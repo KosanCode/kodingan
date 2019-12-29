@@ -1,4 +1,75 @@
+<?php
+session_start();
+require 'function.php';
 
+//cek cookie
+cekCokie();
+
+//cek session login
+cekLogin();
+
+
+//registrasi
+if(isset($_POST["register"])) {
+  if( registrasi($_POST) > 0 ) {
+    echo "<script>
+            alert('User baru berhasil ditambahkan! Silahkan Login');
+          </script>";
+  } else {
+    echo mysqli_error($conn);
+  }
+}
+
+
+//login
+if(isset($_POST["login"])){
+
+  $email2 = $_POST["email2"];
+  $pass3 = $_POST["pass3"];
+  $login = $_POST["login"];
+  
+  if($login) {
+    if($email2 == "" || $pass3 == "") {
+      echo "<script>
+              alert('Email / Password tidak boleh kosong!');
+            </script>";
+    }
+  }
+  $result = mysqli_query($conn, "SELECT * FROM login WHERE email = '$email2'");
+  //cek email
+  if(mysqli_num_rows($result) === 1) {
+    //cek password
+    $row = mysqli_fetch_assoc($result);
+    if(password_verify($pass3, $row["password"])) {
+      if($row['level'] === "admin") {
+        //set session
+        $_SESSION["admin"] = $row['id'];
+
+        //cek remember me
+        if(isset($_POST['remember'])) {
+          //buat cookie
+          setcookie('id',   $row['id'], time()+3600);
+          setcookie('key', hash('sha256',$row['email']), time()+3600);
+        } 
+       } else if($row['level'] === "user") {
+        //set session
+        $_SESSION["user"] = $row['id'];
+
+        //cek remember me
+        if(isset($_POST['remember'])) {
+          //buat cookie
+          setcookie('id',  $row['id'], time()+3600);
+          setcookie('key', hash('sha256', $row['email']), time()+3600);
+        }
+      }
+      header("Location: index.php");
+      exit;
+    }
+  }
+
+  $error = true;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -45,34 +116,17 @@
         <div class="row align-items-center">
           
           <div class="col-11 col-xl-2">
-            <h1 class="mb-0 site-logo"><a href="index.php" class="text-white h2 mb-0">Browse</a></h1>
+            <h1 class="mb-0 site-logo"><a href="index.php" class="text-white h2 mb-0">KAMABA</a></h1>
           </div>
           <div class="col-12 col-md-10 d-none d-xl-block">
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php"><span>Home</span></a></li>
-                <li class="has-children">
-                  <a href="about.php"><span>Dropdown</span></a>
-                  <ul class="dropdown arrow-top">
-                    <li><a href="#">Menu One</a></li>
-                    <li><a href="#">Menu Two</a></li>
-                    <li><a href="#">Menu Three</a></li>
-                    <li class="has-children">
-                      <a href="#">Dropdown</a>
-                      <ul class="dropdown">
-                        <li><a href="#">Menu One</a></li>
-                        <li><a href="#">Menu Two</a></li>
-                        <li><a href="#">Menu Three</a></li>
-                        <li><a href="#">Menu Four</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
                 <li><a href="listings.php"><span>Listings</span></a></li>
                 <li><a href="about.php"><span>About</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
-                <li><a href="contact.php"><span>Contact</span></a></li>
+                <li class="active"><a href="signup.php"><span>Login</span></a></li>
               </ul>
             </nav>
           </div>
@@ -98,8 +152,8 @@
             
             <div class="row justify-content-center">
               <div class="col-md-8 text-center">
-                <h1>Sign Up / Login</h1>
-                <p data-aos="fade-up" data-aos-delay="100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate beatae quisquam perspiciatis adipisci ipsam quam.</p>
+                <h1>Register / Login</h1>
+                <p data-aos="fade-up" data-aos-delay="100">Silahkan Register apabila anda belum memiliki akun. Apabila sudah ada mempunyai akun langsung Login aja lur..</p>
               </div>
             </div>
 
@@ -116,17 +170,13 @@
 
             
 
-            <form action="#" class="p-5 bg-white" style="margin-top: -150px;">
+            <form action="" method="POST" class="p-5 bg-white" style="margin-top: -150px;">
              
 
               <div class="row form-group">
-                <div class="col-md-6 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">First Name</label>
-                  <input type="text" id="fname" class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="text-black" for="lname">Last Name</label>
-                  <input type="text" id="lname" class="form-control">
+                <div class="col-md-12">
+                  <label class="text-black" for="fname">Full Name</label>
+                  <input type="text" name="name" id="name" class="form-control">
                 </div>
               </div>
 
@@ -134,7 +184,7 @@
                 
                 <div class="col-md-12">
                   <label class="text-black" for="email">Email</label> 
-                  <input type="email" id="email" class="form-control">
+                  <input type="email" name="email" id="email" class="form-control">
                 </div>
               </div>
 
@@ -142,7 +192,7 @@
                 
                 <div class="col-md-12">
                   <label class="text-black" for="pass1">Password</label> 
-                  <input type="password" id="pass1" class="form-control">
+                  <input type="password" name="password" id="pass1" class="form-control">
                 </div>
               </div>
               
@@ -150,14 +200,14 @@
                 
                 <div class="col-md-12">
                   <label class="text-black" for="pass2">Re-type Password</label> 
-                  <input type="password" id="pass2" class="form-control">
+                  <input type="password" name="pass2" id="pass2" class="form-control">
                 </div>
               </div>
               
 
               <div class="row form-group">
                 <div class="col-md-12">
-                  <input type="submit" value="Sign Up" class="btn btn-primary btn-md text-white">
+                  <input type="submit" name="register" value="Sign Up" class="btn btn-primary btn-md text-white">
                 </div>
               </div>
 
@@ -168,16 +218,13 @@
 
             
 
-            <form action="#" class="p-5 bg-white" style="margin-top: -150px;">
+            <form action="" method="POST" class="p-5 bg-white" style="margin-top: -150px;">
              
-
-              
-
               <div class="row form-group">
                 
                 <div class="col-md-12">
                   <label class="text-black" for="email">Email</label> 
-                  <input type="email" id="email2" class="form-control">
+                  <input type="email" name="email2" id="email2" class="form-control">
                 </div>
               </div>
 
@@ -185,20 +232,41 @@
                 
                 <div class="col-md-12">
                   <label class="text-black" for="pass1">Password</label> 
-                  <input type="password" id="pass3" class="form-control">
+                  <input type="password" name="pass3" id="pass3" class="form-control">
                 </div>
               </div>
               
+              <div class="row">
+                
+                <div class="col-md-12">
+                  <input type="checkbox" name="remember" id="remember" >
+                  <label class="text-black" for="remember">Remember Me</label> 
+                </div>
+              </div>
+              
+
+              <div class="row form-group">
+                
+                <div class="col-md-12">
+                  <?php if(isset($error)) :  ?>
+                    <p style="color: red; font-style: italic">Email / Password salah</p>
+                  <?php endif; ?>              
+                </div>
+              </div>
+
               
 
               <div class="row form-group">
                 <div class="col-md-12">
-                  <input type="submit" value="Log In" class="btn btn-primary btn-md text-white">
+                  <input type="submit" name="login" value="Log In" class="btn btn-primary btn-md text-white">
                 </div>
               </div>
 
   
             </form>
+            <?php
+            
+            ?>
           </div>
         </div>
       </div>
