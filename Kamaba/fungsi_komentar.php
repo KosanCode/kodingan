@@ -1,6 +1,6 @@
 <?php
 
-$koneksi = mysqli_connect ("localhost", "root", "", "kamaba");
+$koneksi = mysqli_connect ("localhost", "root", "", "db_kamaba");
 
 
 function jmlKomen($query)
