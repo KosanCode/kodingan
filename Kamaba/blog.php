@@ -6,9 +6,9 @@
   
   $start = ($page > 1) ? ($page * $perhalaman)- $perhalaman : 0;
   
-  $berita = query("select * from berita order by tanggal desc limit $start, $perhalaman");
+  $berita = query("select * from tabelberita order by tanggal desc limit $start, $perhalaman");
   
-  $hasil = mysqli_query($koneksi, "select * from berita");
+  $hasil = mysqli_query($koneksi, "select * from tabelberita");
   $total = mysqli_num_rows($hasil);
   
   $pages = ceil($total/$perhalaman);
@@ -142,7 +142,7 @@
 				?>			
 				<div class="col-md-6 col-lg-6 mb-4 mb-lg-4">
 					<div class="h-entry">
-					<a href="blog-single.php?kd_berita=<?= $row["kd_berita"];?> "><img src="Images/<?=$row ["namagambar"]; ?>" alt="Image" class="img-fluid"></a>
+					<a href="blog-single.php?kd_berita=<?= $row["kd_berita"];?> "><img src="Images\Berita/<?=$row ["namagambar"]; ?>" alt="Image" class="img-fluid"></a>
 						<div class="h-entry-inner">
 							<h2 class="font-size-regular"><a href="blog-single.php?kd_berita=<?= $row["kd_berita"];?>"><?= $row["judul"]; ?></a></h2>
 							<div class="meta mb-4">Oleh <?= $row["nama"]; ?> <span class="mx-2">&bullet;</span><?= $row["tanggal"]; ?></div>
@@ -167,8 +167,7 @@
 
           <div class="col-md-3 ml-auto">
             <div class="mb-5">
-              <h3 class="h5 text-black mb-3">
-              </h3>
+              <h3 class="h5 text-black mb-3">Search</h3>
               <form action="" method="get">
                 <div class="form-group d-flex">
                   <input type="text" name="keyword" class="form-control" placeholder="Search keyword and hit enter..." autocomplete="off">

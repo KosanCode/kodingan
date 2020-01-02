@@ -2,13 +2,20 @@
 	include 'koneksi.php';
 	include 'fungsi_komentar.php';
 	
-	//mengambil berita
-  $kd_berita = $_GET["kd_berita"];
-
-	$komen = query("select * from komentar where kd_berita = '$kd_berita'");
-	$jml_komen = ("select * from komentar where kd_berita = '$kd_berita'");
+	$kd_berita = $_GET["kd_berita"];
 	
-	$dtl_berita = query("select * from berita where kd_berita = '$kd_berita'")[0];
+	
+	$komen = query("select * from tabelkomentar where kd_berita = $kd_berita");
+	$jml_komen = ("select * from tabelkomentar where kd_berita = $kd_berita");
+	
+	
+	
+	//mengambil berita	
+	$dtl_berita = query("select * from tabelberita where kd_berita = $kd_berita")[0];
+	
+	if(isset ($_POST["comment"])) {
+	  $komentar = simpankom($_POST["komentar"]);
+	}
 	
 ?>
 <!DOCTYPE html>
@@ -160,7 +167,8 @@
                     <h3>Jean Doe</h3>
                     <div class="meta"><?= $row["tanggal"]; ?></div>
                     <p><?= $row["komentar"]; ?></p>
-                    <p><a href="#" class="reply">Reply</a></p>
+                    <p><a href="#" class="reply">Reply</a>
+					<a href="hapuskom.php?id=<?= $row["kd_komentar"]; ?>&&kd_berita=<?= $kd_berita?>" class="reply">Hapus</a></p>
                   </div>
                 </li>
 				<?php 
@@ -168,35 +176,23 @@
 				?>
                 
               </ul>
-              <!-- END comment-list-->
+              <!-- END comment-list -->
               
               <div class="comment-form-wrap pt-5">
-                <h3 class="mb-5">Leave a comment</h3>
-                <form action="#" class="p-5 bg-light">
+                <h3 class="mb-5">Masukkan Komentar Anda</h3>
+                <form action="" method="post" class="p-5 bg-light">
+				
                   <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input type="text" class="form-control" id="name">
+                    <label for="message">Komentar</label>
+                    <textarea name="komentar" cols="30" rows="10" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" class="form-control" id="email">
-                  </div>
-                  <div class="form-group">
-                    <label for="website">Website</label>
-                    <input type="url" class="form-control" id="website">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <input type="submit" value="Post Comment" class="btn btn-primary text-white btn-md">
+                    <input type="submit" id="comment" name="comment" value="Post Comment" >
                   </div>
 
                 </form>
               </div>
-            </div> -->
+            </div>
 
 
           </div>
