@@ -1,20 +1,21 @@
 <?php
 
 //koneksi database
-$conn = mysqli_connect("localhost", "root","", "final_project"); 
+// $conn = mysqli_connect("localhost", "root","", "final_project"); 
+require_once 'koneksi.php';
 
 
 //registrasi
 function registrasi($data) {
-    global $conn;
+    global $koneksi;
 
     $name = strtoupper(stripslashes($data["name"]));
     $email = $data["email"];
-    $password = mysqli_real_escape_string($conn, $data["password"]);
-    $pass2 = mysqli_real_escape_string($conn, $data["pass2"]);
+    $password = mysqli_real_escape_string($koneksi, $data["password"]);
+    $pass2 = mysqli_real_escape_string($koneksi, $data["pass2"]);
 
     //cek email sudah ada atau belum
-    $result = mysqli_query($conn, "SELECT email FROM login WHERE email = '$email'");
+    $result = mysqli_query($koneksi, "SELECT email FROM login WHERE email = '$email'");
     if(mysqli_fetch_assoc($result)) {
         echo "<script>
             alert('Email sudah terdaftar!');
@@ -36,14 +37,14 @@ function registrasi($data) {
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     //tambahkan user baru ke database
-    mysqli_query($conn, "INSERT INTO login VALUES('',  '$email', '$password', '$name', 'user')");
+    mysqli_query($koneksi, "INSERT INTO login VALUES('',  '$email', '$password', '$name', 'user')");
 
-    return mysqli_affected_rows($conn);
+    return mysqli_affected_rows($koneksi);
 }
 
 //pendaftaran
 function pendaftaran($dataMember){
-  global $conn;
+  global $koneksi;
 
   $nama = htmlspecialchars($dataMember['nama']);
   $jk = $dataMember['jk'];
@@ -65,9 +66,9 @@ function pendaftaran($dataMember){
 
   $query = "INSERT INTO anggota VALUES ('','$nama','$jk','$tmp_lahir', '$tgl_lahir', '$alamat_asal', '$alamat_jogja', '$asal_kampus', '$angkatan', '$telpon', '$foto', '$user_terlogin','5')";
 
-  mysqli_query($conn, $query);
+  mysqli_query($koneksi, $query);
 
-  return mysqli_affected_rows($conn);
+  return mysqli_affected_rows($koneksi);
 }
 
 function uploadProfile(){
@@ -122,7 +123,7 @@ function uploadProfile(){
 
 //update profile
 function updateProfile($dataMember){
-  global $conn;
+  global $koneksi;
 
   $nama = htmlspecialchars($dataMember['nama']);
   $jk = $dataMember['jk'];
@@ -135,7 +136,7 @@ function updateProfile($dataMember){
   $telpon = htmlspecialchars($dataMember['telpon']);
 
   $user_terlogin = @$_SESSION['user'];
-  $sql_user = mysqli_query($conn, "SELECT nia,foto, kd_jabatan FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
+  $sql_user = mysqli_query($koneksi, "SELECT nia,foto, kd_jabatan FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
   $data =  mysqli_fetch_array($sql_user);
 
   $nia = $data['nia'];
@@ -149,9 +150,9 @@ function updateProfile($dataMember){
             angkatan='$angkatan', telpon='$telpon', foto = '$foto', id ='$user_terlogin', kd_jabatan='$kd_jabatan'
             WHERE nia = $nia";
 
-  mysqli_query($conn, $query);
+  mysqli_query($koneksi, $query);
 
-  return mysqli_affected_rows($conn);
+  return mysqli_affected_rows($koneksi);
 }
 
 //cek cookie
@@ -161,7 +162,7 @@ function cekCokie() {
     $key = $_COOKIE['key'];
   
     //ambil email berdasarkan id
-    $result = mysqli_query($conn, "SELECT * FROM login WHERE id = '$id'");
+    $result = mysqli_query($koneksi, "SELECT * FROM login WHERE id = '$id'");
     $row = mysqli_fetch_assoc($result);
   
     //cek cookie dan nama

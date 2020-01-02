@@ -1,10 +1,12 @@
 <?php
+  session_start();
   require 'koneksi.php';
+  require_once 'function.php';
 
-  $kegiatan = query("SELECT * FROM kegiatan ORDER BY tanggal DESC LIMIT 0, 6");
-  $berita = query("SELECT * FROM berita ORDER BY tanggal DESC LIMIT 0, 3");
+  // $kegiatan = query("SELECT * FROM kegiatan ORDER BY tanggal DESC LIMIT 0, 6");
+  // $berita = query("SELECT * FROM berita ORDER BY tanggal DESC LIMIT 0, 3");
 
-  $dtl_kegiatan = query("SELECT * FROM dtl_kegiatan");
+  // $dtl_kegiatan = query("SELECT * FROM dtl_kegiatan");
 
 
 ?>
@@ -81,7 +83,42 @@
         <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
                 <li><a href="about.php"><span>Info</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
+
+                <?php if((@!$_SESSION["admin"]) && (@!$_SESSION["user"])) : ?>
                 <li><a href="signup.php"><span>Login</span></a></li>
+                <?php endif; ?>
+                <?php  
+                  $user_terlogin = @$_SESSION['user'];
+                  $sql_user = mysqli_query($koneksi, "SELECT * FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
+                  $data_user =  mysqli_fetch_array($sql_user);
+
+                  if(@$_SESSION["user"] && !@$data_user['id']) :
+                ?>
+                  <li><a href="pendaftaran.php"><span style="border: 2px solid #fff;">Join With Us</span></a></li>
+                <?php endif; ?>
+                <?php if(@$_SESSION["admin"] || @$_SESSION["user"]) : ?>                
+                  <li class="has-children activeku">
+                  <?php 
+                    if(@$_SESSION["admin"]) {
+                      $user_terlogin = @$_SESSION['admin'];
+                    } else if(@$_SESSION["user"]){
+                      $user_terlogin = @$_SESSION['user'];
+                    }
+                    $sql_user = mysqli_query($koneksi, "SELECT * FROM login WHERE id = '$user_terlogin'") or die(mysql_error());
+                    $data_user =  mysqli_fetch_array($sql_user);
+                  ?>
+                  <a href="#"><span><?php echo $data_user['nama_lengkap']; ?> </span></a>
+                  
+                  <ul class="dropdown arrow-top">
+                  <?php
+                  if(@$_SESSION["user"]) :?>
+                    <li><a href="profile.php">Profile</a></li>
+                  <?php endif; ?>
+                    <li><a href="logout.php">Logout</a></li>
+                    </li>
+                  </ul>
+                </li>
+                <?php endif; ?>
               </ul>
             </nav>
           </div>

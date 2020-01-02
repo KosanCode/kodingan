@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+require_once 'koneksi.php';
 require 'function.php';
 
 //cek session login
@@ -12,10 +13,10 @@ if(isset($_SESSION["admin"]) || (!isset($_SESSION["user"]))){
 //ambil data dari tabel anggota sesuai user login
 $user_terlogin = @$_SESSION['user'];
 
-$result = mysqli_query($conn, "SELECT * FROM anggota INNER JOIN jabatan ON anggota.kd_jabatan=jabatan.kd_jabatan 
-                              INNER JOIN login ON anggota.id=login.id WHERE login.id = '$user_terlogin'") or die(mysqli_error($conn));
+$result = mysqli_query($koneksi, "SELECT * FROM anggota INNER JOIN jabatan ON anggota.kd_jabatan=jabatan.kd_jabatan 
+                              INNER JOIN login ON anggota.id=login.id WHERE login.id = '$user_terlogin'") or die(mysqli_error($koneksi));
 
-$result2 = mysqli_query($conn, "SELECT * FROM login WHERE id='$user_terlogin'") or die(mysqli_error($conn));
+$result2 = mysqli_query($koneksi, "SELECT * FROM login WHERE id='$user_terlogin'") or die(mysqli_error($conn));
 
 //cek apakah tombol edit sudah ditekan
 if(isset($_POST["update"])) {
@@ -98,7 +99,7 @@ if(isset($_POST["update"])) {
                   <li class="has-children activeku">
                   <?php
                     $user_terlogin = @$_SESSION['user'];
-                    $sql_user = mysqli_query($conn, "SELECT * FROM login WHERE id = '$user_terlogin'") or die(mysql_error());
+                    $sql_user = mysqli_query($koneksi, "SELECT * FROM login WHERE id = '$user_terlogin'") or die(mysql_error());
                     $data_user =  mysqli_fetch_array($sql_user);
                   ?>
                   <a href="#"><span><?php echo $data_user['nama_lengkap']; ?> </span></a>
@@ -150,7 +151,7 @@ if(isset($_POST["update"])) {
         <div class="row">
           <?php  
             $user_terlogin = @$_SESSION['user'];
-            $sql_user = mysqli_query($conn, "SELECT * FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
+            $sql_user = mysqli_query($koneksi, "SELECT * FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
             $data_user =  mysqli_fetch_array($sql_user);
 
             if(@$_SESSION["user"] && @$data_user['id']) {

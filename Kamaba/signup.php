@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'koneksi.php';
 require 'function.php';
 
 //cek cookie
@@ -16,7 +17,7 @@ if(isset($_POST["register"])) {
             alert('User baru berhasil ditambahkan! Silahkan Login');
           </script>";
   } else {
-    echo mysqli_error($conn);
+    echo mysqli_error($koneksi);
   }
 }
 
@@ -35,7 +36,7 @@ if(isset($_POST["login"])){
             </script>";
     }
   }
-  $result = mysqli_query($conn, "SELECT * FROM login WHERE email = '$email2'");
+  $result = mysqli_query($koneksi, "SELECT * FROM login WHERE email = '$email2'");
   //cek email
   if(mysqli_num_rows($result) === 1) {
     //cek password
