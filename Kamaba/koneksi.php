@@ -3,7 +3,6 @@
 
 	$koneksi = mysqli_connect("localhost","root","", "kamabaa");
 	
-<<<<<<< HEAD
 	function query($query){
 		global $koneksi;
 		$result = mysqli_query($koneksi, $query);
@@ -13,17 +12,6 @@
 		}
 			return $rows;
 	}
-=======
-	 function query($query){
-	 	global $koneksi;
-	 	$result = mysqli_query($koneksi, $query);
-	 	$rows = [];
-	 	while ( $row = mysqli_fetch_assoc($result) ){
-	 		$rows[] = $row;
-	 	}
-			return $rows;
-	 }
->>>>>>> ebd152eb25bb43c50d9e223b047f2ec7b53e2f84
 	
 	function cari($keyword) {
 		$query = "SELECT * FROM tabelberita
