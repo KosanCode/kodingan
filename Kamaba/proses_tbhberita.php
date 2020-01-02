@@ -24,15 +24,15 @@ if(move_uploaded_file($tmp, $path)){ // Cek apakah gambar berhasil diupload atau
   if($sql){ // Cek jika proses simpan ke database sukses atau tidak
     // Jika Sukses, Lakukan :
     echo "Data berhasil di tambahkan";
-	echo "<br><a href='form.php'>Kembali Ke Form</a>";	// Redirect ke halaman index.php
+	echo "<br><a href='form_berita.php'>Kembali Ke Form</a>";	// Redirect ke halaman index.php
   }else{
     // Jika Gagal, Lakukan :
     echo "Maaf, Terjadi kesalahan saat mencoba untuk menyimpan data ke database.";
-    echo "<br><a href='form.php'>Kembali Ke Form</a>";
+    echo "<br><a href='form_berita.php'>Kembali Ke Form</a>";
   }
 }else{
   // Jika gambar gagal diupload, Lakukan :
   echo "Maaf, Gambar gagal untuk diupload.";
-  echo "<br><a href='form.php'>Kembali Ke Form</a>";
+  echo "<br><a href='form_berita.php'>Kembali Ke Form</a>";
 }
 ?>
