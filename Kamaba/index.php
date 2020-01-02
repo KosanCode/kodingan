@@ -1,12 +1,12 @@
 <?php
   session_start();
-  require 'koneksi.php';
+  require_once 'koneksi.php';
   require_once 'function.php';
 
-  // $kegiatan = query("SELECT * FROM kegiatan ORDER BY tanggal DESC LIMIT 0, 6");
-  // $berita = query("SELECT * FROM berita ORDER BY tanggal DESC LIMIT 0, 3");
+  $kegiatan = query("SELECT * FROM kegiatan ORDER BY tanggal DESC LIMIT 0, 6");
+  $berita = query("SELECT * FROM berita ORDER BY tanggal DESC LIMIT 0, 3");
 
-  // $dtl_kegiatan = query("SELECT * FROM dtl_kegiatan");
+  $dtl_kegiatan = query("SELECT * FROM dtl_kegiatan");
 
 
 ?>
@@ -491,6 +491,7 @@
     </div>
 
     
+    <?php if((@!$_SESSION["admin"]) && (@!$_SESSION["user"])) { ?>
     <div class="py-5 bg-primary">
       <div class="container">
         <div class="row">
@@ -504,6 +505,7 @@
         </div>
       </div>
     </div>
+    <?php } ?>
     
     <footer class="site-footer">
       <div class="container">
