@@ -12,7 +12,7 @@ $tmp = $_FILES['gambar']['tmp_name'];
 // Rename nama fotonya dengan menambahkan tanggal dan jam upload
 $fotobaru = date('dmYHis').$gambar;
 // Set path folder tempat menyimpan fotonya
-$path = "E:\Kuliah\SEM 5\PWL\FP\Template_Fix\images\/".$fotobaru;
+$path = "E:\Kuliah\SEM 5\PWL\kodingan\Kamaba\images\Berita\/".$fotobaru;
 // Proses upload
 if(move_uploaded_file($tmp, $path)){ // Cek apakah gambar berhasil diupload atau tidak
 
