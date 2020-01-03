@@ -4,10 +4,9 @@
   require_once 'function.php';
 
   $kegiatan = query("SELECT * FROM kegiatan ORDER BY tanggal DESC LIMIT 0, 6");
-  $berita = query("SELECT * FROM berita ORDER BY tanggal DESC LIMIT 0, 3");
+  $berita = query("SELECT * FROM tabelberita ORDER BY tanggal DESC LIMIT 0, 3");
 
   $dtl_kegiatan = query("SELECT * FROM dtl_kegiatan");
-
 
 ?>
 

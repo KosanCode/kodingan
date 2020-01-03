@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once 'koneksi.php';
 require 'function.php';
 
 //cek session login
@@ -16,7 +17,7 @@ if(isset($_SESSION["admin"])){
 
 if(isset($_SESSION["user"])) {
     $user_terlogin = @$_SESSION['user'];
-    $sql_user = mysqli_query($conn, "SELECT * FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
+    $sql_user = mysqli_query($koneksi, "SELECT * FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
     $data_user =  mysqli_fetch_array($sql_user);
 
     if(@$data_user['id']) {
@@ -46,7 +47,7 @@ if(isset($_POST["daftar"])) {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Browse &mdash; Website Template by Colorlib</title>
+    <title>Kamaba &mdash; Yogyakarta</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -104,7 +105,7 @@ if(isset($_POST["daftar"])) {
                   <li class="has-children activeku">
                   <?php
                     $user_terlogin = @$_SESSION['user'];
-                    $sql_user = mysqli_query($conn, "SELECT * FROM login WHERE id = '$user_terlogin'") or die(mysql_error());
+                    $sql_user = mysqli_query($koneksi, "SELECT * FROM login WHERE id = '$user_terlogin'") or die(mysql_error());
                     $data_user =  mysqli_fetch_array($sql_user);
                   ?>
                   <a href="#"><span><?php echo $data_user['nama_lengkap']; ?> </span></a>
@@ -132,7 +133,7 @@ if(isset($_POST["daftar"])) {
 
   
 
-    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row align-items-center justify-content-center text-center">
 
@@ -170,22 +171,22 @@ if(isset($_POST["daftar"])) {
                 <div class="col-md-6">
                   <label class="text-black" for="email">Jenis Kelamin</label> <br>
                   <div class="col-md-6">
-                    <input type="radio" name="jk" value="laki-laki" id="jk" checked="true">Laki-laki
+                    <input type="radio" name="jk" value="Laki-laki" id="jk" checked="true">Laki-laki
                   </div>
                   <div class="col-md-6">
-                    <input type="radio" name="jk" value="perempuan" id="jk">Perempuan
+                    <input type="radio" name="jk" value="Perempuan" id="jk">Perempuan
                   </div>
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="col-md-6">
-                  <label class="text-black" for="tmp_lahir">Tempat Lahir</label> 
-                  <input type="text" name="tmp_lahir" id="tmp_lahir" class="form-control" required>
+                  <label class="text-black" for="tempat_lahir">Tempat Lahir</label> 
+                  <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control" required>
                 </div>
                 <div class="col-md-6">
-                  <label class="text-black" for="tgl_lahir">Tanggal Lahir</label> 
-                  <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control" required>
+                  <label class="text-black" for="tanggal_lahir">Tanggal Lahir</label> 
+                  <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" required>
                 </div>
               </div>
 
@@ -195,8 +196,8 @@ if(isset($_POST["daftar"])) {
                   <textarea name="alamat_asal" id="alamat_asal" cols="30" rows="5" class="form-control" required></textarea>
                 </div>
                 <div class="col-md-6">
-                  <label class="text-black" for="alamat_jogja">Alamat Jogja</label> 
-                  <textarea name="alamat_jogja" id="alamat_jogja" cols="30" rows="5" class="form-control" required></textarea>
+                  <label class="text-black" for="alamat_yk">Alamat Jogja</label> 
+                  <textarea name="alamat_yk" id="alamat_yk" cols="30" rows="5" class="form-control" required></textarea>
                 </div>
               </div>
               
@@ -213,8 +214,8 @@ if(isset($_POST["daftar"])) {
 
               <div class="row form-group">
                 <div class="col-md-6">
-                  <label class="text-black" for="telpon">Nomor Telpon</label> 
-                  <input type="number" name="telpon" id="telpon" class="form-control" required>
+                  <label class="text-black" for="telp">Nomor Telpon</label> 
+                  <input type="number" name="telp" id="telp" class="form-control" required>
                 </div>
                 <div class="col-md-6">
                   <label class="text-black" for="foto">Foto</label> 
@@ -240,58 +241,6 @@ if(isset($_POST["daftar"])) {
     <footer class="site-footer">
       <div class="container">
         <div class="row">
-          <div class="col-md-9">
-            <div class="row">
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Quick Links</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Products</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Features</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Follow Us</h2>
-                <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            <form action="#" method="post">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-primary text-white" type="button" id="button-addon2">Send</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="row pt-5 mt-5">
           <div class="col-12 text-md-center text-left">
             <p>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

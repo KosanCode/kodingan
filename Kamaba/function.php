@@ -48,13 +48,13 @@ function pendaftaran($dataMember){
 
   $nama = htmlspecialchars($dataMember['nama']);
   $jk = $dataMember['jk'];
-  $tmp_lahir = htmlspecialchars($dataMember['tmp_lahir']);
-  $tgl_lahir = htmlspecialchars($dataMember['tgl_lahir']);
+  $tempat_lahir = htmlspecialchars($dataMember['tempat_lahir']);
+  $tanggal_lahir = htmlspecialchars($dataMember['tanggal_lahir']);
   $alamat_asal = htmlspecialchars($dataMember['alamat_asal']);
-  $alamat_jogja = htmlspecialchars($dataMember['alamat_jogja']);
+  $alamat_yk = htmlspecialchars($dataMember['alamat_yk']);
   $asal_kampus = htmlspecialchars($dataMember['asal_kampus']);
   $angkatan = htmlspecialchars($dataMember['angkatan']);
-  $telpon = htmlspecialchars($dataMember['telpon']);
+  $telp = htmlspecialchars($dataMember['telp']);
 
   //upload gambar
   $foto = uploadProfile();
@@ -64,7 +64,7 @@ function pendaftaran($dataMember){
 
   $user_terlogin = @$_SESSION['user'];
 
-  $query = "INSERT INTO anggota VALUES ('','$nama','$jk','$tmp_lahir', '$tgl_lahir', '$alamat_asal', '$alamat_jogja', '$asal_kampus', '$angkatan', '$telpon', '$foto', '$user_terlogin','5')";
+  $query = "INSERT INTO anggota VALUES ('','$nama','$jk','$tempat_lahir', '$tanggal_lahir', '$alamat_asal', '$alamat_yk', '$asal_kampus', '$angkatan', '$telp', '$foto',16 ,'$user_terlogin')";
 
   mysqli_query($koneksi, $query);
 

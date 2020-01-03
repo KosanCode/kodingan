@@ -74,7 +74,7 @@ if(isset($_POST["login"])){
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Browse &mdash; Website Template by Colorlib</title>
+    <title>Kamaba &mdash; Yogyakarta</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -124,7 +124,6 @@ if(isset($_POST["login"])){
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php"><span>Home</span></a></li>
-                <li><a href="listings.php"><span>Listings</span></a></li>
                 <li><a href="about.php"><span>About</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
                 <li class="active"><a href="signup.php"><span>Login</span></a></li>
@@ -144,7 +143,7 @@ if(isset($_POST["login"])){
 
   
 
-    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row align-items-center justify-content-center text-center">
 
@@ -153,7 +152,7 @@ if(isset($_POST["login"])){
             
             <div class="row justify-content-center">
               <div class="col-md-8 text-center">
-                <h1>Register / Login</h1>
+                <h1>Sign Up / Sign In</h1>
                 <p data-aos="fade-up" data-aos-delay="100">Silahkan Register apabila anda belum memiliki akun. Apabila sudah ada mempunyai akun langsung Login aja lur..</p>
               </div>
             </div>
@@ -173,6 +172,7 @@ if(isset($_POST["login"])){
 
             <form action="" method="POST" class="p-5 bg-white" style="margin-top: -150px;">
              
+              <h3 class="text-center pb-4">Sign Up</h3>            
 
               <div class="row form-group">
                 <div class="col-md-12">
@@ -217,10 +217,10 @@ if(isset($_POST["login"])){
           </div>
           <div class="col-md-6 mb-5">
 
-            
-
             <form action="" method="POST" class="p-5 bg-white" style="margin-top: -150px;">
              
+              <h3 class="text-center pb-4">Sign In</h3>            
+
               <div class="row form-group">
                 
                 <div class="col-md-12">
@@ -275,59 +275,8 @@ if(isset($_POST["login"])){
     
     <footer class="site-footer">
       <div class="container">
+        
         <div class="row">
-          <div class="col-md-9">
-            <div class="row">
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Quick Links</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Products</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Features</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Follow Us</h2>
-                <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            <form action="#" method="post">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-primary text-white" type="button" id="button-addon2">Send</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="row pt-5 mt-5">
           <div class="col-12 text-md-center text-left">
             <p>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

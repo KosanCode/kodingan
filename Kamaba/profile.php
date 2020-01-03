@@ -16,7 +16,7 @@ $user_terlogin = @$_SESSION['user'];
 $result = mysqli_query($koneksi, "SELECT * FROM anggota INNER JOIN jabatan ON anggota.kd_jabatan=jabatan.kd_jabatan 
                               INNER JOIN login ON anggota.id=login.id WHERE login.id = '$user_terlogin'") or die(mysqli_error($koneksi));
 
-$result2 = mysqli_query($koneksi, "SELECT * FROM login WHERE id='$user_terlogin'") or die(mysqli_error($conn));
+$result2 = mysqli_query($koneksi, "SELECT * FROM login WHERE id='$user_terlogin'") or die(mysqli_error($koneksi));
 
 //cek apakah tombol edit sudah ditekan
 if(isset($_POST["update"])) {
@@ -41,7 +41,7 @@ if(isset($_POST["update"])) {
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Browse &mdash; Website Template by Colorlib</title>
+    <title>Kamaba &mdash; Yogyakarta</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -127,7 +127,7 @@ if(isset($_POST["update"])) {
 
   
 
-    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row align-items-center justify-content-center text-center">
 
@@ -195,20 +195,20 @@ if(isset($_POST["update"])) {
                               </div>
                             </div>
                             <div class="form-group">
-                              <label for="tmp_lahir">Tempat Lahir</label>
-                              <input type="text" class="form-control" id="tmp_lahir" name="tmp_lahir" value="<?= $data_user["tmp_lahir"]; ?>">
+                              <label for="tempat_lahir">Tempat Lahir</label>
+                              <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="<?= $data_user["tempat_lahir"]; ?>">
                             </div>
                             <div class="form-group">
-                              <label for="tgl_lahir">Tanggal Lahir</label>
-                              <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" value="<?= $data_user["tgl_lahir"]; ?>">
+                              <label for="tanggal_lahir">Tanggal Lahir</label>
+                              <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="<?= $data_user["tanggal_lahir"]; ?>">
                             </div>
                             <div class="form-group">
                               <label for="alamat_asal">Alamat Asal</label>
                               <input type="text" class="form-control" id="alamat_asal" name="alamat_asal" rows="3" placeholder="Isikan alamat lengkapmu di Blora" value="<?= $data_user["alamat_asal"]; ?>">
                             </div>
                             <div class="form-group">
-                              <label for="alamat_jogja">Alamat Jogja</label>
-                              <input type="text" class="form-control" id="alamat_jogja" name="alamat_jogja" rows="3" placeholder="Isikan alamat lengkapmu di Yogyakarta" value="<?= $data_user["alamat_jogja"]; ?>">
+                              <label for="alamat_yk">Alamat Jogja</label>
+                              <input type="text" class="form-control" id="alamat_yk" name="alamat_yk" rows="3" placeholder="Isikan alamat lengkapmu di Yogyakarta" value="<?= $data_user["alamat_yk"]; ?>">
                             </div>
                             <div class="form-group">
                               <label for="asal_kampus">Asal Kampus</label>
@@ -219,8 +219,8 @@ if(isset($_POST["update"])) {
                               <input type="number" class="form-control" id="angkatan" name="angkatan" placeholder="ex: 2017" value="<?= $data_user["angkatan"]; ?>">
                             </div>
                             <div class="form-group">
-                              <label for="telpon">Nomor Telpon</label>
-                              <input type="number" class="form-control" id="telpon" name="telpon" placeholder="ex: 0852xxxx" value="<?= $data_user["telpon"]; ?>">
+                              <label for="telp">Nomor Telpon</label>
+                              <input type="number" class="form-control" id="telp" name="telp" placeholder="ex: 0852xxxx" value="<?= $data_user["telp"]; ?>">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -248,7 +248,7 @@ if(isset($_POST["update"])) {
                             <p class="font-weight-bold">Nomor Induk Anggota</p>
                         </div>
                         <div class="col-md-6">
-                            <p><?= $row["nia"]; ?></p>
+                            <p><?= $row["kd_anggota"]; ?></p>
                         </div>
                         <div class="col-md-6">
                             <p class="font-weight-bold">Nama Lengkap</p>
@@ -266,13 +266,13 @@ if(isset($_POST["update"])) {
                             <p class="font-weight-bold">Tempat Lahir</p>
                         </div>
                         <div class="col-md-6">
-                            <p><?= $row["tmp_lahir"]; ?></p>
+                            <p><?= $row["tempat_lahir"]; ?></p>
                         </div>
                         <div class="col-md-6">
                             <p class="font-weight-bold">Tanggal Lahir</p>
                         </div>
                         <div class="col-md-6">
-                            <p><?= $row["tgl_lahir"]; ?></p>
+                            <p><?= $row["tanggal_lahir"]; ?></p>
                         </div>
                         <div class="col-md-6">
                             <p class="font-weight-bold">Alamat Asal</p>
@@ -284,7 +284,7 @@ if(isset($_POST["update"])) {
                             <p class="font-weight-bold">Alamat Jogja</p>
                         </div>
                         <div class="col-md-6">
-                            <p><?= $row["alamat_jogja"]; ?></p>
+                            <p><?= $row["alamat_yk"]; ?></p>
                         </div>
                         <div class="col-md-6">
                             <p class="font-weight-bold">Asal Kampus</p>
@@ -302,7 +302,7 @@ if(isset($_POST["update"])) {
                             <p class="font-weight-bold">Nomor Telpon</p>
                         </div>
                         <div class="col-md-6">
-                            <p><?= $row["telpon"]; ?></p>
+                            <p><?= $row["telp"]; ?></p>
                         </div>
                         <div class="col-md-6">
                             <p class="font-weight-bold">Jabatan</p>
@@ -378,58 +378,6 @@ if(isset($_POST["update"])) {
     <footer class="site-footer">
       <div class="container">
         <div class="row">
-          <div class="col-md-9">
-            <div class="row">
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Quick Links</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Products</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Features</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Follow Us</h2>
-                <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            <form action="#" method="post">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-primary text-white" type="button" id="button-addon2">Send</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="row pt-5 mt-5">
           <div class="col-12 text-md-center text-left">
             <p>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
