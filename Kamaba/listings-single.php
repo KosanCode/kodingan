@@ -1,4 +1,5 @@
 <?php
+  session_start();
   require 'functionkegiatan.php';
   
 
@@ -63,14 +64,13 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="index.php"><span>Home</span></a></li>
-                <!--<li class="has-children">
-                  <a href="about.php"><span>Dropdown</span></a>
+                <li ><a href="index.php"><span>Home</span></a></li>
+                <li class="has-children active">
+                  <a href="listings.php"><span>Kegiatan</span></a>
                   <ul class="dropdown arrow-top">
-                    <li><a href="#">Menu One</a></li>
-                    <li><a href="#">Menu Two</a></li>
-                    <li><a href="#">Menu Three</a></li>
-                    <li class="has-children">
+                    <li><a href="listings.php">Daftar Kegiatan</a></li>
+                    <li><a href="sertifikat.php">Sertifikat</a></li>
+                    <!--<li class="has-children">
                       <a href="#">Dropdown</a>
                       <ul class="dropdown">
                         <li><a href="#">Menu One</a></li>
@@ -78,13 +78,28 @@
                         <li><a href="#">Menu Three</a></li>
                         <li><a href="#">Menu Four</a></li>
                       </ul>
+                    </li>-->
+                  </ul>
+                </li>
+                 <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
+                <li><a href="about.php"><span>Info</span></a></li>
+                <li><a href="blog.php"><span>Blog</span></a></li>
+                <?php if(@$_SESSION["user"]) : ?>                
+                  <li class="has-children activeku">
+                  <?php
+                    $user_terlogin = @$_SESSION['user'];
+                    $sql_user = mysqli_query($koneksi, "SELECT * FROM login WHERE id = '$user_terlogin'") or die(mysql_error());
+                    $data_user =  mysqli_fetch_array($sql_user);
+                  ?>
+                  <a href="#"><span><?php echo $data_user['nama_lengkap']; ?> </span></a>
+                  
+                  <ul class="dropdown arrow-top">
+                    <li><a href="profile.php">Profile</a></li>
+                    <li><a href="logout.php">Logout</a></li>
                     </li>
                   </ul>
-                </li>-->
-                <li class="active"><a href="listings.php"><span>Kegiatan</span></a></li>
-                <li><a href="about.php"><span>About</span></a></li>
-                <li><a href="blog.php"><span>Blog</span></a></li>
-                <li><a href="contact.php"><span>Contact</span></a></li>
+                </li>
+                <?php endif; ?>
               </ul>
             </nav>
           </div>

@@ -1,10 +1,13 @@
 <?php
+  session_start();
   require 'functionkegiatan.php';
 
   $kd_kegiatan = $_GET["kd_kegiatan"];
 
   $dtl_kegiatan = query("SELECT * FROM kegiatan WHERE kd_kegiatan = $kd_kegiatan ")[0];
 
+  //ambil data dari tabel anggota sesuai user login
+$user_terlogin = @$_SESSION['user'];
 
   if (isset($_POST['daftar'])) {
 
@@ -82,11 +85,42 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="index.php"><span>Home</span></a></li>
-                <li><a href="listings.php"><span>Kegiatan</span></a></li>
-                <li><a href="about.php"><span>About</span></a></li>
+                <li ><a href="index.php"><span>Home</span></a></li>
+                <li class="has-children active">
+                  <a href="listings.php"><span>Kegiatan</span></a>
+                  <ul class="dropdown arrow-top">
+                    <li><a href="listings.php">Daftar Kegiatan</a></li>
+                    <li><a href="sertifikat.php">Sertifikat</a></li>
+                    <!--<li class="has-children">
+                      <a href="#">Dropdown</a>
+                      <ul class="dropdown">
+                        <li><a href="#">Menu One</a></li>
+                        <li><a href="#">Menu Two</a></li>
+                        <li><a href="#">Menu Three</a></li>
+                        <li><a href="#">Menu Four</a></li>
+                      </ul>
+                    </li>-->
+                  </ul>
+                </li>
+                 <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
+                <li><a href="about.php"><span>Info</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
-                <li><a href="contact.php"><span>Contact</span></a></li>
+                <?php if(@$_SESSION["user"]) : ?>                
+                  <li class="has-children activeku">
+                  <?php
+                    $user_terlogin = @$_SESSION['user'];
+                    $sql_user = mysqli_query($koneksi, "SELECT * FROM login WHERE id = '$user_terlogin'") or die(mysql_error());
+                    $data_user =  mysqli_fetch_array($sql_user);
+                  ?>
+                  <a href="#"><span><?php echo $data_user['nama_lengkap']; ?> </span></a>
+                  
+                  <ul class="dropdown arrow-top">
+                    <li><a href="profile.php">Profile</a></li>
+                    <li><a href="logout.php">Logout</a></li>
+                    </li>
+                  </ul>
+                </li>
+                <?php endif; ?>
               </ul>
             </nav>
           </div>
@@ -126,6 +160,13 @@
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
+          <?php  
+            $user_terlogin = @$_SESSION['user'];
+            $sql_user = mysqli_query($koneksi, "SELECT * FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
+            $data_user =  mysqli_fetch_array($sql_user);
+
+            if(@$_SESSION["user"] && @$data_user['id']) {
+          ?>
           <div class="col-md-2"></div>
           <div class="col-md-8 mb-5">
 
@@ -142,32 +183,32 @@
               <div class="row form-group">
                 
                 <div class="col-md-12">
-                  <label class="text-black" for="nama">Nama</label> 
-                  <input type="text" name="nama" required class="form-control">
+                  <label class="text-black" for="nama">Nama</label> <br>
+                  <input class="col-md-12" type="text" name="nama" value="<?= $data_user["nama"]; ?>">
                 </div>
               </div>
 
               <div class="row form-group">
                 
                 <div class="col-md-12">
-                  <label class="text-black" for="alamat_jogja">Alamat di Jogja</label> 
-                  <input type="text" name="alamat_jogja" required class="form-control">
+                  <label class="text-black" for="alamat_jogja">Alamat di Jogja</label> <br>
+                  <input class="col-md-12" type="text" name="alamat_jogja" value="<?= $data_user["alamat_yk"]; ?>">
                 </div>
               </div>
 
               <div class="row form-group">
                 
                 <div class="col-md-12">
-                  <label class="text-black" for="noHP">No Hp</label> 
-                  <input type="tel" name="noHP" required class="form-control">
+                  <label class="text-black" for="noHP">No Hp</label> <br>
+                  <input class="col-md-12" type="tel" name="noHP" value="<?= $data_user["telp"]; ?>">
                 </div>
               </div>
 
               <div class="row form-group">
                 
                 <div class="col-md-12">
-                  <label class="text-black" for="email">Email</label> 
-                  <input type="email" name="email" required class="form-control">
+                  <label class="text-black" for="email">Asal Kampus</label> <br>
+                  <input class="col-md-12" type="email" name="email" value="<?= $data_user["asal_kampus"]; ?>">
                 </div>
               </div>
 
@@ -185,7 +226,7 @@
           
           </div>
           <div class="col-md-2"></div>
-        
+        <?php } ?>
         </div>
       </div>
     </div>
