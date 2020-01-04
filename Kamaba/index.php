@@ -35,6 +35,8 @@
     <link rel="stylesheet" href="css/rangeslider.css">
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styleku.css">
+
     
   </head>
   <body>
@@ -84,7 +86,7 @@
                 <li><a href="blog.php"><span>Blog</span></a></li>
 
                 <?php if((@!$_SESSION["admin"]) && (@!$_SESSION["user"])) : ?>
-                <li><a href="signup.php"><span>Login</span></a></li>
+                <li class="activeku"><a href="signup.php"><span>Login</span></a></li>
                 <?php endif; ?>
                 <?php  
                   $user_terlogin = @$_SESSION['user'];

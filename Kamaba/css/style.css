@@ -1781,3 +1781,9 @@ h1, h2, h3, h4, h5,
         .comment-list li .comment-body .reply:hover {
           color: #000;
           background: #e3e3e3; }
+
+/* CSS-Ku */
+.activeku a span{
+  border: 2px solid #00918e;
+  color: #00918e;
+}
