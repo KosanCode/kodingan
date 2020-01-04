@@ -55,6 +55,25 @@ if(isset($_POST["fotoProfile"])) {
       ";
   }
 }
+
+//cek apakah tombol edit sudah ditekan
+if(isset($_POST["ubahPassword"])) {
+  if( updatePassword($_POST) > 0){
+      echo "
+              <script>
+                  alert('Password anda berhasil diubah! Silahkan login kembali');
+                  document.location.href = 'logout.php';
+              </script>
+      ";
+  } else {
+      echo "
+              <script>
+                  alert('Password gagal diubah!');
+                  document.location.href = 'profile.php';
+              </script>
+      ";
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -387,24 +406,26 @@ if(isset($_POST["fotoProfile"])) {
                         </button>
                     </div>
                     <div class="modal-body">
+                    <form action="" method="post">
                       <div class="form-group">
                         <label for="passLama">Password Lama</label>
-                        <input type="password" class="form-control" id="passLama" placeholder="Password Lama">
+                        <input type="password" class="form-control" name="passLama" id="passLama" placeholder="Password Lama">
                       </div>
                       <div class="form-group">
                         <label for="passBaru1">Password Baru</label>
-                        <input type="password" class="form-control" id="passBaru1" placeholder="Password Baru">
+                        <input type="password" class="form-control" name="passBaru1" id="passBaru1" placeholder="Password Baru">
                       </div>
                       <div class="form-group">
                         <label for="passBary2">Konfirmasi Password Baru</label>
-                        <input type="password" class="form-control" id="passBaru2" placeholder="Konfirmasi Password Baru">
+                        <input type="password" class="form-control" name="passBaru2" id="passBaru2" placeholder="Konfirmasi Password Baru">
                       </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Update</button>
+                        <button type="submit" name="ubahPassword" class="btn btn-primary">Update</button>
                     </div>
                     </div>
+                    </form>
                 </div>
                 </div>
                 <h2 class="font-weight-light text-primary">Kelola User Login</h2>

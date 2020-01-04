@@ -109,7 +109,49 @@ function updateFoto($dataMember){
   return mysqli_affected_rows($koneksi);
 }
 
+function updatePassword($data) {
+  global $koneksi;
 
+  $passLama = $data['passLama'];
+  $passBaru1 = $data['passBaru1'];
+  $passBaru2 = $data['passBaru2'];
+
+  $user_terlogin = @$_SESSION["user"];
+  $result = mysqli_query($koneksi, "SELECT * FROM login WHERE id = '$user_terlogin'");
+
+  //cek password
+  $row = mysqli_fetch_assoc($result);
+  $email = $row["email"];
+  $nama = $row["nama_lengkap"];
+  if(!password_verify($passLama, $row["password"])) {
+    echo "<script>
+      alert('Password lama anda tidak sesuai!');
+    </script>";
+  }
+
+  if(password_verify($passLama, $row["password"])) {
+   
+    //cek konfirmasi password
+    if ( $passBaru1 !== $passBaru2) {
+      echo "<script>
+          alert('Konfirmasi password tidak sesuai!');
+        </script>";
+
+      return false;
+    }
+    //enkripsi password
+    $passBaru1 = password_hash($passBaru1, PASSWORD_DEFAULT);
+
+    $query = "UPDATE login SET 
+            email = '$email', password = '$passBaru1', nama_lengkap='$nama'
+            WHERE id = $user_terlogin";
+    //tambahkan user baru ke database
+    mysqli_query($koneksi, $query);
+
+    return mysqli_affected_rows($koneksi);
+  }
+  return false;
+}
 function uploadProfile(){
 
   $namaFile = $_FILES['foto']['name'];
