@@ -71,6 +71,45 @@ function pendaftaran($dataMember){
   return mysqli_affected_rows($koneksi);
 }
 
+//update foto profile
+function updateFoto($dataMember){
+  global $koneksi;
+
+  //upload gambar
+  $foto = uploadProfile();
+  if( !$foto ){
+    return false;
+  }
+
+  $user_terlogin = @$_SESSION['user'];
+  $sql_user = mysqli_query($koneksi, "SELECT * FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
+  $data =  mysqli_fetch_array($sql_user);
+
+  $kd_anggota = $data['kd_anggota'];
+  $nama = $data['nama'];
+  $jk = $data['jk'];
+  $tempat_lahir = $data['tempat_lahir'];
+  $tanggal_lahir = $data['tanggal_lahir'];
+  $alamat_asal = $data['alamat_asal'];
+  $alamat_yk = $data['alamat_yk'];
+  $asal_kampus = $data['asal_kampus'];
+  $angkatan = $data['angkatan'];
+  $telp = $data['telp'];
+  $kd_jabatan = $data['kd_jabatan'];
+ 
+  $query = "UPDATE anggota SET 
+            nama = '$nama', jk = '$jk', tempat_lahir='$tempat_lahir',
+            tanggal_lahir='$tanggal_lahir', alamat_asal='$alamat_asal', 
+            alamat_yk='$alamat_yk', asal_kampus='$asal_kampus', 
+            angkatan='$angkatan', telp='$telp', foto = '$foto', kd_jabatan='$kd_jabatan', id ='$user_terlogin'
+            WHERE kd_anggota = $kd_anggota";
+
+  mysqli_query($koneksi, $query);
+
+  return mysqli_affected_rows($koneksi);
+}
+
+
 function uploadProfile(){
 
   $namaFile = $_FILES['foto']['name'];
@@ -101,7 +140,7 @@ function uploadProfile(){
   }
 
   //cek ukuran
-  if ( $ukuranFile > 2000000) {
+  if ( $ukuranFile > 512000) {
     echo " 	<script>
           alert('Ukuran yang anda masukkan terlalu besar');
         </script>";
@@ -127,28 +166,28 @@ function updateProfile($dataMember){
 
   $nama = htmlspecialchars($dataMember['nama']);
   $jk = $dataMember['jk'];
-  $tmp_lahir = htmlspecialchars($dataMember['tmp_lahir']);
-  $tgl_lahir = htmlspecialchars($dataMember['tgl_lahir']);
+  $tempat_lahir = htmlspecialchars($dataMember['tempat_lahir']);
+  $tanggal_lahir = htmlspecialchars($dataMember['tanggal_lahir']);
   $alamat_asal = htmlspecialchars($dataMember['alamat_asal']);
-  $alamat_jogja = htmlspecialchars($dataMember['alamat_jogja']);
+  $alamat_yk = htmlspecialchars($dataMember['alamat_yk']);
   $asal_kampus = htmlspecialchars($dataMember['asal_kampus']);
   $angkatan = htmlspecialchars($dataMember['angkatan']);
-  $telpon = htmlspecialchars($dataMember['telpon']);
+  $telp = htmlspecialchars($dataMember['telp']);
 
   $user_terlogin = @$_SESSION['user'];
-  $sql_user = mysqli_query($koneksi, "SELECT nia,foto, kd_jabatan FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
+  $sql_user = mysqli_query($koneksi, "SELECT kd_anggota,foto, kd_jabatan FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
   $data =  mysqli_fetch_array($sql_user);
 
-  $nia = $data['nia'];
+  $kd_anggota = $data['kd_anggota'];
   $foto = $data['foto'];
   $kd_jabatan = $data['kd_jabatan'];
 
   $query = "UPDATE anggota SET 
-            nama = '$nama', jk = '$jk', tmp_lahir='$tmp_lahir',
-            tgl_lahir='$tgl_lahir', alamat_asal='$alamat_asal', 
-            alamat_jogja='$alamat_jogja', asal_kampus='$asal_kampus', 
-            angkatan='$angkatan', telpon='$telpon', foto = '$foto', id ='$user_terlogin', kd_jabatan='$kd_jabatan'
-            WHERE nia = $nia";
+            nama = '$nama', jk = '$jk', tempat_lahir='$tempat_lahir',
+            tanggal_lahir='$tanggal_lahir', alamat_asal='$alamat_asal', 
+            alamat_yk='$alamat_yk', asal_kampus='$asal_kampus', 
+            angkatan='$angkatan', telp='$telp', foto = '$foto', kd_jabatan='$kd_jabatan', id ='$user_terlogin'
+            WHERE kd_anggota = $kd_anggota";
 
   mysqli_query($koneksi, $query);
 

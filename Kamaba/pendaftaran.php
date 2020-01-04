@@ -220,6 +220,7 @@ if(isset($_POST["daftar"])) {
                 <div class="col-md-6">
                   <label class="text-black" for="foto">Foto</label> 
                   <input type="file" name="foto" id="foto" class="form-control">
+                  <small>max file: 500kb</small>
                 </div>
               </div>
             

@@ -36,6 +36,25 @@ if(isset($_POST["update"])) {
       ";
   }
 }
+
+//cek apakah tombol edit sudah ditekan
+if(isset($_POST["fotoProfile"])) {
+  if( updateFoto($_POST) > 0){
+      echo "
+              <script>
+                  alert('Foto profile anda berhasil diubah!');
+                  document.location.href = 'profile.php';
+              </script>
+      ";
+  } else {
+      echo "
+              <script>
+                  alert('Foto profile gagal diubah!');
+                  document.location.href = 'profile.php';
+              </script>
+      ";
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -174,6 +193,7 @@ if(isset($_POST["update"])) {
                             </button>
                         </div>
                         <div class="modal-body">
+                        <?php $row = mysqli_fetch_assoc($result) ?>
                           <form action="" method="POST">
                             <div class="form-group">
                               <label for="nama">Nama Lengkap</label>
@@ -235,12 +255,46 @@ if(isset($_POST["update"])) {
                 </div>
             </div>
             
-            <?php $row = mysqli_fetch_assoc($result) ?>
+            
             <div class="row">
                 <div class="col-md-6 text-center">
+                <div class="row">
                     <div class="col-md-12">
-                        <img src="images\user\<?= $row["foto"]; ?>" width="250px">
+                        <img src="images\user\<?= $row["foto"]; ?>" width="250px" height="250px" style="border-radius: 50%">
                     </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-12 p-3">
+                      <!-- Button trigger modal -->
+                      <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#editFotoProfile">
+                          Ubah Foto Profile
+                      </button>
+                      <!-- Modal -->
+                      <div class="modal fade" id="editFotoProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Ubah Foto Profile</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <form action="" method="POST" enctype="multipart/form-data">
+                              <div class="modal-body text-left">
+                                  <label for="foto">Pilih foto baru</label>
+                                  <input type="file" class="form-control" name="foto" id="foto">
+                                  <small>max file: 500kb</small>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" name="fotoProfile" class="btn btn-primary">Ubah Foto</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
                 </div>
                 <div class="col-md-6 text-left">
                     <div class="row">

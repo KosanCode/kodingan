@@ -149,7 +149,6 @@ if(isset($_POST["login"])){
 
           <div class="col-md-10" data-aos="fade-up" data-aos-delay="400">
             
-            
             <div class="row justify-content-center">
               <div class="col-md-8 text-center">
                 <h1>Sign Up / Sign In</h1>
