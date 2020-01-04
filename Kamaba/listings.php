@@ -1,6 +1,6 @@
 
 <?php
-  require 'koneksi.php';
+  require 'functionkegiatan.php';
   
 
   $perpage = 5; //kegiatan perhalaman
@@ -8,21 +8,19 @@
 
   $start = ($page > 1) ? ($page * $perpage) - $perpage : 0;
 
-  $kegiatan = query("SELECT * FROM kegiatan INNER JOIN dtl_kegiatan ON dtl_kegiatan.kd_kegiatan=kegiatan.kd_kegiatan ORDER BY tanggal DESC LIMIT $start, $perpage");
+  $kegiatan = query("SELECT * FROM kegiatan ORDER BY kd_kegiatan DESC LIMIT $start, $perpage");
 
   $hasil = mysqli_query( $koneksi,"Select * from kegiatan");
   $total = mysqli_num_rows($hasil);
 
   $pages = ceil($total/$perpage);
 
-  $dtl_kegiatan = query("SELECT * FROM dtl_kegiatan");
-
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>KAMABA &mdash; Yogyakarta</title>
+    <title>Browse &mdash; Website Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -65,19 +63,20 @@
         <div class="row align-items-center">
           
           <div class="col-11 col-xl-2">
-            <h1 class="mb-0 site-logo"><a href="index.php" class="text-white h2 mb-0">Browse</a></h1>
+            <h1 class="mb-0 site-logo"><a href="index.php" class="text-white h2 mb-0">KAMABA</a></h1>
           </div>
           <div class="col-12 col-md-10 d-none d-xl-block">
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php"><span>Home</span></a></li>
-                <li class="has-children active">
-                  <a href="listings.php"><span>Kegiatan</span></a>
-                  <ul class="dropdown arrow-top">
-                    <li class="active"><a href="listings.php">Daftar Kegiatan</a></li>
-                    <li><a href="sertifikat.php">Sertifikat</a></li>
-                    <!--<li class="has-children">
+               <!--  <li class="has-children">
+                  <a href="about.php"><span>Dropdown</span></a>
+                 <ul class="dropdown arrow-top">
+                    <li><a href="#">Menu One</a></li>
+                    <li><a href="#">Menu Two</a></li>
+                    <li><a href="#">Menu Three</a></li>
+                    <li class="has-children">
                       <a href="#">Dropdown</a>
                       <ul class="dropdown">
                         <li><a href="#">Menu One</a></li>
@@ -85,13 +84,13 @@
                         <li><a href="#">Menu Three</a></li>
                         <li><a href="#">Menu Four</a></li>
                       </ul>
-                    </li>-->
+                    </li>
                   </ul>
-                </li>
-        <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
-                <li><a href="about.php"><span>Info</span></a></li>
+                </li>-->
+                <li class="active"><a href="listings.php"><span>Kegiatan</span></a></li>
+                <li><a href="about.php"><span>About</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
-                <li><a href="signup.php"><span>Login</span></a></li>
+                <li><a href="contact.php"><span>Login</span></a></li>
               </ul>
             </nav>
           </div>
@@ -117,7 +116,7 @@
             
             <div class="row justify-content-center">
               <div class="col-md-8 text-center">
-                <h1>Kegiatan</h1>
+                <h1>KEGIATAN</h1>
                 <p data-aos="fade-up" data-aos-delay="100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate beatae quisquam perspiciatis adipisci ipsam quam.</p>
               </div>
             </div>
@@ -130,28 +129,27 @@
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
+          <div class="col-lg-2"></div>
           <div class="col-lg-8">
 
             <?php
-              $i=1;
 
                foreach ($kegiatan as $row):
             ?>
             <div class="d-block d-md-flex listing-horizontal">
 
-              <a href="#" class="img d-block" style="background-image: url('images/img_2.jpg')"></a>
+              <a href="#" class="img d-block" style="background-image: url(images/<?= $row["gambar"]; ?>)"></a>
 
               <div class="lh-content">
                 <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                <h3><a href="#"> <?= $row["kegiatan"]; ?></a></h3>
-                <p><?= $row["tanggal"]; ?></p>
-                <p><?= $row["tempat"]; ?></p>
-                <p><?= $row["iuran"]; ?></p>
-              </div>
+                <h3><a href="listings-single.php?kd_kegiatan=<?= $row["kd_kegiatan"]; ?>"> <?= $row["kegiatan"]; ?></a></h3>
+                <p><img src="images/date.jpg" width="20px" style="margin-right: 10px; padding-bottom: 5px;">
+                  <?= $format_tanggal = date('d F Y', strtotime($row["tanggal"])); ?></p>
+                <p><img src="images/location.png" width="20px" style="margin-right: 10px; padding-bottom: 5px;"><?= $row["tempat"]; ?></p>              </div>
 
             </div>
             <?php 
-              $i++;
+             
             endforeach;
             ?>
             
@@ -161,7 +159,7 @@
                 <?php 
                     for($j=1; $j<=$pages; $j++){ ?>
 
-                      <a href="?halaman=<?php echo $j ?>"><?php echo $j ?></a>
+                      <a class="active" href="?halaman=<?php echo $j ?>"><?php echo $j ?></a>
                 <?php
                     }
                 ?>
@@ -173,7 +171,7 @@
           </div>
           <div class="col-lg-3 ml-auto">
 
-            <div class="mb-5">
+            <!--<div class="mb-5">
               <h3 class="h5 text-black mb-3">Filters</h3>
               <form action="#" method="post">
                 <div class="form-group">
@@ -194,7 +192,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                  <!-- select-wrap, .wrap-icon -->
+                  select-wrap, .wrap-icon 
                   <div class="wrap-icon">
                     <span class="icon icon-room"></span>
                     <input type="text" placeholder="Location" class="form-control">
@@ -249,7 +247,7 @@
                   </ul>
                 </div>
               </form>
-            </div>
+            </div>-->
 
           </div>
 
@@ -260,13 +258,13 @@
     <div class="site-section">
       <div class="container">
         <div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center border-primary">
+      <!--    <div class="col-md-7 text-center border-primary">
             <h2 class="font-weight-light text-primary">Popular Categories</h2>
             <p class="color-black-opacity-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
           </div>
-        </div>
+        </div>-->
 
-        <div class="row align-items-stretch">
+        <!-- <div class="row align-items-stretch">
           <div class="col-6 col-sm-6 col-md-4 mb-4 mb-lg-0 col-lg-2">
             <a href="#" class="popular-category h-100">
               <span class="icon mb-3"><span class="flaticon-hotel"></span></span>
@@ -309,14 +307,14 @@
               <span class="number">692</span>
             </a>
           </div>
-        </div>
+        </div>-->
 
         
       </div>
     </div>
 
     
-    <div class="py-5 bg-primary">
+  <!--  <div class="py-5 bg-primary">
       <div class="container">
         <div class="row">
           <div class="col-lg-7 mr-auto mb-4 mb-lg-0">
@@ -328,13 +326,13 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     
     <footer class="site-footer">
       <div class="container">
         <div class="row">
           <div class="col-md-9">
-            <div class="row">
+          <!--   <div class="row">
               <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
                 <h2 class="footer-heading mb-4">Quick Links</h2>
                 <ul class="list-unstyled">
@@ -369,10 +367,10 @@
                 <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
                 <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="col-lg-3">
-            <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
+          <!--   <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
             <form action="#" method="post">
               <div class="input-group mb-3">
@@ -382,9 +380,9 @@
                 </div>
               </div>
             </form>
-          </div>
+          </div> -->
         </div>
-        <div class="row pt-5 mt-5">
+        <div class="col-md-12">
           <div class="col-12 text-md-center text-left">
             <p>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

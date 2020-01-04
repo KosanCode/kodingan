@@ -1,14 +1,33 @@
 <?php
   require 'functionkegiatan.php';
-  
-
 
   $kd_kegiatan = $_GET["kd_kegiatan"];
 
-  $single_kegiatan = query("SELECT * FROM kegiatan WHERE kd_kegiatan = $kd_kegiatan ")[0];
+  $dtl_kegiatan = query("SELECT * FROM kegiatan WHERE kd_kegiatan = $kd_kegiatan ")[0];
 
 
+  if (isset($_POST['daftar'])) {
 
+    if( daftarkeg($_POST) > 0){
+      echo "
+          <script>
+            alert('ANDA BERHASIL MENDAFTAR!');
+            document.location.href = 'listings.php';
+          </script>
+      ";
+    } else {
+      echo "
+          <script>
+            alert('GAGAL UNTUK MENDAFTAR!');
+            document.location.href = 'pendaftaran.php';
+          </script>
+      ";
+    }
+    
+
+    
+
+  }
 
 ?>
 <!DOCTYPE html>
@@ -64,24 +83,7 @@
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php"><span>Home</span></a></li>
-                <!--<li class="has-children">
-                  <a href="about.php"><span>Dropdown</span></a>
-                  <ul class="dropdown arrow-top">
-                    <li><a href="#">Menu One</a></li>
-                    <li><a href="#">Menu Two</a></li>
-                    <li><a href="#">Menu Three</a></li>
-                    <li class="has-children">
-                      <a href="#">Dropdown</a>
-                      <ul class="dropdown">
-                        <li><a href="#">Menu One</a></li>
-                        <li><a href="#">Menu Two</a></li>
-                        <li><a href="#">Menu Three</a></li>
-                        <li><a href="#">Menu Four</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>-->
-                <li class="active"><a href="listings.php"><span>Kegiatan</span></a></li>
+                <li><a href="listings.php"><span>Kegiatan</span></a></li>
                 <li><a href="about.php"><span>About</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
                 <li><a href="contact.php"><span>Contact</span></a></li>
@@ -110,8 +112,8 @@
             
             <div class="row justify-content-center">
               <div class="col-md-8 text-center">
-                <h1>KEGIATAN</h1>
-                <h2 style="color: white;" class="mb-0"><?= $single_kegiatan["kegiatan"]; ?></h2>
+                <h1>Pendaftaran</h1>
+                <h2 style="color: white;" data-aos="fade-up" data-aos-delay="100"><?= $dtl_kegiatan["kegiatan"]; ?></h2>
               </div>
             </div>
 
@@ -121,113 +123,78 @@
       </div>
     </div>  
 
-    <div class="site-section">
+    <div class="site-section bg-light">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8">
-
-            <div class="mb-5 border-bottom pb-5">
-
-              <img src="images/<?= $single_kegiatan["gambar"]; ?>" alt="Image" class="img-fluid mb-4">
-              <h1><?= $single_kegiatan["kegiatan"]; ?></h1>
-              <p style="text-align: justify;"><?= $single_kegiatan["detail"]; ?></p>
-              <h3 class="h5 text-black mb-3">KETERANGAN :</h3>
-              <p><img src="images/date.jpg" width="20px" style="margin-right: 10px; padding-bottom: 5px;"><?= $format_tanggal = date('d F Y', strtotime($single_kegiatan["tanggal"])); ?></p>
-              <p><img src="images/location.png" width="20px" style="margin-right: 10px; padding-bottom: 5px;"><?= $single_kegiatan["tempat"]; ?></p>
-              <p><img src="images/uang2.png" width="20px" style="margin-right: 10px; padding-bottom: 5px;">Rp <?= $single_kegiatan["iuran"]; ?></p> 
+          <div class="col-md-2"></div>
+          <div class="col-md-8 mb-5">
 
 
-              <div class="row" style="text-align: right;">
-                <div class="col-md-12"  >
-                  <br><br>
-                  <a href="pendaftarankeg.php?kd_kegiatan=<?= $single_kegiatan["kd_kegiatan"]; ?>" class="btn btn-primary btn-md text-white">DAFTAR</a>
+            
+
+            <form action="#" method="POST" class="p-5 bg-white" style="margin-top: -150px;">
+             
+              <h2 style="text-align: center;">FORMULIR PENDAFTARAN</h2>
+              <h3 style="margin-bottom: 35px; text-align: center;"><?= $dtl_kegiatan["kegiatan"]; ?></h3>
+
+              <input type="hidden" name="kd_kegiatan" value="<?= $dtl_kegiatan["kd_kegiatan"]; ?>">
+
+              <div class="row form-group">
+                
+                <div class="col-md-12">
+                  <label class="text-black" for="nama">Nama</label> 
+                  <input type="text" name="nama" required class="form-control">
                 </div>
-
               </div>
 
-            </div>
-
-            <!--
-
-            <h2 class="mb-5 text-primary">More Listings</h2>
-
-            <?php
-              $i=1;
-
-               foreach ($kegiatan as $row):
-            ?>
-            <div class="d-block d-md-flex listing-horizontal">
-
-              <a href="#" class="img d-block" style="background-image: url(images/<?= $row["gambar"]; ?>)"></a>
-
-              <div class="lh-content">
-                <a href="listings-single.php" class="bookmark"><span class="icon-heart"></span></a>
-                <h3><a href="listings-single.php"> <?= $row["kegiatan"]; ?></a></h3>
-                <p>
-                  <img src="images/date.jpg" width="20px" style="margin-right: 10px; padding-bottom: 5px;">
-                  <?= 
-                      $format_tanggal = date('d F Y', strtotime($row["tanggal"]));
-                  ?>
-              </p>
-                <p><img src="images/location.png" width="20px" style="margin-right: 10px; padding-bottom: 5px;"><?= $row["tempat"]; ?></p>              </div>
-
-            </div>
-            <?php 
-              $i++;
-            endforeach;
-            ?>
-            
-        
-            <div class="col-12 mt-5 text-center">
-              <div class="custom-pagination">
-                <?php 
-                    for($j=1; $j<=$pages; $j++){ ?>
-
-                      <a href="?halaman=<?php echo $j ?>"><?php echo $j ?></a>
-                <?php
-                    }
-                ?>
+              <div class="row form-group">
+                
+                <div class="col-md-12">
+                  <label class="text-black" for="alamat_jogja">Alamat di Jogja</label> 
+                  <input type="text" name="alamat_jogja" required class="form-control">
+                </div>
               </div>
-            </div>
 
-          </div> -->
-       <!-- <div class="col-lg-3 ml-auto">
+              <div class="row form-group">
+                
+                <div class="col-md-12">
+                  <label class="text-black" for="noHP">No Hp</label> 
+                  <input type="tel" name="noHP" required class="form-control">
+                </div>
+              </div>
 
-            <div class="mb-5">
-              <h3 class="h5 text-black mb-3">MORE KEGIATAN</h3>
+              <div class="row form-group">
+                
+                <div class="col-md-12">
+                  <label class="text-black" for="email">Email</label> 
+                  <input type="email" name="email" required class="form-control">
+                </div>
+              </div>
+
+
+              <div class="row form-group" style="text-align: right;">
+                <div class="col-md-12" >
+                  <button type="submit" name="daftar" class="btn btn-primary btn-md text-white">DAFTAR</button>
+                </div>
+              </div>
+
               
-          </div> --> 
-            
-            
 
-            
-
-          </div> 
-
+  
+            </form>
+          
+          </div>
+          <div class="col-md-2"></div>
+        
         </div>
       </div>
     </div>
-
-    
-   <!-- <div class="py-5 bg-primary">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-7 mr-auto mb-4 mb-lg-0">
-            <h2 class="mb-3 mt-0 text-white">Let's get started. Create your account</h2>
-            <p class="mb-0 text-white">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-          </div>
-          <div class="col-lg-4">
-            <p class="mb-0"><a href="signup.php" class="btn btn-outline-white text-white btn-md px-5 font-weight-bold btn-md-block">Sign Up</a></p>
-          </div>
-        </div>
-      </div>
-    </div> -->
     
     <footer class="site-footer">
       <div class="container">
         <div class="row">
           <div class="col-md-9">
-          <!--   <div class="row">
+            <div class="row">
               <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
                 <h2 class="footer-heading mb-4">Quick Links</h2>
                 <ul class="list-unstyled">
@@ -262,10 +229,10 @@
                 <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
                 <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
               </div>
-            </div> -->
+            </div>
           </div>
           <div class="col-lg-3">
-          <!--   <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
+            <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
             <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
             <form action="#" method="post">
               <div class="input-group mb-3">
@@ -275,9 +242,9 @@
                 </div>
               </div>
             </form>
-          </div> -->
+          </div>
         </div>
-        <div class="col-md-12">
+        <div class="row pt-5 mt-5">
           <div class="col-12 text-md-center text-left">
             <p>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
