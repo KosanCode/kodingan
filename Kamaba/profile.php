@@ -212,7 +212,7 @@ if(isset($_POST["ubahPassword"])) {
                             </button>
                         </div>
                         <div class="modal-body">
-                        <?php $row = mysqli_fetch_assoc($result) ?>
+                        
                           <form action="" method="POST">
                             <div class="form-group">
                               <label for="nama">Nama Lengkap</label>
@@ -274,7 +274,7 @@ if(isset($_POST["ubahPassword"])) {
                 </div>
             </div>
             
-            
+            <?php $row = mysqli_fetch_assoc($result) ?>
             <div class="row">
                 <div class="col-md-6 text-center">
                 <div class="row">

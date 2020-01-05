@@ -52,6 +52,7 @@ if(isset($_POST["login"])){
           setcookie('id',   $row['id'], time()+3600);
           setcookie('key', hash('sha256',$row['email']), time()+3600);
         } 
+        header("Location: admin/index.php");
        } else if($row['level'] === "user") {
         //set session
         $_SESSION["user"] = $row['id'];
@@ -62,8 +63,9 @@ if(isset($_POST["login"])){
           setcookie('id',  $row['id'], time()+3600);
           setcookie('key', hash('sha256', $row['email']), time()+3600);
         }
+        header("Location: index.php");
       }
-      header("Location: index.php");
+      
       exit;
     }
   }

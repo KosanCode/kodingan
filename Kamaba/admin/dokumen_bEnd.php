@@ -65,7 +65,7 @@
   <title>Kamaba - Administrator Page</title>
 
   <!-- Favicons -->
-  <link href="./img/favicon.png" rel="icon">
+  <!-- <link href="./img/favicon.png" rel="icon"> -->
   <link href="./img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Bootstrap core CSS -->
@@ -103,7 +103,7 @@
       
       <div class="top-menu">
         <ul class="nav pull-right top-menu">
-          <li><a class="logout" href="login.html">Logout</a></li>
+          <li><a class="logout" href="../logout.php">Logout</a></li>
         </ul>
       </div>
     </header>
@@ -116,15 +116,15 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+          <p class="centered"><img src="img/ui-sam.jpg" class="img-circle" width="80"></p>
           <h5 class="centered">Sam Soffes</h5>
           <li class="mt">
-            <a href="dokumen_bEnd.php">
+            <a href="index.php">
               <i class="fa fa-dashboard"></i>
               <span>Dashboard</span>
               </a>
           </li>
-          <li class="sub-menu">
+          <li class="mt">
             <a class="active" href="dokumen_bEnd.php">
               <i class="fa fa-th"></i>
               <span>Data Sertifikat</span>

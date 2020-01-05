@@ -6,15 +6,17 @@ require 'function.php';
 
 //ambil data dari tabel anggota
 $anggota = query("SELECT * FROM anggota");
+
 //cek apakah tombol daftar sudah ditekan
 if(isset($_GET["aksi"])) {
     switch($_GET['aksi']) {
         case "ubah":
-            $kd_anggota = $_GET['kd_anggota'];
+            $kd_anggota2 = $_GET['kd_anggota'];
+            
         break;
         case "hapus":
             $kd_anggota = $_GET['kd_anggota'];
-            $sql_hapus = "DELETE FROM anggota WHERE kd_anggota = '$kd_aggota'";
+            $sql_hapus = "DELETE FROM anggota WHERE kd_anggota = '$kd_anggota'";
             hapus($sql_hapus);
             header("Location: olah_data_anggota.php");
         break;
@@ -195,7 +197,7 @@ if(isset($_GET["aksi"])) {
                     <td><?= $row["angkatan"] ?></td>
                     <td><?= $row["telp"] ?></td>
                     <td>
-                        <a href="olah_data_anggota.php?aksi=ubah&kd_anggota=<?= $row["kd_anggota"]; ?>" data-toggle="modal" data-target="#editAnggota">
+                        <a href="olah_data_anggota.php?aksi=ubah&kd_anggota=<?= $row["kd_anggota"]; ?> data-toggle="modal" data-target="#editAnggota">
                             ubah
                     </a> |
                         <a href="olah_data_anggota.php?aksi=hapus&kd_anggota=<?= $row["kd_anggota"]; ?>">hapus</a>
@@ -255,6 +257,10 @@ if(isset($_GET["aksi"])) {
         </button>
     </div>
     <div class="modal-body">
+        <?php 
+            $result = mysqli_query($koneksi, "SELECT * FROM anggota WHERE kd_anggota='$kd_anggota2'");
+            $data_user = mysqli_fetch_assoc($result);
+        ?>
         <form action="" method="POST">
         <div class="form-group">
             <label for="nama">Nama Lengkap</label>
