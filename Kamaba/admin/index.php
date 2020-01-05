@@ -64,16 +64,20 @@
           <p class="centered"><img src="img/admin.png" class="img-circle" width="80"></p>
           <h5 class="centered">ADMIN</h5>
           <li class="mt">
-            <a class="active" href="index.html">
+            <a class="active" href="index.php">
               <i class="fa fa-dashboard"></i>
               <span>Dashboard</span>
               </a>
           </li>
-          <li class="mt">
-            <a href="dokumen_bEnd.php">
+          <li class="sub-menu">
+            <a href="javascript:;">
               <i class="fa fa-th"></i>
-              <span>Data Sertifikat</span>
+              <span>Data</span>
               </a>
+            <ul class="sub">
+              <li><a href="data_anggota.php">Anggota</a></li>
+              <li><a href="dokumen_bEnd.php">Sertifikat</a></li>
+            </ul>
           </li>
         </ul>
         <!-- sidebar menu end-->
@@ -115,7 +119,7 @@
     $(document).ready(function() {
       var unique_id = $.gritter.add({
         // (string | mandatory) the heading of the notification
-        title: 'Welcome to KAMABA!',
+        title: 'Welcome back to KAMABA!',
         // (string | mandatory) the text inside the notification
         text: 'Jadilah admin KAMABA yang bijak. Jangan lupa senyum hari ini ;)',
         // (string | optional) the image to display on the left

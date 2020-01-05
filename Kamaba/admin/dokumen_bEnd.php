@@ -98,7 +98,7 @@
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="index.html" class="logo"><b>KAMA<span>BA</span></b></a>
+      <a href="index.php" class="logo"><b>KAMA<span>BA</span></b></a>
       <!--logo end-->
       
       <div class="top-menu">
@@ -116,19 +116,23 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><img src="img/ui-sam.jpg" class="img-circle" width="80"></p>
-          <h5 class="centered">Sam Soffes</h5>
+          <p class="centered"><img src="img/admin.png" class="img-circle" width="80"></p>
+          <h5 class="centered">ADMIN</h5>
           <li class="mt">
             <a href="index.php">
               <i class="fa fa-dashboard"></i>
               <span>Dashboard</span>
               </a>
           </li>
-          <li class="mt">
-            <a class="active" href="dokumen_bEnd.php">
+          <li class="sub-menu">
+          <a href="javascript:;">
               <i class="fa fa-th"></i>
-              <span>Data Sertifikat</span>
+              <span>Data</span>
               </a>
+              <ul class="sub">
+              <li><a href="data_anggota.php">Anggota</a></li>
+              <li class="active"><a  href="dokumen_bEnd.php">Sertifikat</a></li>
+            </ul>
           </li>
         </ul>
         <!-- sidebar menu end-->

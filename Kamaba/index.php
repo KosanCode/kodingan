@@ -65,6 +65,8 @@
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li class="active"><a href="index.php"><span>Home</span></a></li>
+
+                <?php if(@$_SESSION["user"]) : ?>
                 <li class="has-children">
                   <a href="listings.php"><span>Kegiatan</span></a>
                   <ul class="dropdown arrow-top">
@@ -81,7 +83,8 @@
                     </li>-->
                   </ul>
                 </li>
-        <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
+                <?php endif; ?>
+                <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
                 <li><a href="about.php"><span>Info</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
 
