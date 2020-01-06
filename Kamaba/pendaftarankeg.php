@@ -179,6 +179,7 @@ $user_terlogin = @$_SESSION['user'];
               <h3 style="margin-bottom: 35px; text-align: center;"><?= $dtl_kegiatan["kegiatan"]; ?></h3>
 
               <input type="hidden" name="kd_kegiatan" value="<?= $dtl_kegiatan["kd_kegiatan"]; ?>">
+              <input type="hidden" name="kd_anggota" value="<?= $data_user["kd_anggota"]; ?>">
 
               <div class="row form-group">
                 
@@ -200,15 +201,15 @@ $user_terlogin = @$_SESSION['user'];
                 
                 <div class="col-md-12">
                   <label class="text-black" for="noHP">No Hp</label> <br>
-                  <input class="col-md-12" type="tel" name="noHP" value="<?= $data_user["telp"]; ?>">
+                  <input class="col-md-12" type="telp" name="noHP" value="<?= $data_user["telp"]; ?>">
                 </div>
               </div>
 
               <div class="row form-group">
                 
                 <div class="col-md-12">
-                  <label class="text-black" for="email">Asal Kampus</label> <br>
-                  <input class="col-md-12" type="email" name="email" value="<?= $data_user["asal_kampus"]; ?>">
+                  <label class="text-black" for="asal_kampus">Asal Kampus</label> <br>
+                  <input class="col-md-12" type="text" name="asal_kampus" value="<?= $data_user["asal_kampus"]; ?>">
                 </div>
               </div>
 
