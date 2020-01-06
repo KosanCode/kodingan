@@ -154,7 +154,7 @@
             ?>
             <div class="d-block d-md-flex listing-horizontal">
 
-              <a href="#" class="img d-block" style="background-image: url(images/<?= $row["gambar"]; ?>)"></a>
+              <a href="#" class="img d-block" style="background-image: url(images/kegiatan/<?= $row["gambar"]; ?>)"></a>
 
               <div class="lh-content">
                 <a href="#" class="bookmark"><span class="icon-heart"></span></a>

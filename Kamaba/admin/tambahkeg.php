@@ -1,32 +1,31 @@
 <?php
 
 session_start();
-require_once '../koneksi.php';
-require '../function.php';
+include '../functionkegiatan.php'; 
 
 //ambil data dari tabel anggota
-$anggota = query("SELECT * FROM anggota a JOIN jabatan j ON a.kd_jabatan=j.kd_jabatan");
+$kegiatan = query("SELECT * FROM kegiatan");
 
 //cek apakah tombol daftar sudah ditekan
-if(isset($_GET["aksi"])) {
-    switch($_GET['aksi']) {
-        case "ubah":
-            
-        break;
-        case "hapus":
-            $kd_anggota = $_GET['kd_anggota'];
-            $sql_hapus = "DELETE FROM anggota WHERE kd_anggota = '$kd_anggota'";
-            $result = mysqli_query($koneksi, $sql_hapus);
-            // $row = mysqli_fetch_assoc($result);
-            echo "
-              <script>
-                  alert('Data berhasil dihapus!');
-                  document.location.href = 'data_anggota.php';
-              </script>
-            ";
-        break;
+if (isset($_POST['submit'])) {
+
+    if( tambahkeg($_POST) > 0){
+      echo "
+          <script>
+            alert('DATA BERHASIL DITAMBAHKAN!');
+            document.location.href = 'data_kegiatan.php';
+          </script>
+      ";
+    } else {
+      echo "
+          <script>
+            alert('DATA GAGAL DITAMBAHKAN!');
+            document.location.href = 'data_kegiatan.php';
+          </script>
+      ";
     }
-}
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -57,8 +56,6 @@ if(isset($_GET["aksi"])) {
   <link href="css/style-responsive.css" rel="stylesheet">
   <script src="lib/jquery/jquery.min.js"></script>
 
-
-  
   <!-- =======================================================
     Template Name: Dashio
     Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
@@ -127,72 +124,49 @@ if(isset($_GET["aksi"])) {
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
-    
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Data Anggota KAMABA</h3>
+        <h3><i class="fa fa-angle-right"></i>Tambah Kegiatan KAMABA</h3>
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
-            <div class="adv-table table-responsive">
-              <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
-                <thead>
-                    <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Jenis Kelamin</th>
-                    <th scope="col">Tempat Lahir</th>
-                    <th scope="col">Tanggal Lahir</th>
-                    <th scope="col">Alamat Asal</th>
-                    <th scope="col">Alamat Jogjakarta</th>
-                    <th scope="col">Asal Kampus</th>
-                    <th scope="col">Angkatan</th>
-                    <th scope="col">Nomor Telpon</th>
-                    <th scope="col">Jabatan</th>
-                    <th scope="col">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php $i=1; ?>
-                    <?php foreach($anggota as $row) : ?>
-                    <tr>
-                    <th scope="row"><?= $i; ?></th>
-                    <td>
-                    <div class="project-wrapper">
-                        <div class="project">
-                            <div class="photo">
-                                <a class="fancybox" href="../images/user/<?= $row["foto"] ?>">
-                                    <img src="../images/user/<?= $row["foto"] ?>" alt="user" width="40px">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    </td>
-                    <td><?= $row["nama"] ?></td>
-                    <td><?= $row["jk"] ?></td>
-                    <td><?= $row["tempat_lahir"] ?></td>
-                    <td><?= $row["tanggal_lahir"] ?></td>
-                    <td><?= $row["alamat_asal"] ?></td>
-                    <td><?= $row["alamat_yk"] ?></td>
-                    <td><?= $row["asal_kampus"] ?></td>
-                    <td><?= $row["angkatan"] ?></td>
-                    <td><?= $row["telp"] ?></td>
-                    <td><?= $row["jabatan"] ?></td>
-                    <td>
-                        <a href="edit_anggota.php?aksi=ubah&kd_anggota=<?= $row["kd_anggota"]; ?>">
-                            <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                        </a>
-                        <a href="data_anggota.php?aksi=hapus&kd_anggota=<?= $row["kd_anggota"]; ?>" onclick="return confirm('Yakin ingin menghapus data yang dipilih?');">
-                            <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                        </a>
-                    </td>
-                    </tr>
-                    <?php $i++; ?>
-                    <?php endforeach; ?>
-                </tbody>
-              </table>
+            <button style="margin-left: 10px;"><a href="data_kegiatan.php"> Kembali</a></button><br><br>
+            <div >
+                <form action="#"  method="post" enctype="multipart/form-data">
+                    <table >
+                      <tr>
+                        <td>Nama Kegiatan</td>
+                        <td>: <input type="text" name="kegiatan" style="width: 510px;" required></td>
+                      </tr>
+                      <tr>
+                        <td valign="top">Deskripsi Kegiatan</td>
+                        <td>: <textarea rows="20" cols="70" name="detail" required></textarea></td>
+                      </tr>
+                      <tr>
+                        <td>Tanggal</td>
+                        <td>: <input type="date" name="tanggal" required></td>
+                      </tr>
+                      <tr>
+                        <td>Tempat</td>
+                        <td>: <input type="text" name="tempat" style="width: 510px;" required></td>
+                      </tr>
+                      <tr>
+                        <td>Iuran</td>
+                        <td>: Rp <input type="text" name="iuran" style="width: 150px;"></td>
+                      </tr>
+                      <tr>
+                        <td>Gambar</td>
+                        <td>: <input type="file" name="gambar"></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" align="right">
+                          <button type="submit" name="submit">Tambah Data</button>
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
             </div>
+
           </div>
           <!-- page end-->
         </div>
@@ -224,7 +198,6 @@ if(isset($_GET["aksi"])) {
     </footer>
     <!--footer end-->
   </section>
-
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="lib/jquery/jquery.min.js"></script>
   <script type="text/javascript" language="javascript" src="lib/advanced-datatable/js/jquery.js"></script>

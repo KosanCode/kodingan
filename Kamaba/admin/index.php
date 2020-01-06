@@ -79,6 +79,12 @@
               <li><a href="dokumen_bEnd.php">Sertifikat</a></li>
             </ul>
           </li>
+          <li class="sub-menu">
+            <a href="data_kegiatan.php">
+              <i class="fa fa-th"></i>
+              <span>Kegiatan</span>
+              </a>
+          </li>
         </ul>
         <!-- sidebar menu end-->
       </div>

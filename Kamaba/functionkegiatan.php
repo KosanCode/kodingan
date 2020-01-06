@@ -72,7 +72,7 @@
 		$namaFilebaru .= $ekstensiGambar;
 
 
-		move_uploaded_file($tmpName, 'images/' . $namaFilebaru);
+		move_uploaded_file($tmpName, '../images/kegiatan/' . $namaFilebaru);
 
 		return $namaFilebaru;
 
@@ -137,25 +137,22 @@
     return implode(" ",array_splice($words,0,$word_limit));
 	}
 
-	/*function daftarkeg($datakeg){
+	function daftarkeg($datakeg){
 		global $koneksi;
 
 		$kd_kegiatan = $datakeg["kd_kegiatan"];
-		$nama = htmlspecialchars($datakeg['nama']);
-		$alamat_jogja = htmlspecialchars($datakeg['alamat_jogja']);
-		$noHP = htmlspecialchars($datakeg['noHP']);
-		$email = $datakeg['email'];
+		$kd_anggota = $datakeg["kd_anggota"];
 
 
 
-		$query = "INSERT INTO peserta_kegiatan  VALUES ('$nama','$alamat_jogja','$noHP', '$email', '$kd_kegiatan')";
+		$query = "INSERT INTO dtl_kegiatan  VALUES ('$kd_kegiatan','$kd_anggota','y')";
 
 		$hasil = mysqli_query($koneksi, $query );
 
 		return mysqli_affected_rows($koneksi);
 
 
-	}*/
+	}
 
 
 ?>
