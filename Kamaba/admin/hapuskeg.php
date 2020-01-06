@@ -1,6 +1,6 @@
 <?php
 
-	include 'functionkegiatan.php';	
+	include '../functionkegiatan.php';	
 	
 	$kd_kegiatan = $_GET["kd_kegiatan"];
 
@@ -8,14 +8,14 @@
 		echo "
 					<script>
 						alert('DATA BERHASIL DIHAPUS');
-						document.location.href = 'showdatakeg.php';
+						document.location.href = 'data_kegiatan.php';
 					</script>
 			";
 	}else {
 		echo "
 					<script>
 						alert('DATA GAGAS DIHAPUS!');
-						document.location.href = 'showdatakeg.php';
+						document.location.href = 'data_kegiatan.php';
 					</script>
 			";
 	}

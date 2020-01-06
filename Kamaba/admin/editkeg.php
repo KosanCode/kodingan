@@ -1,27 +1,37 @@
 <?php
 
 session_start();
-require_once '../koneksi.php';
-require '../function.php';
+include '../functionkegiatan.php'; 
 
 //ambil data dari tabel anggota
-$anggota = query("SELECT * FROM anggota");
+$kegiatan = query("SELECT * FROM kegiatan");
 
 //cek apakah tombol daftar sudah ditekan
-if(isset($_GET["aksi"])) {
-    switch($_GET['aksi']) {
-        case "ubah":
-            $kd_anggota2 = $_GET['kd_anggota'];
-            
-        break;
-        case "hapus":
-            $kd_anggota = $_GET['kd_anggota'];
-            $sql_hapus = "DELETE FROM anggota WHERE kd_anggota = '$kd_anggota'";
-            hapus($sql_hapus);
-            header("Location: data_anggota.php");
-        break;
+if (isset($_POST['submit'])) {
+
+    if( editkeg($_POST) > 0){
+      echo "
+          <script>
+            alert('DATA BERHASIL DIEDIT!');
+            document.location.href = 'data_kegiatan.php';
+          </script>
+      ";
+    } else {
+      echo "
+          <script>
+            alert('DATA GAGAL DIEDIT!');
+            document.location.href = 'data_kegiatan.php';
+          </script>
+      ";
     }
-}
+  }
+
+  //ambil data di url
+  $kd_kegiatan = $_GET["kd_kegiatan"];
+  // 
+
+  $keg = query("SELECT * FROM kegiatan WHERE kegiatan.kd_kegiatan = $kd_kegiatan")[0];
+
 ?>
 
 <!DOCTYPE html>
@@ -122,63 +132,51 @@ if(isset($_GET["aksi"])) {
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Data Anggota KAMABA</h3>
+        <h3><i class="fa fa-angle-right"></i>Tambah Kegiatan KAMABA</h3>
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
-            <div class="adv-table table-responsive">
-              <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
-                <thead>
-                    <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Jenis Kelamin</th>
-                    <th scope="col">Tempat Lahir</th>
-                    <th scope="col">Tanggal Lahir</th>
-                    <th scope="col">Alamat Asal</th>
-                    <th scope="col">Alamat Jogjakarta</th>
-                    <th scope="col">Asal Kampus</th>
-                    <th scope="col">Angkatan</th>
-                    <th scope="col">Nomor Telpon</th>
-                    <th scope="col">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php $i=1; ?>
-                    <?php foreach($anggota as $row) : ?>
-                    <tr>
-                    <th scope="row"><?= $i; ?></th>
-                    <td>
-                    <div class="project-wrapper">
-                        <div class="project">
-                            <div class="photo">
-                                <a class="fancybox" href="../images/user/<?= $row["foto"] ?>"><img src="../images/user/<?= $row["foto"] ?>" alt="user" width="40px"></a>
-                            </div>
-                        </div>
-                    </div>
-                    </td>
-                    <td><?= $row["nama"] ?></td>
-                    <td><?= $row["jk"] ?></td>
-                    <td><?= $row["tempat_lahir"] ?></td>
-                    <td><?= $row["tanggal_lahir"] ?></td>
-                    <td><?= $row["alamat_asal"] ?></td>
-                    <td><?= $row["alamat_yk"] ?></td>
-                    <td><?= $row["asal_kampus"] ?></td>
-                    <td><?= $row["angkatan"] ?></td>
-                    <td><?= $row["telp"] ?></td>
-                    <td>
-                        <a href="olah_data_anggota.php?aksi=ubah&kd_anggota=<?= $row["kd_anggota"]; ?> data-toggle="modal" data-target="#editAnggota">
-                            ubah
-                    </a> |
-                        <a href="olah_data_anggota.php?aksi=hapus&kd_anggota=<?= $row["kd_anggota"]; ?>">hapus</a>
-                    </td>
-                    </tr>
-                    <?php $i++; ?>
-                    <?php endforeach; ?>
-                </tbody>
-              </table>
+            <button style="margin-left: 10px;"><a href="data_kegiatan.php"> Kembali</a></button><br><br>
+            <div >
+                <form action="#"  method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="kd_kegiatan" value="<?= $keg["kd_kegiatan"]; ?>">
+                  <input type="hidden" name="gambarLama" value="<?= $keg["gambar"]; ?>">
+                    <table >
+                      <tr>
+                        <td>Nama Kegiatan</td>
+                        <td>: <input type="text" name="kegiatan" style="width: 510px;" value="<?= $keg["kegiatan"]; ?>" required></td>
+                      </tr>
+                      <tr>
+                        <td valign="top">Deskripsi Kegiatan</td>
+                        <td>: <textarea rows="10" cols="70" name="detail" required><?= $keg["detail"]; ?></textarea></td></td>
+                      </tr>
+                      <tr>
+                        <td>Tanggal</td>
+                        <td>: <input type="date" name="tanggal" value="<?= $keg["tanggal"]; ?>" required></td>
+                      </tr>
+                      <tr>
+                        <td>Tempat</td>
+                        <td>: <input type="text" name="tempat" style="width: 510px;" value="<?= $keg["tempat"]; ?>" required></td>
+                      </tr>
+                      <tr>
+                        <td>Iuran</td>
+                        <td>: Rp <input type="text" name="iuran" value="<?= $keg["iuran"]; ?>" style="width: 150px;"></td>
+                      </tr>
+                      <tr>
+                        <td>Gambar</td>
+                        <td>: <img src="images/<?= $keg["gambar"]; ?>" width="200px"> 
+                              <br>
+                              <input type="file" name="gambar"></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" align="right">
+                          <button type="submit" name="submit">Edit Data</button>
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
             </div>
+
           </div>
           <!-- page end-->
         </div>

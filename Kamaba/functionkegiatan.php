@@ -72,7 +72,7 @@
 		$namaFilebaru .= $ekstensiGambar;
 
 
-		move_uploaded_file($tmpName, 'images/' . $namaFilebaru);
+		move_uploaded_file($tmpName, '../images/kegiatan/' . $namaFilebaru);
 
 		return $namaFilebaru;
 
