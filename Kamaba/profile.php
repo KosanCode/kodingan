@@ -318,7 +318,7 @@ if(isset($_POST["ubahPassword"])) {
                 <div class="col-md-6 text-left">
                     <div class="row">
                         <div class="col-md-6">
-                            <p class="font-weight-bold">Nomor Induk Anggota</p>
+                            <p class="font-weight-bold">Kode Anggota</p>
                         </div>
                         <div class="col-md-6">
                             <p><?= $row["kd_anggota"]; ?></p>

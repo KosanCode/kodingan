@@ -236,6 +236,40 @@ function updateProfile($dataMember){
   return mysqli_affected_rows($koneksi);
 }
 
+//update jabatan
+function updateJabatan($dataMember){
+  global $koneksi;
+
+  $kd_jabatan = $dataMember['kd_jabatan'];
+
+  $kd_anggota = @$_GET['kd_anggota'];
+  $sql_user = mysqli_query($koneksi, "SELECT * FROM anggota WHERE kd_anggota = '$kd_anggota'") or die(mysql_error());
+  $data =  mysqli_fetch_array($sql_user);
+
+  $nama = $data['nama'];
+  $jk = $data['jk'];
+  $tempat_lahir = $data['tempat_lahir'];
+  $tanggal_lahir = $data['tanggal_lahir'];
+  $alamat_asal = $data['alamat_asal'];
+  $alamat_yk = $data['alamat_yk'];
+  $asal_kampus = $data['asal_kampus'];
+  $angkatan = $data['angkatan'];
+  $telp = $data['telp'];
+  $foto = $data['foto'];
+  $id = $data['id'];
+
+  $query = "UPDATE anggota SET 
+            nama = '$nama', jk = '$jk', tempat_lahir='$tempat_lahir',
+            tanggal_lahir='$tanggal_lahir', alamat_asal='$alamat_asal', 
+            alamat_yk='$alamat_yk', asal_kampus='$asal_kampus', 
+            angkatan='$angkatan', telp='$telp', foto = '$foto', kd_jabatan='$kd_jabatan', id ='$id'
+            WHERE kd_anggota = $kd_anggota";
+
+  mysqli_query($koneksi, $query);
+
+  return mysqli_affected_rows($koneksi);
+}
+
 //cek cookie
 function cekCokie() {
   if(isset($_COOKIE['id']) && isset($_COOKIE['key'])) {

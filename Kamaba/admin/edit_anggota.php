@@ -5,27 +5,28 @@ require_once '../koneksi.php';
 require '../function.php';
 
 //ambil data dari tabel anggota
-$anggota = query("SELECT * FROM anggota a JOIN jabatan j ON a.kd_jabatan=j.kd_jabatan");
+$kd_anggota = $_GET['kd_anggota'];
+$anggota = query("SELECT * FROM anggota a JOIN jabatan j ON a.kd_jabatan=j.kd_jabatan WHERE kd_anggota = $kd_anggota")[0];
 
-//cek apakah tombol daftar sudah ditekan
-if(isset($_GET["aksi"])) {
-    switch($_GET['aksi']) {
-        case "ubah":
-            
-        break;
-        case "hapus":
-            $kd_anggota = $_GET['kd_anggota'];
-            $sql_hapus = "DELETE FROM anggota WHERE kd_anggota = '$kd_anggota'";
-            $result = mysqli_query($koneksi, $sql_hapus);
-            // $row = mysqli_fetch_assoc($result);
-            echo "
+$jabatan = mysqli_query($koneksi, "SELECT * FROM jabatan");
+
+//cek apakah tombol ubah jabatan sudah ditekan
+if(isset($_POST["ubahJabatan"])) {
+  if( updateJabatan($_POST) > 0){
+      echo "
               <script>
-                  alert('Data berhasil dihapus!');
+                  alert('Data Jabatan berhasil diubah!');
                   document.location.href = 'data_anggota.php';
               </script>
-            ";
-        break;
-    }
+      ";
+  } else {
+      echo "
+              <script>
+                  alert('Data gagal diubah!');
+                  document.location.href = 'data_anggota.php';
+              </script>
+      ";
+  }
 }
 ?>
 
@@ -119,71 +120,121 @@ if(isset($_GET["aksi"])) {
     
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Edit Data Anggota KAMABA</h3>
+        <h3><i class="fa fa-angle-right"></i> Data Anggota KAMABA</h3>
         
         <!-- BASIC FORM ELELEMNTS -->
-        <div class="row mt">
+        <div class="row mt form-panel">
           <div class="col-lg-12">
-            <div class="form-panel">
-              <h4 class="mb"><i class="fa fa-angle-right"></i> Form Elements</h4>
-              <form class="form-horizontal style-form" method="get">
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Default</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control">
+            <h4 class="mb"><i class="fa fa-angle-right"></i> Biodata Lengkap</h4>
+            <form class="form-horizontal style-form" method="POST">
+              <div class="col-lg-6">
+                  <?php  ?>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Kode Anggota</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="disabledInput" type="text" value="<?= $anggota["kd_anggota"]; ?>" disabled>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Help text</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control">
-                    <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Nama Lengkap</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="disabledInput" type="text" value="<?= $anggota["nama"]; ?>" disabled>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Rounder</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control round-form">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Jenis Kelamin</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="disabledInput" type="text" value="<?= $anggota["jk"]; ?>" disabled>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Input focus</label>
-                  <div class="col-sm-10">
-                    <input class="form-control" id="focusedInput" type="text" value="This is focused...">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Tempat Lahir</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="disabledInput" type="text" value="<?= $anggota["tempat_lahir"]; ?>" disabled>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Disabled</label>
-                  <div class="col-sm-10">
-                    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Tanggal Lahir</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="disabledInput" type="text" value="<?= $anggota["tanggal_lahir"]; ?>" disabled>
+                    </div>
                   </div>
+                  
+              </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Alamat Asal</label>
+                <div class="col-sm-8">
+                  <input class="form-control" id="disabledInput" type="text" value="<?= $anggota["alamat_asal"]; ?>" disabled>
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Placeholder</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="placeholder">
-                  </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Alamat Yogyakarta</label>
+                <div class="col-sm-8">
+                  <input class="form-control" id="disabledInput" type="text" value="<?= $anggota["alamat_yk"]; ?>" disabled>
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-2 col-sm-2 control-label">Password</label>
-                  <div class="col-sm-10">
-                    <input type="password" class="form-control" placeholder="">
-                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Asal Kampus</label>
+                <div class="col-sm-8">
+                  <input class="form-control" id="disabledInput" type="text" value="<?= $anggota["asal_kampus"]; ?>" disabled>
                 </div>
-                <div class="form-group">
-                  <label class="col-lg-2 col-sm-2 control-label">Static control</label>
-                  <div class="col-lg-10">
-                    <p class="form-control-static">email@example.com</p>
-                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Angkatan</label>
+                <div class="col-sm-8">
+                  <input class="form-control" id="disabledInput" type="text" value="<?= $anggota["angkatan"]; ?>" disabled>
                 </div>
-              </form>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Nomor Telpon</label>
+                <div class="col-sm-8">
+                  <input class="form-control" id="disabledInput" type="text" value="<?= $anggota["telp"]; ?>" disabled>
+                </div>
+              </div>
             </div>
+            </form>
           </div>
           <!-- col-lg-12-->
+        </div>
+
+
+        <div class="row mt form-panel">
+          <div class="col-lg-12">
+            <h4 class="mb"><i class="fa fa-angle-right"></i> Jabatan Saat Ini</h4>
+            <form class="form-horizontal style-form" method="POST">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="col-sm-4 control-label">Kode Jabatan</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" id="disabledInput" type="text" value="<?= $anggota["kd_jabatan"]; ?>" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="col-sm-4 control-label">Jabatan</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" id="disabledInput" type="text" value="<?= $anggota["jabatan"]; ?>" disabled>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 text-center">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editJabatan">
+                  Ubah Jabatan
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
       <!-- /wrapper -->
     </section>
+
+    
     <!-- /MAIN CONTENT -->
     <!--main content end-->
     <!--footer start-->
@@ -233,3 +284,32 @@ if(isset($_GET["aksi"])) {
 </body>
 
 </html>
+
+<!-- Modal -->
+<div class="modal fade" id="editJabatan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Ubah Jabatan Member KAMABA</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="" method="POST">
+      <div class="modal-body">
+          <label for="kd_jabatan">Jabatan</label>
+          <select class="form-control" name="kd_jabatan" id="kd_jabatan">
+            <?php while($data = mysqli_fetch_assoc($jabatan) ){?>
+              <option value="<?php echo $data['kd_jabatan']; ?>"><?php echo $data['jabatan']; ?></option>
+            <?php } ?>
+          </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button type="submit" name="ubahJabatan" class="btn btn-primary">Simpan</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+            
