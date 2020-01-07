@@ -132,54 +132,68 @@ if (isset($_POST['submit'])) {
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i>Tambah Kegiatan KAMABA</h3>
-        <div class="row mb">
-          <!-- page start-->
-          <div class="content-panel">
-            <button style="margin-left: 10px;"><a href="data_kegiatan.php"> Kembali</a></button><br><br>
+        <h3><i class="fa fa-angle-right"></i>Data Kegiatan KAMABA</h3>        
+        <div class="row mt form-panel">
+          <div class="col-lg-12">
+            <h3 class="mb" align="center">Tambah Kegiatan</h3>
+            <button class="btn btn-primary" ><a href="data_kegiatan.php" style="color: white;"> Kembali</a></button><br><br>
             <div >
-                <form action="#"  method="post" enctype="multipart/form-data">
+                <form class="form-horizontal style-form" method="POST" enctype="multipart/form-data">
                   <input type="hidden" name="kd_kegiatan" value="<?= $keg["kd_kegiatan"]; ?>">
                   <input type="hidden" name="gambarLama" value="<?= $keg["gambar"]; ?>">
-                    <table >
-                      <tr>
-                        <td>Nama Kegiatan</td>
-                        <td>: <input type="text" name="kegiatan" style="width: 510px;" value="<?= $keg["kegiatan"]; ?>" required></td>
-                      </tr>
-                      <tr>
-                        <td valign="top">Deskripsi Kegiatan</td>
-                        <td>: <textarea rows="10" cols="70" name="detail" required><?= $keg["detail"]; ?></textarea></td></td>
-                      </tr>
-                      <tr>
-                        <td>Tanggal</td>
-                        <td>: <input type="date" name="tanggal" value="<?= $keg["tanggal"]; ?>" required></td>
-                      </tr>
-                      <tr>
-                        <td>Tempat</td>
-                        <td>: <input type="text" name="tempat" style="width: 510px;" value="<?= $keg["tempat"]; ?>" required></td>
-                      </tr>
-                      <tr>
-                        <td>Iuran</td>
-                        <td>: Rp <input type="text" name="iuran" value="<?= $keg["iuran"]; ?>" style="width: 150px;"></td>
-                      </tr>
-                      <tr>
-                        <td>Gambar</td>
-                        <td>: <img src="images/<?= $keg["gambar"]; ?>" width="200px"> 
-                              <br>
-                              <input type="file" name="gambar"></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2" align="right">
-                          <button type="submit" name="submit">Edit Data</button>
-                        </td>
-                      </tr>
-                    </table>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">Nama Kegiatan</label>
+                          <div class="col-sm-8">
+                            <input class="form-control" name="kegiatan" type="text" value="<?= $keg["kegiatan"]; ?>" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">Tanggal</label>
+                          <div class="col-sm-8">
+                            <input class="form-control" name="tanggal" type="date" value="<?= $keg["tanggal"]; ?>" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">Tempat</label>
+                          <div class="col-sm-8">
+                            <input class="form-control" name="tempat" type="text" value="<?= $keg["tempat"]; ?>" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">Iuran</label>
+                          <div class="col-sm-8">
+                            <input class="form-control" name="iuran" type="text" value="<?= $keg["iuran"]; ?>" required>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">Deskripsi</label>
+                          <div class="col-sm-8">
+                            <textarea class="col-sm-12" rows="6" name="detail" required><?= $keg["detail"]; ?></textarea>
+                          </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 29px;">
+                          <label class="col-sm-4 control-label">Gambar</label>
+                          <div class="col-sm-8">
+                            <img src="images/kegiatan/<?= $keg["gambar"]; ?>" width="200px">
+                            <input class="form-control" name="gambar" type="file" >
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 text-center">
+                    <!-- Button Tambah -->
+                    <button type="submit" name="submit" class="btn btn-primary" >Tambah</button>
+              </div>
                   </form>
             </div>
 
           </div>
           <!-- page end-->
         </div>
+
+
         <!-- /row -->
       </section>
       <!-- /wrapper -->

@@ -14,7 +14,7 @@
 	}else {
 		echo "
 					<script>
-						alert('DATA GAGAS DIHAPUS!');
+						alert('DATA GAGAL DIHAPUS!');
 						document.location.href = 'data_kegiatan.php';
 					</script>
 			";

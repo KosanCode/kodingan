@@ -4,7 +4,7 @@ session_start();
 include '../functionkegiatan.php'; 
 
 //ambil data dari tabel anggota
-$kegiatan = query("SELECT * FROM kegiatan ORDER BY tanggal desc");
+$kegiatan = query("SELECT * FROM kegiatan ORDER BY kd_kegiatan DESC");
 
 //cek apakah tombol daftar sudah ditekan
 if(isset($_GET["aksi"])) {
@@ -122,11 +122,13 @@ if(isset($_GET["aksi"])) {
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Data Kegiatan KAMABA</h3>
+        <h3><i class="fa fa-angle-right"></i>Data Kegiatan KAMABA</h3>
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
-            <button style="margin-left: 10px;"><a href="tambahkeg.php"> Tambah Kegiatan</a></button><br><br>
+            <button type="button" class="btn btn-primary"><a href="tambahkeg.php" style="color: white;">Tambah Kegiatan</a>
+                  
+                </button><br><br>
             <div class="adv-table table-responsive">
 
               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
@@ -162,10 +164,8 @@ if(isset($_GET["aksi"])) {
                     <td><?= $row["tanggal"] ?></td>
                     <td><?= $row["iuran"] ?></td>
                     <td>
-                        <a href="editkeg.php?kd_kegiatan=<?= $row["kd_kegiatan"]; ?>">
-                            ubah
-                    </a> |
-                        <a href="hapuskeg.php?kd_kegiatan=<?= $row["kd_kegiatan"]; ?>">hapus</a>
+                        <a href="editkeg.php?kd_kegiatan=<?= $row["kd_kegiatan"]; ?>"><i class="fa fa-pencil"></i></a>
+                        <a href="hapuskeg.php?kd_kegiatan=<?= $row["kd_kegiatan"]; ?>"><i class="fa fa-trash-o "></i></a>
                     </td>
                     </tr>
                     <?php $i++; ?>
@@ -287,3 +287,31 @@ if(isset($_GET["aksi"])) {
 </body>
 
 </html>
+
+<!-- Modal -->
+<div class="modal fade" id="tambahKegiatan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Tambah Data Kegiatan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="" method="POST">
+      <div class="modal-body">
+          <label for="kd_jabatan">Jabatan</label>
+          <select class="form-control" name="kd_jabatan" id="kd_jabatan">
+            <?php while($data = mysqli_fetch_assoc($jabatan) ){?>
+              <option value="<?php echo $data['kd_jabatan']; ?>"><?php echo $data['jabatan']; ?></option>
+            <?php } ?>
+          </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button type="submit" name="ubahJabatan" class="btn btn-primary">Simpan</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

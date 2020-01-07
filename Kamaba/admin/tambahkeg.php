@@ -126,44 +126,58 @@ if (isset($_POST['submit'])) {
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i>Tambah Kegiatan KAMABA</h3>
-        <div class="row mb">
-          <!-- page start-->
-          <div class="content-panel">
-            <button style="margin-left: 10px;"><a href="data_kegiatan.php"> Kembali</a></button><br><br>
+        <h3><i class="fa fa-angle-right"></i>Data Kegiatan KAMABA</h3>
+        
+        <div class="row mt form-panel">
+          <div class="col-lg-12">
+            <h3 class="mb" align="center">Tambah Kegiatan</h3>
+            <button class="btn btn-primary" ><a href="data_kegiatan.php" style="color: white;"> Kembali</a></button><br><br>
             <div >
-                <form action="#"  method="post" enctype="multipart/form-data">
-                    <table >
-                      <tr>
-                        <td>Nama Kegiatan</td>
-                        <td>: <input type="text" name="kegiatan" style="width: 510px;" required></td>
-                      </tr>
-                      <tr>
-                        <td valign="top">Deskripsi Kegiatan</td>
-                        <td>: <textarea rows="20" cols="70" name="detail" required></textarea></td>
-                      </tr>
-                      <tr>
-                        <td>Tanggal</td>
-                        <td>: <input type="date" name="tanggal" required></td>
-                      </tr>
-                      <tr>
-                        <td>Tempat</td>
-                        <td>: <input type="text" name="tempat" style="width: 510px;" required></td>
-                      </tr>
-                      <tr>
-                        <td>Iuran</td>
-                        <td>: Rp <input type="text" name="iuran" style="width: 150px;"></td>
-                      </tr>
-                      <tr>
-                        <td>Gambar</td>
-                        <td>: <input type="file" name="gambar"></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2" align="right">
-                          <button type="submit" name="submit">Tambah Data</button>
-                        </td>
-                      </tr>
-                    </table>
+                <form class="form-horizontal style-form" method="POST" enctype="multipart/form-data">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">Nama Kegiatan</label>
+                          <div class="col-sm-8">
+                            <input class="form-control" name="kegiatan" type="text" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">Tanggal</label>
+                          <div class="col-sm-8">
+                            <input class="form-control" name="tanggal" type="date" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">Tempat</label>
+                          <div class="col-sm-8">
+                            <input class="form-control" name="tempat" type="text" required>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">Iuran</label>
+                          <div class="col-sm-8">
+                            <input class="form-control" name="iuran" type="text" required>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="col-sm-4 control-label">Deskripsi</label>
+                          <div class="col-sm-8">
+                            <textarea class="col-sm-12" rows="8.5" name="detail"></textarea>
+                          </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 29px;">
+                          <label class="col-sm-4 control-label">Gambar</label>
+                          <div class="col-sm-8">
+                            <input class="form-control" name="gambar" type="file" required>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 text-center">
+                    <!-- Button Tambah -->
+                    <button type="submit" name="submit" class="btn btn-primary" >Tambah</button>
+              </div>
                   </form>
             </div>
 
