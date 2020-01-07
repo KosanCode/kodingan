@@ -2,6 +2,11 @@
   session_start();
   require 'functionkegiatan.php';
 
+  if(isset($_SESSION["admin"]) || (!isset($_SESSION["user"]))){
+    header("Location: index.php");
+    exit;
+}
+
   $kd_kegiatan = $_GET["kd_kegiatan"];
 
   $dtl_kegiatan = query("SELECT * FROM kegiatan WHERE kd_kegiatan = $kd_kegiatan ")[0];
@@ -86,7 +91,8 @@ $user_terlogin = @$_SESSION['user'];
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li ><a href="index.php"><span>Home</span></a></li>
-                <li class="has-children active">
+                <?php if(@$_SESSION["user"]) : ?>
+                <li class="has-children">
                   <a href="listings.php"><span>Kegiatan</span></a>
                   <ul class="dropdown arrow-top">
                     <li><a href="listings.php">Daftar Kegiatan</a></li>
@@ -102,6 +108,7 @@ $user_terlogin = @$_SESSION['user'];
                     </li>-->
                   </ul>
                 </li>
+                <?php endif; ?>
                  <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
                 <li><a href="about.php"><span>Info</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
