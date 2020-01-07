@@ -153,7 +153,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-2"></div>
-          <div class="col-lg-8">
+          <div class="col-lg-12">
 
             <?php
 
@@ -165,7 +165,7 @@
 
               <div class="lh-content">
                 <a href="#" class="bookmark"><span class="icon-heart"></span></a>
-                <h3><a href="listings-single.php?kd_kegiatan=<?= $row["kd_kegiatan"]; ?>"> <?= $row["kegiatan"]; ?></a></h3>
+                <h1><a href="listings-single.php?kd_kegiatan=<?= $row["kd_kegiatan"]; ?>"> <?= $row["kegiatan"]; ?></a></h1>
                 <p><img src="images/date.jpg" width="20px" style="margin-right: 10px; padding-bottom: 5px;">
                   <?= $format_tanggal = date('d F Y', strtotime($row["tanggal"])); ?></p>
                 <p><img src="images/location.png" width="20px" style="margin-right: 10px; padding-bottom: 5px;"><?= $row["tempat"]; ?></p>              </div>
@@ -281,7 +281,7 @@
     
 
   <footer>
-      <div class="container">
+      <div class="container" style="padding-top: 20px; padding-bottom: 20px;">
 
         
           <div class="col-lg-12" style="margin-top: 20px;">
@@ -319,7 +319,7 @@
           <div class="text-center p-3">
 
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a> x KosanCode <img src="images/kosanlogo.png" height="25px">
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a><br> KosanCode <br> <img src="images/kosanlogo.png" height="25px">
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             
           </div>

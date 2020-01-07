@@ -146,11 +146,13 @@
     <div class="site-section">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8">
+          <div class="col-lg-12">
 
-            <div class="mb-5 border-bottom pb-5">
+            <div class="mb-5 border-bottom pb-5" align="center" >
+              <div class="col-lg-1"></div>
 
-              <img src="images/kegiatan/<?= $single_kegiatan["gambar"]; ?>" alt="Image" class="img-fluid mb-4">
+              <img src="images/kegiatan/<?= $single_kegiatan["gambar"]; ?>" alt="Image" class="img-fluid col-lg-10">
+              <div class="col-lg-10" align="left">
               <h1><?= $single_kegiatan["kegiatan"]; ?></h1>
               <p style="text-align: justify;"><?= $single_kegiatan["detail"]; ?></p>
               <h3 class="h5 text-black mb-3">KETERANGAN :</h3>
@@ -166,6 +168,11 @@
                 </div>
 
               </div>
+              
+              </div>
+
+
+              
 
             </div>
 
@@ -212,7 +219,9 @@
               </div>
             </div>
 
-          </div> -->
+          </div> 
+
+        -->
        <!-- <div class="col-lg-3 ml-auto">
 
             <div class="mb-5">
@@ -224,13 +233,11 @@
 
             
 
-          </div> 
+          
 
         </div>
       </div>
-    </div>
-
-    
+    </div> 
   </div>
 
   <footer>
