@@ -213,7 +213,7 @@
             
             <div class="listing-item">
               <div class="listing-image">
-                <img src="images/<?= $row["gambar"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                <img src="images/kegiatan/<?= $row["gambar"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               </div>
               <div class="listing-item-content">
                 <a href="listings-single.php" class="bookmark" data-toggle="tooltip" data-placement="left" title="Bookmark"><span class="icon-heart"></span></a>

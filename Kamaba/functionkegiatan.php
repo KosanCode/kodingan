@@ -145,7 +145,7 @@
 
 
 
-		$query = "INSERT INTO dtl_kegiatan  VALUES ('$kd_kegiatan','$kd_anggota','y')";
+		$query = "INSERT INTO dtl_kegiatan  VALUES ('$kd_kegiatan','$kd_anggota','n')";
 
 		$hasil = mysqli_query($koneksi, $query );
 

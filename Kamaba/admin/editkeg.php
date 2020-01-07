@@ -135,7 +135,7 @@ if (isset($_POST['submit'])) {
         <h3><i class="fa fa-angle-right"></i>Data Kegiatan KAMABA</h3>        
         <div class="row mt form-panel">
           <div class="col-lg-12">
-            <h3 class="mb" align="center">Tambah Kegiatan</h3>
+            <h3 class="mb" align="center">Edit Kegiatan</h3>
             <button class="btn btn-primary" ><a href="data_kegiatan.php" style="color: white;"> Kembali</a></button><br><br>
             <div >
                 <form class="form-horizontal style-form" method="POST" enctype="multipart/form-data">
@@ -174,17 +174,21 @@ if (isset($_POST['submit'])) {
                             <textarea class="col-sm-12" rows="6" name="detail" required><?= $keg["detail"]; ?></textarea>
                           </div>
                         </div>
-                        <div class="form-group" style="margin-top: 29px;">
+                        <div class="form-group"">
                           <label class="col-sm-4 control-label">Gambar</label>
                           <div class="col-sm-8">
-                            <img src="images/kegiatan/<?= $keg["gambar"]; ?>" width="200px">
+                            <div class="photo">
+                              <a class="fancybox" href="../images/kegiatan/<?= $keg["gambar"] ?>">
+                                <img src="../images/kegiatan/<?= $keg["gambar"] ?>" alt="user" height="50px">
+                              </a>
+                            </div>
                             <input class="form-control" name="gambar" type="file" >
                           </div>
                         </div>
                     </div>
                     <div class="col-lg-12 text-center">
-                    <!-- Button Tambah -->
-                    <button type="submit" name="submit" class="btn btn-primary" >Tambah</button>
+                    <!-- Button Edit -->
+                    <button type="submit" name="submit" class="btn btn-primary" >Edit</button>
               </div>
                   </form>
             </div>

@@ -126,7 +126,7 @@ if(isset($_GET["aksi"])) {
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
-            <button type="button" class="btn btn-primary"><a href="tambahkeg.php" style="color: white;">Tambah Kegiatan</a>
+            <button style="margin-left: 15px;" type="button" class="btn btn-primary"><a href="tambahkeg.php" style="color: white;">Tambah Kegiatan</a>
                   
                 </button><br><br>
             <div class="adv-table table-responsive">
