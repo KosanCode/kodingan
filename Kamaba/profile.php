@@ -130,8 +130,26 @@ if(isset($_POST["ubahPassword"])) {
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php"><span>Home</span></a></li>
-                <li><a href="listings.php"><span>Listings</span></a></li>
-                <li><a href="about.php"><span>About</span></a></li>
+                <?php if(@$_SESSION["user"]) : ?>
+                <li class="has-children">
+                  <a href="listings.php"><span>Kegiatan</span></a>
+                  <ul class="dropdown arrow-top">
+                    <li><a href="listings.php">Daftar Kegiatan</a></li>
+                    <li><a href="sertifikat.php">Sertifikat</a></li>
+                    <!--<li class="has-children">
+                      <a href="#">Dropdown</a>
+                      <ul class="dropdown">
+                        <li><a href="#">Menu One</a></li>
+                        <li><a href="#">Menu Two</a></li>
+                        <li><a href="#">Menu Three</a></li>
+                        <li><a href="#">Menu Four</a></li>
+                      </ul>
+                    </li>-->
+                  </ul>
+                </li>
+                <?php endif; ?>
+                <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
+                <li><a href="about.php"><span>Info</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
                 <?php if(@$_SESSION["user"]) : ?>                
                   <li class="has-children activeku">
@@ -450,17 +468,50 @@ if(isset($_POST["ubahPassword"])) {
       </div>
     </div>
     
-    <footer class="site-footer">
+    <footer>
       <div class="container">
-        <div class="row">
-          <div class="col-12 text-md-center text-left">
-            <p>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
+
+        
+          <div class="col-lg-12" style="margin-top: 20px;">
+            <div class="row"> 
+              <div class="col-lg-5">
+                  <a href="about.php" class="logo"><h1 style="color: #000;"><b>KAMA<span style="color: #00908d;">BA</span></b></h1></a>
+                  <p>Keluarga Mahasiswa Blora (KAMABA) Yogyakarta merupakan organisasi mahasiswa di Yogyakarta<br> yang berasal dari daerah Kabupaten Blora,<br> Provinsi Jawa Tegah.
+                    
+                  </p>
+              </div>
+
+              <div class="col-lg-4">
+                  <div class="row">
+                    <i class="icon-map-marker" style="font-size: 24px; margin-right: 30px;"></i>
+                    <p >Jaranan, Desa Banguntapan, <br> Kec. Banguntapan, Kab.  Bantul,<br> Daerah Istimewa Yogyakarta<br> 55198
+                    </p>
+                  </div>
+                  <div class="row">
+                    <i class="icon-camera-retro" style="font-size: 24px; margin-right: 20px;"></i>
+                    <p >kamaba_yk</p>
+                  </div>
+                  <div class="row">
+                    <i class="icon-envelope" style="font-size: 24px; margin-right: 20px;"></i>
+                    <p >kamaba_yk@gmail.com</p>
+                  </div>
+              </div>
+
+              <div class="col-lg-3">
+              <a href="about.php"><img class="col-lg-12" src="images/logo.png"></a>
+              </div>
+            </div>
           </div>
-        </div>
+       
+        
+          <div class="text-center p-3">
+
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a> x KosanCode <img src="images/kosanlogo.png" height="25px">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            
+          </div>
+        
       </div>
     </footer>
   </div>

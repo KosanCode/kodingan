@@ -1,3 +1,10 @@
+<?php 
+  session_start();
+  require_once 'koneksi.php';
+
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +58,9 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li><a href="index.php"><span>Home</span></a></li>
+                <li class="active"><a href="index.php"><span>Home</span></a></li>
+
+                <?php if(@$_SESSION["user"]) : ?>
                 <li class="has-children">
                   <a href="listings.php"><span>Kegiatan</span></a>
                   <ul class="dropdown arrow-top">
@@ -68,10 +77,46 @@
                     </li>-->
                   </ul>
                 </li>
+                <?php endif; ?>
                 <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
-                <li class="active"><a href="about.php"><span>Info</span></a></li>
+                <li><a href="about.php"><span>Info</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
-                <li><a href="signup.php"><span>Login</span></a></li>
+
+                <?php if((@!$_SESSION["admin"]) && (@!$_SESSION["user"])) : ?>
+                <li class="activeku"><a href="signup.php"><span>Login</span></a></li>
+                <?php endif; ?>
+                <?php  
+                  $user_terlogin = @$_SESSION['user'];
+                  $sql_user = mysqli_query($koneksi, "SELECT * FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
+                  $data_user =  mysqli_fetch_array($sql_user);
+
+                  if(@$_SESSION["user"] && !@$data_user['id']) :
+                ?>
+                  <li><a href="pendaftaran.php"><span style="border: 2px solid #fff;">Join With Us</span></a></li>
+                <?php endif; ?>
+                <?php if(@$_SESSION["admin"] || @$_SESSION["user"]) : ?>                
+                  <li class="has-children activeku">
+                  <?php 
+                    if(@$_SESSION["admin"]) {
+                      $user_terlogin = @$_SESSION['admin'];
+                    } else if(@$_SESSION["user"]){
+                      $user_terlogin = @$_SESSION['user'];
+                    }
+                    $sql_user = mysqli_query($koneksi, "SELECT * FROM login WHERE id = '$user_terlogin'") or die(mysql_error());
+                    $data_user =  mysqli_fetch_array($sql_user);
+                  ?>
+                  <a href="#"><span><?php echo $data_user['nama_lengkap']; ?> </span></a>
+                  
+                  <ul class="dropdown arrow-top">
+                  <?php
+                  if(@$_SESSION["user"]) :?>
+                    <li><a href="profile.php">Profile</a></li>
+                  <?php endif; ?>
+                    <li><a href="logout.php">Logout</a></li>
+                    </li>
+                  </ul>
+                </li>
+                <?php endif; ?>
               </ul>
             </nav>
           </div>
@@ -266,69 +311,50 @@
       </div>
     </div>
     
-    <footer class="site-footer">
+    <footer>
       <div class="container">
-        <div class="row">
-          <div class="col-md-9">
-            <div class="row">
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Quick Links</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
+
+        
+          <div class="col-lg-12" style="margin-top: 20px;">
+            <div class="row"> 
+              <div class="col-lg-5">
+                  <a href="about.php" class="logo"><h1 style="color: #000;"><b>KAMA<span style="color: #00908d;">BA</span></b></h1></a>
+                  <p>Keluarga Mahasiswa Blora (KAMABA) Yogyakarta merupakan organisasi mahasiswa di Yogyakarta<br> yang berasal dari daerah Kabupaten Blora,<br> Provinsi Jawa Tegah.
+                    
+                  </p>
               </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Products</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
+
+              <div class="col-lg-4">
+                  <div class="row">
+                    <i class="icon-map-marker" style="font-size: 24px; margin-right: 30px;"></i>
+                    <p >Jaranan, Desa Banguntapan, <br> Kec. Banguntapan, Kab.  Bantul,<br> Daerah Istimewa Yogyakarta<br> 55198
+                    </p>
+                  </div>
+                  <div class="row">
+                    <i class="icon-camera-retro" style="font-size: 24px; margin-right: 20px;"></i>
+                    <p >kamaba_yk</p>
+                  </div>
+                  <div class="row">
+                    <i class="icon-envelope" style="font-size: 24px; margin-right: 20px;"></i>
+                    <p >kamaba_yk@gmail.com</p>
+                  </div>
               </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Features</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Follow Us</h2>
-                <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+
+              <div class="col-lg-3">
+              <a href="about.php"><img class="col-lg-12" src="images/logo.png"></a>
               </div>
             </div>
           </div>
-          <div class="col-lg-3">
-            <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            <form action="#" method="post">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-primary text-white" type="button" id="button-addon2">Send</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="row pt-5 mt-5">
-          <div class="col-12 text-md-center text-left">
-            <p>
+       
+        
+          <div class="text-center p-3">
+
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a> x KosanCode <img src="images/kosanlogo.png" height="25px">
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
+            
           </div>
-        </div>
+        
       </div>
     </footer>
   </div>

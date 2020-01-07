@@ -231,86 +231,54 @@
     </div>
 
     
-   <!-- <div class="py-5 bg-primary">
+  </div>
+
+  <footer>
       <div class="container">
-        <div class="row">
-          <div class="col-lg-7 mr-auto mb-4 mb-lg-0">
-            <h2 class="mb-3 mt-0 text-white">Let's get started. Create your account</h2>
-            <p class="mb-0 text-white">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+
+        
+          <div class="col-lg-12" style="margin-top: 20px;">
+            <div class="row"> 
+              <div class="col-lg-5">
+                  <a href="about.php" class="logo"><h1 style="color: #000;"><b>KAMA<span style="color: #00908d;">BA</span></b></h1></a>
+                  <p>Keluarga Mahasiswa Blora (KAMABA) Yogyakarta merupakan organisasi mahasiswa di Yogyakarta<br> yang berasal dari daerah Kabupaten Blora,<br> Provinsi Jawa Tegah.
+                    
+                  </p>
+              </div>
+
+              <div class="col-lg-4">
+                  <div class="row">
+                    <i class="icon-map-marker" style="font-size: 24px; margin-right: 30px;"></i>
+                    <p >Jaranan, Desa Banguntapan, <br> Kec. Banguntapan, Kab.  Bantul,<br> Daerah Istimewa Yogyakarta<br> 55198
+                    </p>
+                  </div>
+                  <div class="row">
+                    <i class="icon-camera-retro" style="font-size: 24px; margin-right: 20px;"></i>
+                    <p >kamaba_yk</p>
+                  </div>
+                  <div class="row">
+                    <i class="icon-envelope" style="font-size: 24px; margin-right: 20px;"></i>
+                    <p >kamaba_yk@gmail.com</p>
+                  </div>
+              </div>
+
+              <div class="col-lg-3">
+              <a href="about.php"><img class="col-lg-12" src="images/logo.png"></a>
+              </div>
+            </div>
           </div>
-          <div class="col-lg-4">
-            <p class="mb-0"><a href="signup.php" class="btn btn-outline-white text-white btn-md px-5 font-weight-bold btn-md-block">Sign Up</a></p>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    
-    <footer class="site-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-9">
-          <!--   <div class="row">
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Quick Links</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Products</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Features</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Follow Us</h2>
-                <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
-              </div>
-            </div> -->
-          </div>
-          <div class="col-lg-3">
-          <!--   <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            <form action="#" method="post">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-primary text-white" type="button" id="button-addon2">Send</button>
-                </div>
-              </div>
-            </form>
-          </div> -->
-        </div>
-        <div class="col-md-12">
-          <div class="col-12 text-md-center text-left">
-            <p>
+       
+        
+          <div class="text-center p-3">
+
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a> x KosanCode <img src="images/kosanlogo.png" height="25px">
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
+            
           </div>
-        </div>
+        
       </div>
     </footer>
-  </div>
 
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
