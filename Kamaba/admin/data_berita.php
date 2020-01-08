@@ -140,7 +140,7 @@ if(isset($_GET["aksi"])) {
     <!--main content start-->
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i>Data Kegiatan KAMABA</h3>
+        <h3><i class="fa fa-angle-right"></i>Data Berita</h3>
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
@@ -178,7 +178,7 @@ if(isset($_GET["aksi"])) {
                     <td><?= $row["judul"] ?></td>
                     <td><?= $row["nama"] ?></td>
                     <td><?= $row["tanggal"] ?></td>
-                    <td><?= $row["isi"] ?></td>
+                    <td><?= substr($row["isi"], 0, 100); ?></td>
                     <td>
                         <a href="editberita.php?kd_berita=<?= $row["kd_berita"]; ?>"><i class="fa fa-pencil"></i></a>
                         <a href="hapusberita.php?kd_berita=<?= $row["kd_berita"]; ?>"><i class="fa fa-trash-o"></i></a>

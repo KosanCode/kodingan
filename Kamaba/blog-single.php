@@ -3,10 +3,13 @@
 	include 'koneksi.php';
 	include 'fungsi_komentar.php';
 	
-	$kd_berita = $_GET["kd_berita"];	
-	$user = $_SESSION["user"];
+	$kd_berita = $_GET["kd_berita"];
+
+	if(isset($_SESSION['user'])) {
+		$user = $_SESSION["user"];
+	}
 	
-	$komen = mysqli_query($koneksi, "SELECT * FROM tabelkomentar tk join login l on tk.id=l.id join anggota a on l.id=a.id where kd_berita = $kd_berita and l.id = $user");
+	$komen = mysqli_query($koneksi, "SELECT * FROM tabelkomentar tk join login l on tk.id=l.id join anggota a on l.id=a.id where kd_berita = $kd_berita");
 	$jml_komen = ("select * from tabelkomentar where kd_berita = $kd_berita");	
 	
 	//mengambil berita	
@@ -21,7 +24,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Browse &mdash; Website Template by Colorlib</title>
+    <title>KAMABA &mdash; Yogyakarta</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -64,20 +67,21 @@
         <div class="row align-items-center">
           
           <div class="col-11 col-xl-2">
-            <h1 class="mb-0 site-logo"><a href="index.php" class="text-white h2 mb-0">Browse</a></h1>
+            <h1 class="mb-0 site-logo"><a href="index.php" class="text-white h2 mb-0">KAMABA</a></h1>
           </div>
           <div class="col-12 col-md-10 d-none d-xl-block">
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php"><span>Home</span></a></li>
+
+                <?php if(@$_SESSION["user"]) : ?>
                 <li class="has-children">
-                  <a href="about.php"><span>Dropdown</span></a>
+                  <a href="listings.php"><span>Kegiatan</span></a>
                   <ul class="dropdown arrow-top">
-                    <li><a href="#">Menu One</a></li>
-                    <li><a href="#">Menu Two</a></li>
-                    <li><a href="#">Menu Three</a></li>
-                    <li class="has-children">
+                    <li><a href="listings.php">Daftar Kegiatan</a></li>
+                    <li><a href="sertifikat.php">Sertifikat</a></li>
+                    <!--<li class="has-children">
                       <a href="#">Dropdown</a>
                       <ul class="dropdown">
                         <li><a href="#">Menu One</a></li>
@@ -85,13 +89,49 @@
                         <li><a href="#">Menu Three</a></li>
                         <li><a href="#">Menu Four</a></li>
                       </ul>
+                    </li>-->
+                  </ul>
+                </li>
+                <?php endif; ?>
+                <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
+                <li><a href="about.php"><span>Info</span></a></li>
+                <li class="active"><a href="blog.php"><span>Blog</span></a></li>
+
+                <?php if((@!$_SESSION["admin"]) && (@!$_SESSION["user"])) : ?>
+                <li class="activeku"><a href="signup.php"><span>Login</span></a></li>
+                <?php endif; ?>
+                <?php  
+                  $user_terlogin = @$_SESSION['user'];
+                  $sql_user = mysqli_query($koneksi, "SELECT * FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
+                  $data_user =  mysqli_fetch_array($sql_user);
+
+                  if(@$_SESSION["user"] && !@$data_user['id']) :
+                ?>
+                  <li><a href="pendaftaran.php"><span style="border: 2px solid #fff;">Join With Us</span></a></li>
+                <?php endif; ?>
+                <?php if(@$_SESSION["admin"] || @$_SESSION["user"]) : ?>                
+                  <li class="has-children activeku">
+                  <?php 
+                    if(@$_SESSION["admin"]) {
+                      $user_terlogin = @$_SESSION['admin'];
+                    } else if(@$_SESSION["user"]){
+                      $user_terlogin = @$_SESSION['user'];
+                    }
+                    $sql_user = mysqli_query($koneksi, "SELECT * FROM login WHERE id = '$user_terlogin'") or die(mysql_error());
+                    $data_user =  mysqli_fetch_array($sql_user);
+                  ?>
+                  <a href="#"><span><?php echo $data_user['nama_lengkap']; ?> </span></a>
+                  
+                  <ul class="dropdown arrow-top">
+                  <?php
+                  if(@$_SESSION["user"]) :?>
+                    <li><a href="profile.php">Profile</a></li>
+                  <?php endif; ?>
+                    <li><a href="logout.php">Logout</a></li>
                     </li>
                   </ul>
                 </li>
-                <li><a href="listings.php"><span>Listings</span></a></li>
-                <li><a href="about.php"><span>About</span></a></li>
-                <li class="active"><a href="blog.php"><span>Blog</span></a></li>
-                <li><a href="contact.php"><span>Contact</span></a></li>
+                <?php endif; ?>
               </ul>
             </nav>
           </div>
@@ -108,7 +148,7 @@
 
   
 
-    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/kegiatan.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row align-items-center justify-content-center text-center">
 
@@ -117,8 +157,8 @@
             
             <div class="row justify-content-center">
               <div class="col-md-8 text-center">
-                <h1>Etiquette tips for travellers</h1>
-                <p data-aos="fade-up" data-aos-delay="100">Posted by Admin <span class="mx-3">&bullet;</span> May 5th, 2019</p>
+                <h1>BERITA KAMABA</h1>
+                <p data-aos="fade-up" data-aos-delay="100"></p>
               </div>
             </div>
 
@@ -131,50 +171,58 @@
     <div class="site-section">
       <div class="container">
         <div class="row">
-          <div class="col-md-8">
-			
-			<div class="mb-4 ">
-            <img src="images/berita/<?= $berita_single["namagambar"]; ?>" alt="Image" class="img-fluid rounded">
+          <div class="col-md-12">
+			<div class="p-3 bg-light">
+				<div class="mb-4">
+				<img src="images/berita/<?= $berita_single["namagambar"]; ?>" alt="Image" class="img-fluid rounded">
+				</div>
+
+				<h3><?= $berita_single["judul"]; ?></h3>
+				<p><?= $berita_single["isi"]; ?></p>
 			</div>
-
-            <h3><?= $berita_single["judul"]; ?></h3>
-            <p><?= $berita_single["isi"]; ?></p>
-			
 			
             <div class="pt-5">
-              <p>Categories:  <a href="#">Design</a>, <a href="#">Events</a>  Tags: <a href="#">#html</a>, <a href="#">#trends</a></p>
-            </div>
-			
-
-            <div class="pt-5">
-						
+				
               <h3 class="mb-5"><?= jmlkomen($jml_komen); ?> Komentar</h3>
 	
-              <ul class="comment-list">
-			  
-				<?php
-					foreach($komen as $row):
-				?>
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="images\user\<?= $row["foto"]; ?>" alt="Image">
-                  </div>
-                  <div class="comment-body">
-                    <h3><?= $row["nama"]; ?></h3>
-                    <div class="meta"><?= $row["tanggal"]; ?></div>
-                    <p><?= $row["komentar"]; ?></p>
-                    <p><a href="#" class="reply">Reply</a>
-					<a href="hapuskom.php?id=<?= $row["kd_komentar"]; ?>&&kd_berita=<?= $kd_berita?>" class="reply">Hapus</a></p>
-                  </div>
-                </li>
-				<?php 
-					endforeach;
-				?>
-                
-              </ul>
+				  <ul class="comment-list">
+				  
+					<?php
+						foreach($komen as $row):
+					?>
+					<li class="comment bg-light p-3">
+					  <div class="vcard bio">
+						<img src="images\user\<?= $row["foto"]; ?>" alt="Image">
+					  </div>
+					  <div class="comment-body">
+						<h3><?= $row["nama"]; ?></h3>
+						<div class="meta"><?= $row["tanggal"]; ?></div>
+						<p><?= $row["komentar"]; ?></p>
+						
+						<?php
+						
+						$user = @$_SESSION["user"];
+						if($user && $row["id"]==$user){
+						?>
+						<p><a href="hapuskom.php?id=<?= $row["kd_komentar"]; ?>&&kd_berita=<?= $kd_berita?>" class="reply">Hapus</a></p>
+						
+						<?php
+						}
+						?>
+						
+						
+					  </div>
+					</li>
+					<?php 
+						endforeach;
+					?>
+					
+				  </ul>
               <!-- END comment-list -->
-              
-              <div class="comment-form-wrap pt-5">
+              <?php
+			  if(isset ($_SESSION["user"])){
+			  ?>
+              <div class="comment-form-wrap pt-5 ">
                 <h3 class="mb-5">Masukkan Komentar Anda</h3>
                 <form action="" method="post" class="p-5 bg-light">			
                   <div class="form-group">
@@ -186,48 +234,18 @@
                   </div>
                 </form>
               </div>
+			  <?php
+			  }
+			  ?>
             </div>
 
 
-          </div>
-
-          <div class="col-md-3 ml-auto">
-            <div class="mb-5">
-              <h3 class="h5 text-black mb-3">Search</h3>
-              <form action="#" method="post">
-                <div class="form-group d-flex">
-                  <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
-                </div>
-              </form>
-            </div>
-
-            <div class="mb-5">
-              <h3 class="h5 text-black mb-3">Popular Posts</h3>
-              <ul class="list-unstyled">
-                <li class="mb-2"><a href="#">Lorem ipsum dolor sit amet</a></li>
-                <li class="mb-2"><a href="#">Quaerat rerum voluptatibus veritatis</a></li>
-                <li class="mb-2"><a href="#">Maiores sapiente veritatis reprehenderit</a></li>
-                <li class="mb-2"><a href="#">Natus eligendi nobis</a></li>
-              </ul>
-            </div>
-
-            <div class="mb-5">
-              <h3 class="h5 text-black mb-3">Recent Comments</h3>
-              <ul class="list-unstyled">
-                <li class="mb-2"><a href="#">Admin</a> <em>in</em> <a href="#">Lorem ipsum dolor sit amet</a></li>
-                <li class="mb-2"><a href="#">Admin</a> <em>in</em> <a href="#">Quaerat rerum voluptatibus veritatis</a></li>
-                <li class="mb-2"><a href="#">Admin</a> <em>in</em> <a href="#">Maiores sapiente veritatis reprehenderit</a></li>
-                <li class="mb-2"><a href="#">Admin</a> <em>in</em> <a href="#">Natus eligendi nobis</a></li>
-              </ul>
-            </div>
-
-          </div>
-          
+          </div>          
         </div>
       </div>
     </div>
 
-    
+	<?php if((@!$_SESSION["admin"]) && (@!$_SESSION["user"])) { ?>
     <div class="py-5 bg-primary">
       <div class="container">
         <div class="row">
@@ -241,70 +259,52 @@
         </div>
       </div>
     </div>
+	<?php }	?>
     
-    <footer class="site-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-9">
-            <div class="row">
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Quick Links</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
+     <footer>
+      <div class="container" style="padding-top: 20px; padding-bottom: 20px;">
+
+        
+          <div class="col-lg-12" style="margin-top: 20px;">
+            <div class="row"> 
+              <div class="col-lg-5">
+                  <a href="about.php" class="logo"><h1 style="color: #000;"><b>KAMA<span style="color: #00908d;">BA</span></b></h1></a>
+                  <p>Keluarga Mahasiswa Blora (KAMABA) Yogyakarta merupakan organisasi mahasiswa di Yogyakarta<br> yang berasal dari daerah Kabupaten Blora,<br> Provinsi Jawa Tegah.
+                    
+                  </p>
               </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Products</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
+
+              <div class="col-lg-4">
+                  <div class="row">
+                    <i class="icon-map-marker" style="font-size: 24px; margin-right: 30px;"></i>
+                    <p >Jaranan, Desa Banguntapan, <br> Kec. Banguntapan, Kab.  Bantul,<br> Daerah Istimewa Yogyakarta<br> 55198
+                    </p>
+                  </div>
+                  <div class="row">
+                    <i class="icon-camera-retro" style="font-size: 24px; margin-right: 20px;"></i>
+                    <p >kamaba_yk</p>
+                  </div>
+                  <div class="row">
+                    <i class="icon-envelope" style="font-size: 24px; margin-right: 20px;"></i>
+                    <p >kamaba_yk@gmail.com</p>
+                  </div>
               </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Features</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Follow Us</h2>
-                <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+
+              <div class="col-lg-3">
+              <a href="about.php"><img class="col-lg-12" src="images/logo.png"></a>
               </div>
             </div>
           </div>
-          <div class="col-lg-3">
-            <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            <form action="#" method="post">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-primary text-white" type="button" id="button-addon2">Send</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="row pt-5 mt-5">
-          <div class="col-12 text-md-center text-left">
-            <p>
+       
+        
+          <div class="text-center p-3">
+
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a><br> KosanCode <br> <img src="images/kosanlogo.png" height="25px">
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
+            
           </div>
-        </div>
+        
       </div>
     </footer>
   </div>

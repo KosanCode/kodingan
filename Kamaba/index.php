@@ -3,8 +3,9 @@
   require_once 'koneksi.php';
   require_once 'function.php';
   
-
-
+  if( isset( $_GET["cari"]) ) {
+    $berita = cari($_GET["keyword"]);
+  }
 
   $kegiatan = query("SELECT * FROM kegiatan ORDER BY tanggal DESC LIMIT 0, 6");
   $berita = query("SELECT * FROM tabelberita ORDER BY tanggal DESC LIMIT 0, 3");
@@ -160,10 +161,10 @@
               <form method="post">
                 <div class="row align-items-center">
                   <div class="col-lg-12 col-xl-10 no-sm-border border-right">
-                    <input type="text" class="form-control" placeholder="What are you looking for?">
+                    <input type="text" name="keyword" class="form-control" placeholder="What are you looking for?">
                   </div>
                   <div class="col-lg-12 col-xl-2 ml-auto text-right">
-                    <input type="submit" class="btn text-white btn-primary" value="Search">
+                    <input type="submit" name="cari" class="btn text-white btn-primary" value="Search">
                   </div>
                   
                 </div>
@@ -184,7 +185,6 @@
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center border-primary">
             <h2 class="font-weight-light text-primary">Our Activities</h2>
-            <p class="color-black-opacity-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
           </div>
         </div>
 
@@ -226,8 +226,8 @@
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 mb-5">
-            <img src="images/img_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid rounded">
+          <div class="col-md-6 mb-5 text-center">
+            <img src="images/logo.png" width="400px" alt="Free Website Template by Free-Template.co" class="img-fluid rounded">
           </div>
           <div class="col-md-5 ml-auto">
             <h2 class="text-primary mb-3">Q&A?</h2>
@@ -238,7 +238,7 @@
 
                   <div class="collapse" id="collapse-1">
                     <div class="pt-2">
-                      <p class="mb-0">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                      <p class="mb-0">KAMABA adalah organisasi mahasiswa daerah asal Blora, Jawa tengah</p>
                     </div>
                   </div>
                 </div>
@@ -248,7 +248,7 @@
 
                   <div class="collapse" id="collapse-4">
                     <div class="pt-2">
-                      <p class="mb-0">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                      <p class="mb-0">Banyak kegiatan menarik dalam berbagai bidang yang diadakan</p>
                     </div>
                   </div>
                 </div>
@@ -258,7 +258,7 @@
 
                   <div class="collapse" id="collapse-2">
                     <div class="pt-2">
-                      <p class="mb-0">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                      <p class="mb-0">Selain di Yogyakarta, KAMABA juga ada di Solo, Salatiga, Magelang, dan Madura</p>
                     </div>
                   </div>
                 </div>
@@ -268,7 +268,7 @@
 
                   <div class="collapse" id="collapse-3">
                     <div class="pt-2">
-                      <p class="mb-0">The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
+                      <p class="mb-0">Selama kamu masih mahasiswa aktif dan berasal Blora, kalian hanya perlu kontak ke admin yang bersangkutan untuk melakukan proses pendaftaran.</p>
                     </div>
                   </div>
                 </div>
@@ -285,7 +285,6 @@
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center border-primary">
             <h2 class="font-weight-light text-primary">How It Works</h2>
-            <p class="color-black-opacity-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
           </div>
         </div>
 
@@ -297,7 +296,6 @@
               </div>
               <span class="number">1</span>
               <h3>Decide What To Do</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
             </div>
           </div>
           <div class="col-md-6 mb-4 mb-lg-0 col-lg-4">
@@ -307,7 +305,6 @@
               </div>
               <span class="number">2</span>
               <h3>Find What You Want</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
             </div>
           </div>
           <div class="col-md-6 mb-4 mb-lg-0 col-lg-4">
@@ -317,7 +314,6 @@
               </div>
               <span class="number">3</span>
               <h3>Join Ours Amazing Activities</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
             </div>
           </div>
         </div>
@@ -404,11 +400,11 @@
         ?>
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
             <div class="h-entry">
-              <img src="images/img_<?= $i; ?>.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
+              <img src="Images\Berita/<?=$row ["namagambar"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               <div class="h-entry-inner">
                 <h2 class="font-size-regular"><a href="#"><?= $row["judul"]; ?></a></h2>
                 <div class="meta mb-4">by <a href="#"><?= $row["nama"]; ?></a> <span class="mx-2">&bullet;</span> <?= $row["tanggal"]; ?></div>
-                <p style="overflow:hidden;"><?= $row["isi"]; ?></p>
+                <p style="overflow:hidden;"><?= substr($row["isi"], 0, 100); ?></p>
               </div>
             </div> 
           </div>

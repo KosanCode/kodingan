@@ -241,8 +241,8 @@
       </div>
     </div>
 
-    
-    <!--<div class="py-5 bg-primary">
+    <?php if((@!$_SESSION["admin"]) && (@!$_SESSION["user"])) { ?>
+    <div class="py-5 bg-primary">
       <div class="container">
         <div class="row">
           <div class="col-lg-7 mr-auto mb-4 mb-lg-0">
@@ -254,12 +254,14 @@
           </div>
         </div>
       </div>
-    </div>-->
+    </div>
+	<?php }	?>
     
-    <footer>
-      <div class="container">
+     <footer>
+      <div class="container" style="padding-top: 20px; padding-bottom: 20px;">
+
         
-		<div class="col-lg-12" style="margin-top: 20px;">
+          <div class="col-lg-12" style="margin-top: 20px;">
             <div class="row"> 
               <div class="col-lg-5">
                   <a href="about.php" class="logo"><h1 style="color: #000;"><b>KAMA<span style="color: #00908d;">BA</span></b></h1></a>
@@ -289,13 +291,14 @@
               </div>
             </div>
           </div>
+       
         
-          <div class="col-12 text-md-center text-left">
-            <p>
+          <div class="text-center p-3">
+
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a><br> KosanCode <br> <img src="images/kosanlogo.png" height="25px">
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
+            
           </div>
         
       </div>
