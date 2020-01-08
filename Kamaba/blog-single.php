@@ -1,20 +1,19 @@
 <?php
+	session_start();
 	include 'koneksi.php';
 	include 'fungsi_komentar.php';
 	
-	$kd_berita = $_GET["kd_berita"];
+	$kd_berita = $_GET["kd_berita"];	
 	
-	
-	$komen = query("select * from tabelkomentar where kd_berita = $kd_berita");
-	$jml_komen = ("select * from tabelkomentar where kd_berita = $kd_berita");
-	
-	
+	$komen = mysqli_query($koneksi, "select * from tabelkomentar where kd_berita = $kd_berita");
+	$jml_komen = ("select * from tabelkomentar where kd_berita = $kd_berita");	
 	
 	//mengambil berita	
-	$dtl_berita = query("select * from tabelberita where kd_berita = $kd_berita")[0];
+	$berita_single = query("select * from tabelberita where kd_berita = $kd_berita")[0];
 	
 	if(isset ($_POST["comment"])) {
 	  $komentar = simpankom($_POST["komentar"]);
+	  header("Location: blog-single.php?kd_berita=$kd_berita");
 	}
 	
 ?>
@@ -134,15 +133,11 @@
           <div class="col-md-8">
 			
 			<div class="mb-4 ">
-            <img src="images/<?= $dtl_berita["namagambar"]; ?>" alt="Image" class="img-fluid rounded">
+            <img src="images/berita/<?= $berita_single["namagambar"]; ?>" alt="Image" class="img-fluid rounded">
 			</div>
 
-            <h3><?= $dtl_berita["judul"]; ?></h3>
-            <p><?= $dtl_berita["isi"]; ?></p>
-
-            <p><?= $dtl_berita["isi"]; ?></p>
-
-            <p><?= $dtl_berita["isi"]; ?></p>
+            <h3><?= $berita_single["judul"]; ?></h3>
+            <p><?= $berita_single["isi"]; ?></p>
 			
 			
             <div class="pt-5">
@@ -180,16 +175,14 @@
               
               <div class="comment-form-wrap pt-5">
                 <h3 class="mb-5">Masukkan Komentar Anda</h3>
-                <form action="" method="post" class="p-5 bg-light">
-				
+                <form action="" method="post" class="p-5 bg-light">			
                   <div class="form-group">
                     <label for="message">Komentar</label>
                     <textarea name="komentar" cols="30" rows="10" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
-                    <input type="submit" id="comment" name="comment" value="Post Comment" >
+                    <input type="submit" name="comment" value="Post Comment" class="btn btn-primary text-white btn-md">
                   </div>
-
                 </form>
               </div>
             </div>
