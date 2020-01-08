@@ -112,6 +112,12 @@ if(isset($_GET["aksi"])) {
               <span>Kegiatan</span>
               </a>
           </li>
+		  <li class="sub-menu">
+            <a href="data_berita.php">
+              <i class="fa fa-th"></i>
+              <span>Berita</span>
+              </a>
+          </li>
         </ul>
         <!-- sidebar menu end-->
       </div>
