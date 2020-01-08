@@ -4,7 +4,9 @@ include 'koneksi.php';
 // include composer packages
 include "vendor/autoload.php";
 
-$now = date('d F Y');
+date_default_timezone_set("Asia/Jakarta");
+date_default_timezone_get();
+$now = date('Y-m-d H:i:s');
 $kd_kegiatan = $_GET["kd_kegiatan"];
 $kd_anggota = $_GET["kd_anggota"];
 
@@ -59,4 +61,8 @@ $pdf->Cell(0, 10, 'Yogyakarta '.date('d F Y'), 0, 0, 'C');
 // render PDF to browser
 $pdf->Output('I','sertifikat.pdf');
 
-mysqli_query($koneksi, "INSERT INTO dokumen(kd_kegiatan, kd_anggota) VALUES ('$kd_kegiatan', '$kd_anggota') ");
+
+$cek = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM dokumen WHERE kd_anggota='$kd_anggota' AND $kd_kegiatan='$kd_kegiatan'"));
+    if ($cek == 0){
+    mysqli_query($koneksi, "INSERT INTO dokumen(kd_kegiatan, kd_anggota, tanggal_buat) VALUES ('$kd_kegiatan', '$kd_anggota', '$now') ");
+    }

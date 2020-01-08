@@ -5,7 +5,7 @@
   date_default_timezone_get();
   $now = date("Y-m-d H:i:s");
   
-  $kegiatanku = query("SELECT * FROM dokumen INNER JOIN dtl_kegiatan ON dokumen.kd_anggota=dtl_kegiatan.kd_anggota AND dokumen.kd_kegiatan=dtl_kegiatan.kd_kegiatan INNER JOIN kegiatan ON kegiatan.kd_kegiatan=dokumen.kd_kegiatan INNER JOIN anggota ON anggota.kd_anggota=dokumen.kd_anggota WHERE status='y' ORDER BY tanggal_buat DESC");
+  $kegiatanku = query("SELECT * FROM dokumen INNER JOIN dtl_kegiatan ON dokumen.kd_anggota=dtl_kegiatan.kd_anggota AND dokumen.kd_kegiatan=dtl_kegiatan.kd_kegiatan INNER JOIN kegiatan ON kegiatan.kd_kegiatan=dokumen.kd_kegiatan INNER JOIN anggota ON anggota.kd_anggota=dokumen.kd_anggota ORDER BY tanggal_buat DESC");
   // var_dump($kegiatanku);
 
   $kehadiran = query("SELECT * FROM dtl_kegiatan JOIN kegiatan ON kegiatan.kd_kegiatan=dtl_kegiatan.kd_kegiatan JOIN anggota ON anggota.kd_anggota=dtl_kegiatan.kd_anggota ORDER BY tanggal");
@@ -19,23 +19,31 @@
 
         case "hapus":
         $id = $_GET['id'];
-        $sql_hapus = "DELETE FROM dokumen WHERE kd_dok=" . $id;
-        $hapus = hapus($sql_hapus);
+        $sql_hapus = "DELETE FROM dokumen WHERE kd_dok=$id";
+        update($sql_hapus);
         header('location: dokumen_bEnd.php');
         break;
 
         case "update":
-        $sql_hapus = "UPDATE dtl_kegiatan SET status='y' WHERE kd_anggota='$kd_anggota' AND $kd_kegiatan='$kd_kegiatan'";
-        $hapus = hapus($sql_hapus);
+        $sql_update = "UPDATE dtl_kegiatan SET status='y' WHERE kd_anggota='$kd_anggota' AND kd_kegiatan='$kd_kegiatan'";
+        update($sql_update);
         header('location: dokumen_bEnd.php');
         break;
 
         case "simpan":
 
-        $cek = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM dokumen WHERE kd_anggota='$kd_anggota' AND $kd_kegiatan='$kd_kegiatan'"));
+        $cek = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM dokumen WHERE kd_anggota='$kd_anggota' AND kd_kegiatan='$kd_kegiatan'"));
+
+        $status = mysqli_query($koneksi,"SELECT status FROM dtl_kegiatan WHERE kd_anggota='$kd_anggota' AND kd_kegiatan='$kd_kegiatan'");
+
 
           if ($cek > 0){
           echo "<script>window.alert('Data tersebut sudah ada dalam database')
+          window.location='dokumen_bEnd.php'</script>";
+          }
+
+          else if($status = 'n'){
+          echo "<script>window.alert('Status peserta belum memenuhi syarat')
           window.location='dokumen_bEnd.php'</script>";
           }
 
@@ -65,7 +73,7 @@
   <title>Kamaba - Administrator Page</title>
 
   <!-- Favicons -->
-  <!-- <link href="./img/favicon.png" rel="icon"> -->
+  <link href="./img/favicon.png" rel="icon">
   <link href="./img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Bootstrap core CSS -->
@@ -98,12 +106,12 @@
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="index.php" class="logo"><b>KAMA<span>BA</span></b></a>
+      <a href="index.html" class="logo"><b>KAMA<span>BA</span></b></a>
       <!--logo end-->
       
       <div class="top-menu">
         <ul class="nav pull-right top-menu">
-          <li><a class="logout" href="../logout.php">Logout</a></li>
+          <li><a class="logout" href="login.html">Logout</a></li>
         </ul>
       </div>
     </header>
@@ -116,28 +124,18 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><img src="img/admin.png" class="img-circle" width="80"></p>
-          <h5 class="centered">ADMIN</h5>
+          <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
+          <h5 class="centered">Sam Soffes</h5>
           <li class="mt">
-            <a href="index.php">
+            <a href="dokumen_bEnd.php">
               <i class="fa fa-dashboard"></i>
               <span>Dashboard</span>
               </a>
           </li>
           <li class="sub-menu">
-          <a href="javascript:;">
+            <a class="active" href="dokumen_bEnd.php">
               <i class="fa fa-th"></i>
-              <span>Data</span>
-              </a>
-              <ul class="sub">
-              <li><a href="data_anggota.php">Anggota</a></li>
-              <li class="active"><a  href="dokumen_bEnd.php">Sertifikat</a></li>
-            </ul>
-          </li>
-          <li class="sub-menu">
-            <a href="data_kegiatan.php">
-              <i class="fa fa-th"></i>
-              <span>Kegiatan</span>
+              <span>Data Sertifikat</span>
               </a>
           </li>
         </ul>

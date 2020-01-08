@@ -42,4 +42,9 @@
 		return mysqli_affected_rows($koneksi);
 	}
 
+	function update($query){
+		global $koneksi;
+		$result = mysqli_query($koneksi, $query);
+	}
+
 ?>

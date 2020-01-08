@@ -211,7 +211,9 @@
 			
           <div class="col-md-6 mb-4 mb-lg-4 col-lg-4">
             
-            <div class="listing-item ">
+
+          
+            <div href="listings-single.php?kd_kegiatan=<?= $row["kd_kegiatan"]; ?>" class="listing-item ">
               <div class="listing-image">
                 <img style="height: 300px;" src="images/kegiatan/<?= $row["gambar"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               </div>
@@ -222,7 +224,6 @@
                 <span class="address"><?= $row["tempat"]; ?></span>
               </div>
             </div>
-
           </div>
 		  
 		  <?php 

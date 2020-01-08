@@ -1,6 +1,13 @@
 
 <?php
+  
+  session_start();
   require 'koneksi.php';
+
+  if(isset($_SESSION["admin"]) || (!isset($_SESSION["user"]))){
+    header("Location: index.php");
+    exit;
+  }
   
 
   $perpage = 5; //kegiatan perhalaman
@@ -8,7 +15,10 @@
 
   $start = ($page > 1) ? ($page * $perpage) - $perpage : 0;
 
-  $kegiatanku = query("SELECT * FROM dtl_kegiatan INNER JOIN kegiatan ON kegiatan.kd_kegiatan=dtl_kegiatan.kd_kegiatan INNER JOIN anggota ON anggota.kd_anggota=dtl_kegiatan.kd_anggota WHERE status='y' ORDER BY tanggal DESC LIMIT $start, $perpage");
+  $user_terlogin = @$_SESSION['user'];
+ // $kd_anggota_terlogin = mysqli_query($koneksi, SELECT kd_anggota FROM anggota WHERE id=$user_terlogin);
+
+  $kegiatanku = query("SELECT * FROM dtl_kegiatan INNER JOIN kegiatan ON kegiatan.kd_kegiatan=dtl_kegiatan.kd_kegiatan INNER JOIN anggota ON anggota.kd_anggota=dtl_kegiatan.kd_anggota WHERE status='y' AND id=$user_terlogin ORDER BY tanggal DESC LIMIT $start, $perpage");
 
   $hasil = mysqli_query( $koneksi,"SELECT * FROM dtl_kegiatan");
   $total = mysqli_num_rows($hasil);
@@ -70,6 +80,7 @@
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php"><span>Home</span></a></li>
+                <?php if(@$_SESSION["user"]) : ?>
                 <li class="has-children active">
                   <a href="listings.php"><span>Kegiatan</span></a>
                   <ul class="dropdown arrow-top">
@@ -86,10 +97,45 @@
                     </li>-->
                   </ul>
                 </li>
-        <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
+                <?php endif; ?>
+                <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
                 <li><a href="about.php"><span>Info</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
-                <li><a href="signup.php"><span>Login</span></a></li>
+                <?php if((@!$_SESSION["admin"]) && (@!$_SESSION["user"])) : ?>
+                <li class="activeku"><a href="signup.php"><span>Login</span></a></li>
+                <?php endif; ?>
+                <?php  
+                  $user_terlogin = @$_SESSION['user'];
+                  $sql_user = mysqli_query($koneksi, "SELECT * FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
+                  $data_user =  mysqli_fetch_array($sql_user);
+
+                  if(@$_SESSION["user"] && !@$data_user['id']) :
+                ?>
+                  <li><a href="pendaftaran.php"><span style="border: 2px solid #fff;">Join With Us</span></a></li>
+                <?php endif; ?>
+                <?php if(@$_SESSION["admin"] || @$_SESSION["user"]) : ?>                
+                  <li class="has-children activeku">
+                  <?php 
+                    if(@$_SESSION["admin"]) {
+                      $user_terlogin = @$_SESSION['admin'];
+                    } else if(@$_SESSION["user"]){
+                      $user_terlogin = @$_SESSION['user'];
+                    }
+                    $sql_user = mysqli_query($koneksi, "SELECT * FROM login WHERE id = '$user_terlogin'") or die(mysql_error());
+                    $data_user =  mysqli_fetch_array($sql_user);
+                  ?>
+                  <a href="#"><span><?php echo $data_user['nama_lengkap']; ?> </span></a>
+                  
+                  <ul class="dropdown arrow-top">
+                  <?php
+                  if(@$_SESSION["user"]) :?>
+                    <li><a href="profile.php">Profile</a></li>
+                  <?php endif; ?>
+                    <li><a href="logout.php">Logout</a></li>
+                    </li>
+                  </ul>
+                </li>
+                <?php endif; ?>
               </ul>
             </nav>
           </div>
