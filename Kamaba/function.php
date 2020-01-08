@@ -272,6 +272,8 @@ function updateJabatan($dataMember){
 
 //cek cookie
 function cekCokie() {
+  global $koneksi;
+
   if(isset($_COOKIE['id']) && isset($_COOKIE['key'])) {
     $id = $_COOKIE['id'];
     $key = $_COOKIE['key'];
@@ -282,10 +284,10 @@ function cekCokie() {
   
     //cek cookie dan nama
     if ($key === hash('sha256', $row['email'])) {
-      if($row['id'] == '2') {
-        $_SESSION['user'] = $row['id'];
-      } else {
+      if($row['id'] == '1') {
         $_SESSION['admin'] = $row['id'];
+      } else {
+        $_SESSION['user'] = $row['id'];
       }   
     }
   }
@@ -293,8 +295,15 @@ function cekCokie() {
 
 //cek login
 function cekLogin(){
-  if(isset($_SESSION["admin"]) || isset($_SESSION["user"])) {
+  if(isset($_SESSION["admin"]) ) {
+    header("Location: admin/index.php");
+
+    exit;
+  }
+
+  if(isset($_SESSION["user"])) {
     header("Location: index.php");
+    
     exit;
   }
 

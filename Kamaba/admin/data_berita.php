@@ -1,32 +1,27 @@
 <?php
 
 session_start();
-require_once '../koneksi.php';
-require '../function.php';
+include '../functionberita.php'; 
 
 //ambil data dari tabel anggota
-$anggota = query("SELECT * FROM anggota a JOIN jabatan j ON a.kd_jabatan=j.kd_jabatan");
+$berita = query("SELECT * FROM tabelberita ORDER BY kd_berita DESC");
 
 //cek apakah tombol daftar sudah ditekan
 if(isset($_GET["aksi"])) {
     switch($_GET['aksi']) {
         case "ubah":
+            $kd_anggota2 = $_GET['kd_anggota'];
             
         break;
         case "hapus":
             $kd_anggota = $_GET['kd_anggota'];
             $sql_hapus = "DELETE FROM anggota WHERE kd_anggota = '$kd_anggota'";
-            $result = mysqli_query($koneksi, $sql_hapus);
-            // $row = mysqli_fetch_assoc($result);
-            echo "
-              <script>
-                  alert('Data berhasil dihapus!');
-                  document.location.href = 'data_anggota.php';
-              </script>
-            ";
+            hapus($sql_hapus);
+            header("Location: data_anggota.php");
         break;
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -57,8 +52,6 @@ if(isset($_GET["aksi"])) {
   <link href="css/style-responsive.css" rel="stylesheet">
   <script src="lib/jquery/jquery.min.js"></script>
 
-
-  
   <!-- =======================================================
     Template Name: Dashio
     Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
@@ -133,65 +126,50 @@ if(isset($_GET["aksi"])) {
         MAIN CONTENT
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
-    
     <section id="main-content">
       <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Data Anggota KAMABA</h3>
+        <h3><i class="fa fa-angle-right"></i>Data Kegiatan KAMABA</h3>
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
+            <button style="margin-left: 15px;" type="button" class="btn btn-primary"><a href="tambahberita.php" style="color: white;">Tambah Berita</a>
+                  
+                </button><br><br>
             <div class="adv-table table-responsive">
+
               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="hidden-table-info">
                 <thead>
                     <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Foto</th>
+                    <th scope="col">No</th>
+                    <th scope="col">Gambar</th>
+                    <th scope="col">Judul Berita</th>
                     <th scope="col">Nama</th>
-                    <th scope="col">Jenis Kelamin</th>
-                    <th scope="col">Tempat Lahir</th>
-                    <th scope="col">Tanggal Lahir</th>
-                    <th scope="col">Alamat Asal</th>
-                    <th scope="col">Alamat Jogjakarta</th>
-                    <th scope="col">Asal Kampus</th>
-                    <th scope="col">Angkatan</th>
-                    <th scope="col">Nomor Telpon</th>
-                    <th scope="col">Jabatan</th>
+                    <th scope="col">Tanggal Upload</th>
+                    <th scope="col">Isi</th>
                     <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php $i=1; ?>
-                    <?php foreach($anggota as $row) : ?>
+                    <?php foreach($berita as $row) : ?>
                     <tr>
                     <th scope="row"><?= $i; ?></th>
                     <td>
                     <div class="project-wrapper">
                         <div class="project">
                             <div class="photo">
-                                <a class="fancybox" href="../images/user/<?= $row["foto"] ?>">
-                                    <img src="../images/user/<?= $row["foto"] ?>" alt="user" width="40px">
-                                </a>
+                                <a class="fancybox" href="../images/berita/<?= $row["namagambar"] ?>"><img src="../images/berita/<?= $row["namagambar"] ?>" alt="user" width="40px"></a>
                             </div>
                         </div>
                     </div>
                     </td>
+                    <td><?= $row["judul"] ?></td>
                     <td><?= $row["nama"] ?></td>
-                    <td><?= $row["jk"] ?></td>
-                    <td><?= $row["tempat_lahir"] ?></td>
-                    <td><?= $row["tanggal_lahir"] ?></td>
-                    <td><?= $row["alamat_asal"] ?></td>
-                    <td><?= $row["alamat_yk"] ?></td>
-                    <td><?= $row["asal_kampus"] ?></td>
-                    <td><?= $row["angkatan"] ?></td>
-                    <td><?= $row["telp"] ?></td>
-                    <td><?= $row["jabatan"] ?></td>
+                    <td><?= $row["tanggal"] ?></td>
+                    <td><?= $row["isi"] ?></td>
                     <td>
-                        <a href="edit_anggota.php?aksi=ubah&kd_anggota=<?= $row["kd_anggota"]; ?>">
-                            <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                        </a>
-                        <a href="data_anggota.php?aksi=hapus&kd_anggota=<?= $row["kd_anggota"]; ?>" onclick="return confirm('Yakin ingin menghapus data yang dipilih?');">
-                            <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                        </a>
+                        <a href="editberita.php?kd_berita=<?= $row["kd_berita"]; ?>"><i class="fa fa-pencil"></i></a>
+                        <a href="hapusberita.php?kd_berita=<?= $row["kd_berita"]; ?>"><i class="fa fa-trash-o "></i></a>
                     </td>
                     </tr>
                     <?php $i++; ?>
@@ -230,7 +208,6 @@ if(isset($_GET["aksi"])) {
     </footer>
     <!--footer end-->
   </section>
-
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="lib/jquery/jquery.min.js"></script>
   <script type="text/javascript" language="javascript" src="lib/advanced-datatable/js/jquery.js"></script>
@@ -314,3 +291,31 @@ if(isset($_GET["aksi"])) {
 </body>
 
 </html>
+
+<!-- Modal -->
+<div class="modal fade" id="tambahKegiatan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Tambah Data Kegiatan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="" method="POST">
+      <div class="modal-body">
+          <label for="kd_jabatan">Jabatan</label>
+          <select class="form-control" name="kd_jabatan" id="kd_jabatan">
+            <?php while($data = mysqli_fetch_assoc($jabatan) ){?>
+              <option value="<?php echo $data['kd_jabatan']; ?>"><?php echo $data['jabatan']; ?></option>
+            <?php } ?>
+          </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button type="submit" name="ubahJabatan" class="btn btn-primary">Simpan</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

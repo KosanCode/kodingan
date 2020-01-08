@@ -1,6 +1,5 @@
 <?php
 	//koneksi ke database
-
 	$koneksi = mysqli_connect("localhost","root","", "kamabaa");
 	
 	function query($query){
@@ -25,15 +24,12 @@
 		
 		$kd_berita = $_GET["kd_berita"];
 		$tanggal = date("Y-m-d h:i:s");
+		$user = $_SESSION['user'];
 		
-		$query = "INSERT INTO tabelkomentar(tanggal, komentar, kd_berita) VALUES('$tanggal', '$komentar', '$kd_berita')";
+		$query = "INSERT INTO tabelkomentar VALUES('', '$tanggal', '$komentar', $kd_berita, $user)" or die(mysqli_error());
+		mysqli_query($koneksi, $query);
+		return mysqli_affected_rows($koneksi);
 		
-		$result = mysqli_query($koneksi, $query);
-		$rows = [];
-		while ( $row = mysqli_fetch_array($result)) {
-			$rows[] = $row;
-		}
-		return $rows;
 	}
 	
 	function hapus ($id, $kd_berita) {

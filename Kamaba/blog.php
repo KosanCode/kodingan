@@ -1,5 +1,7 @@
 <?php
+  session_start();
   include 'koneksi.php';
+  
   
   $perhalaman = 4;
   $page = isset($_GET["perhalaman"]) ? (int)$_GET["perhalaman"] : 1;
