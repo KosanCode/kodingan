@@ -2,15 +2,16 @@
   session_start();
   require_once 'koneksi.php';
   require_once 'function.php';
-  
-  if( isset( $_GET["cari"]) ) {
-    $berita = cari($_GET["keyword"]);
-  }
 
   $kegiatan = query("SELECT * FROM kegiatan ORDER BY tanggal DESC LIMIT 0, 6");
   $berita = query("SELECT * FROM tabelberita ORDER BY tanggal DESC LIMIT 0, 3");
 
   $dtl_kegiatan = query("SELECT * FROM dtl_kegiatan");
+
+
+  if( isset( $_GET["cari"]) ) {
+    $berita = cari($_GET["keyword"]);
+  }
 
 ?>
 
@@ -158,7 +159,7 @@
             </div>
 
             <div class="form-search-wrap p-2" data-aos="fade-up" data-aos-delay="200">
-              <form method="post">
+              <form action="" method="get">
                 <div class="row align-items-center">
                   <div class="col-lg-12 col-xl-10 no-sm-border border-right">
                     <input type="text" name="keyword" class="form-control" placeholder="What are you looking for?">
@@ -383,10 +384,9 @@
     </div>
 	-->
 
-
     <div class="site-section">
       <div class="container">
-        <div class="row justify-content-center mb-5">
+        <div id="blog"  class="row justify-content-center mb-5">
           <div class="col-md-7 text-center border-primary">
             <h2 class="font-weight-light text-primary">Tips &amp; Articles</h2>
             <p class="color-black-opacity-5">See Our Daily tips &amp; articles</p>
