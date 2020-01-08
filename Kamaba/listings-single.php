@@ -189,6 +189,7 @@
 
                   if(@$_SESSION["user"] && !@$data_user['id']) {
                 ?>
+                  <a href="pendaftaran.php" class="btn btn-primary btn-md text-white">JOIN MEMBER</a>
                 <?php } else{ ?>
 
                   <a href="pendaftarankeg.php?kd_kegiatan=<?= $single_kegiatan["kd_kegiatan"]; ?>" class="btn btn-primary btn-md text-white">DAFTAR</a>
