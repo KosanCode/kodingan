@@ -181,7 +181,7 @@ if(isset($_GET["aksi"])) {
                     <td><?= $row["isi"] ?></td>
                     <td>
                         <a href="editberita.php?kd_berita=<?= $row["kd_berita"]; ?>"><i class="fa fa-pencil"></i></a>
-                        <a href="hapusberita.php?kd_berita=<?= $row["kd_berita"]; ?>"><i class="fa fa-trash-o "></i></a>
+                        <a href="hapusberita.php?kd_berita=<?= $row["kd_berita"]; ?>"><i class="fa fa-trash-o"></i></a>
                     </td>
                     </tr>
                     <?php $i++; ?>
