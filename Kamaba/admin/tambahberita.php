@@ -3,6 +3,18 @@
 session_start();
 include '../functionberita.php'; 
 
+//cek session login
+if(isset($_SESSION["user"])){
+  header("Location: ../index.php");
+  exit;
+}
+
+//cek session login
+if(!isset($_SESSION["admin"])){
+header("Location: ../signup.php");
+exit;
+}
+
 //ambil data dari tabel anggota
 $berita = query("SELECT * FROM tabelberita");
 

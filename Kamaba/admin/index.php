@@ -1,3 +1,19 @@
+<?php
+session_start();
+//cek session login
+if(isset($_SESSION["user"])){
+  header("Location: ../index.php");
+  exit;
+}
+
+//cek session login
+if(!isset($_SESSION["admin"])){
+header("Location: ../signup.php");
+exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
