@@ -404,11 +404,11 @@
         ?>
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
             <div class="h-entry">
-              <img src="images/img_<?= $i; ?>.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
+              <img src="Images\Berita/<?=$row ["namagambar"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               <div class="h-entry-inner">
                 <h2 class="font-size-regular"><a href="#"><?= $row["judul"]; ?></a></h2>
                 <div class="meta mb-4">by <a href="#"><?= $row["nama"]; ?></a> <span class="mx-2">&bullet;</span> <?= $row["tanggal"]; ?></div>
-                <p style="overflow:hidden;"><?= $row["isi"]; ?></p>
+                <p style="overflow:hidden;"><?= substr($row["isi"], 0, 100); ?></p>
               </div>
             </div> 
           </div>
