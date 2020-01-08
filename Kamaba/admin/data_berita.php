@@ -3,6 +3,18 @@
 session_start();
 include '../functionberita.php'; 
 
+//cek session login
+if(isset($_SESSION["user"])){
+  header("Location: ../index.php");
+  exit;
+}
+
+//cek session login
+if(!isset($_SESSION["admin"])){
+header("Location: ../signup.php");
+exit;
+}
+
 //ambil data dari tabel anggota
 $berita = query("SELECT * FROM tabelberita ORDER BY kd_berita DESC");
 
@@ -169,7 +181,7 @@ if(isset($_GET["aksi"])) {
                     <td><?= $row["isi"] ?></td>
                     <td>
                         <a href="editberita.php?kd_berita=<?= $row["kd_berita"]; ?>"><i class="fa fa-pencil"></i></a>
-                        <a href="hapusberita.php?kd_berita=<?= $row["kd_berita"]; ?>"><i class="fa fa-trash-o "></i></a>
+                        <a href="hapusberita.php?kd_berita=<?= $row["kd_berita"]; ?>"><i class="fa fa-trash-o"></i></a>
                     </td>
                     </tr>
                     <?php $i++; ?>
