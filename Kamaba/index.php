@@ -3,6 +3,11 @@
   require_once 'koneksi.php';
   require_once 'function.php';
 
+  //cek remember me
+  
+
+
+
   $kegiatan = query("SELECT * FROM kegiatan ORDER BY tanggal DESC LIMIT 0, 6");
   $berita = query("SELECT * FROM tabelberita ORDER BY tanggal DESC LIMIT 0, 3");
 
