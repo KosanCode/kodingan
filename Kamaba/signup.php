@@ -126,7 +126,8 @@ if(isset($_POST["login"])){
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php"><span>Home</span></a></li>
-                <li><a href="about.php"><span>About</span></a></li>
+                <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
+                <li><a href="about.php"><span>Info</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
                 <li class="active"><a href="signup.php"><span>Login</span></a></li>
               </ul>
