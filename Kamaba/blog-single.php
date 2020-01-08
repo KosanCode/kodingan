@@ -4,8 +4,9 @@
 	include 'fungsi_komentar.php';
 	
 	$kd_berita = $_GET["kd_berita"];	
+	$user = $_SESSION["user"];
 	
-	$komen = mysqli_query($koneksi, "select * from tabelkomentar where kd_berita = $kd_berita");
+	$komen = mysqli_query($koneksi, "SELECT * FROM tabelkomentar tk join login l on tk.id=l.id join anggota a on l.id=a.id where kd_berita = $kd_berita and l.id = $user");
 	$jml_komen = ("select * from tabelkomentar where kd_berita = $kd_berita");	
 	
 	//mengambil berita	
@@ -156,10 +157,10 @@
 				?>
                 <li class="comment">
                   <div class="vcard bio">
-                    <img src="images/comment_vcard.jpg" alt="Image">
+                    <img src="images\user\<?= $row["foto"]; ?>" alt="Image">
                   </div>
                   <div class="comment-body">
-                    <h3>Jean Doe</h3>
+                    <h3><?= $row["nama"]; ?></h3>
                     <div class="meta"><?= $row["tanggal"]; ?></div>
                     <p><?= $row["komentar"]; ?></p>
                     <p><a href="#" class="reply">Reply</a>

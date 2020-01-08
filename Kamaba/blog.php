@@ -24,7 +24,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Browse &mdash; Website Template by Colorlib</title>
+    <title>KAMABA &mdash; Yogyakarta</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -67,20 +67,21 @@
         <div class="row align-items-center">
           
           <div class="col-11 col-xl-2">
-            <h1 class="mb-0 site-logo"><a href="index.php" class="text-white h2 mb-0">Browse</a></h1>
+            <h1 class="mb-0 site-logo"><a href="index.php" class="text-white h2 mb-0">KAMABA</a></h1>
           </div>
           <div class="col-12 col-md-10 d-none d-xl-block">
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php"><span>Home</span></a></li>
+
+                <?php if(@$_SESSION["user"]) : ?>
                 <li class="has-children">
-                  <a href="about.php"><span>Dropdown</span></a>
+                  <a href="listings.php"><span>Kegiatan</span></a>
                   <ul class="dropdown arrow-top">
-                    <li><a href="#">Menu One</a></li>
-                    <li><a href="#">Menu Two</a></li>
-                    <li><a href="#">Menu Three</a></li>
-                    <li class="has-children">
+                    <li><a href="listings.php">Daftar Kegiatan</a></li>
+                    <li><a href="sertifikat.php">Sertifikat</a></li>
+                    <!--<li class="has-children">
                       <a href="#">Dropdown</a>
                       <ul class="dropdown">
                         <li><a href="#">Menu One</a></li>
@@ -88,13 +89,49 @@
                         <li><a href="#">Menu Three</a></li>
                         <li><a href="#">Menu Four</a></li>
                       </ul>
+                    </li>-->
+                  </ul>
+                </li>
+                <?php endif; ?>
+                <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
+                <li><a href="about.php"><span>Info</span></a></li>
+                <li class="active"><a href="blog.php"><span>Blog</span></a></li>
+
+                <?php if((@!$_SESSION["admin"]) && (@!$_SESSION["user"])) : ?>
+                <li class="activeku"><a href="signup.php"><span>Login</span></a></li>
+                <?php endif; ?>
+                <?php  
+                  $user_terlogin = @$_SESSION['user'];
+                  $sql_user = mysqli_query($koneksi, "SELECT * FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
+                  $data_user =  mysqli_fetch_array($sql_user);
+
+                  if(@$_SESSION["user"] && !@$data_user['id']) :
+                ?>
+                  <li><a href="pendaftaran.php"><span style="border: 2px solid #fff;">Join With Us</span></a></li>
+                <?php endif; ?>
+                <?php if(@$_SESSION["admin"] || @$_SESSION["user"]) : ?>                
+                  <li class="has-children activeku">
+                  <?php 
+                    if(@$_SESSION["admin"]) {
+                      $user_terlogin = @$_SESSION['admin'];
+                    } else if(@$_SESSION["user"]){
+                      $user_terlogin = @$_SESSION['user'];
+                    }
+                    $sql_user = mysqli_query($koneksi, "SELECT * FROM login WHERE id = '$user_terlogin'") or die(mysql_error());
+                    $data_user =  mysqli_fetch_array($sql_user);
+                  ?>
+                  <a href="#"><span><?php echo $data_user['nama_lengkap']; ?> </span></a>
+                  
+                  <ul class="dropdown arrow-top">
+                  <?php
+                  if(@$_SESSION["user"]) :?>
+                    <li><a href="profile.php">Profile</a></li>
+                  <?php endif; ?>
+                    <li><a href="logout.php">Logout</a></li>
                     </li>
                   </ul>
                 </li>
-                <li><a href="listings.php"><span>Listings</span></a></li>
-                <li><a href="about.php"><span>About</span></a></li>
-                <li class="active"><a href="blog.php"><span>Blog</span></a></li>
-                <li><a href="contact.php"><span>Contact</span></a></li>
+                <?php endif; ?>
               </ul>
             </nav>
           </div>
@@ -111,7 +148,7 @@
 
   
 
-    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/kegiatan.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row align-items-center justify-content-center text-center">
 
@@ -120,8 +157,8 @@
             
             <div class="row justify-content-center">
               <div class="col-md-8 text-center">
-                <h1>Tips &amp; Articles</h1>
-                <p data-aos="fade-up" data-aos-delay="100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate beatae quisquam perspiciatis adipisci ipsam quam.</p>
+                <h1>BERITA KAMABA</h1>
+                <p data-aos="fade-up" data-aos-delay="100"></p>
               </div>
             </div>
 
@@ -131,7 +168,7 @@
       </div>
     </div>  
 
-    <div class="site-section">
+    <div class="site-section bg-light">
       <div class="container">
         <div class="row">
 
@@ -172,13 +209,13 @@
               <h3 class="h5 text-black mb-3">Search</h3>
               <form action="" method="get">
                 <div class="form-group d-flex">
-                  <input type="text" name="keyword" class="form-control" placeholder="Search keyword and hit enter..." autocomplete="off">
+                  <input type="text" name="keyword" class="form-control" placeholder="Cari berita disini" autocomplete="off">
 				  <button type="submit" name="cari">Cari</button>
                 </div>
               </form>
             </div>
 
-            <div class="mb-5">
+            <!--<div class="mb-5">
               <h3 class="h5 text-black mb-3">Popular Posts</h3>
               <ul class="list-unstyled">
                 <li class="mb-2"><a href="#">Lorem ipsum dolor sit amet</a></li>
@@ -196,7 +233,7 @@
                 <li class="mb-2"><a href="#">Image</a> <em>in</em> <a href="#">Maiores sapiente veritatis reprehenderit</a></li>
                 <li class="mb-2"><a href="#">Image</a> <em>in</em> <a href="#">Natus eligendi nobis</a></li>
               </ul>
-            </div>
+            </div>-->
 
           </div>
           
@@ -205,7 +242,7 @@
     </div>
 
     
-    <div class="py-5 bg-primary">
+    <!--<div class="py-5 bg-primary">
       <div class="container">
         <div class="row">
           <div class="col-lg-7 mr-auto mb-4 mb-lg-0">
@@ -217,63 +254,42 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
     
-    <footer class="site-footer">
+    <footer>
       <div class="container">
-        <div class="row">
-          <div class="col-md-9">
-            <div class="row">
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Quick Links</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
+        
+		<div class="col-lg-12" style="margin-top: 20px;">
+            <div class="row"> 
+              <div class="col-lg-5">
+                  <a href="about.php" class="logo"><h1 style="color: #000;"><b>KAMA<span style="color: #00908d;">BA</span></b></h1></a>
+                  <p>Keluarga Mahasiswa Blora (KAMABA) Yogyakarta merupakan organisasi mahasiswa di Yogyakarta<br> yang berasal dari daerah Kabupaten Blora,<br> Provinsi Jawa Tegah.
+                    
+                  </p>
               </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Products</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
+
+              <div class="col-lg-4">
+                  <div class="row">
+                    <i class="icon-map-marker" style="font-size: 24px; margin-right: 30px;"></i>
+                    <p >Jaranan, Desa Banguntapan, <br> Kec. Banguntapan, Kab.  Bantul,<br> Daerah Istimewa Yogyakarta<br> 55198
+                    </p>
+                  </div>
+                  <div class="row">
+                    <i class="icon-camera-retro" style="font-size: 24px; margin-right: 20px;"></i>
+                    <p >kamaba_yk</p>
+                  </div>
+                  <div class="row">
+                    <i class="icon-envelope" style="font-size: 24px; margin-right: 20px;"></i>
+                    <p >kamaba_yk@gmail.com</p>
+                  </div>
               </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Features</h2>
-                <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-              </div>
-              <div class="col-md-6 mb-5 mb-lg-0 col-lg-3">
-                <h2 class="footer-heading mb-4">Follow Us</h2>
-                <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-                <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+
+              <div class="col-lg-3">
+              <a href="about.php"><img class="col-lg-12" src="images/logo.png"></a>
               </div>
             </div>
           </div>
-          <div class="col-lg-3">
-            <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            <form action="#" method="post">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-primary text-white" type="button" id="button-addon2">Send</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="row pt-5 mt-5">
+        
           <div class="col-12 text-md-center text-left">
             <p>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -281,7 +297,7 @@
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </p>
           </div>
-        </div>
+        
       </div>
     </footer>
   </div>
