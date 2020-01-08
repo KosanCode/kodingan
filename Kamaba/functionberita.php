@@ -85,8 +85,8 @@
 	
 		$query4 = "DELETE FROM tabelkomentar WHERE kd_berita = $kd_berita";
 		$query3 = "DELETE FROM tabelberita WHERE kd_berita = $kd_berita";
-		query($query4);
-		query($query3);
+		$hasil = mysqli_query($koneksi, $query4);
+		$hasil = mysqli_query($koneksi, $query3);
 		return mysqli_affected_rows($koneksi); 
 	}
 
