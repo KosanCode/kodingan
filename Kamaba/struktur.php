@@ -140,7 +140,7 @@
 
   
 
-    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row align-items-center justify-content-center text-center">
 
@@ -149,8 +149,8 @@
             
             <div class="row justify-content-center">
               <div class="col-md-8 text-center">
-                <h1>About Us</h1>
-                <p data-aos="fade-up" data-aos-delay="100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate beatae quisquam perspiciatis adipisci ipsam quam.</p>
+                <h1>Struktur</h1>
+                <p data-aos="fade-up" data-aos-delay="100">Struktur Organisasi KAMABA Yogyakarta</p>
               </div>
             </div>
 
