@@ -1,6 +1,18 @@
 <?php
   require '../koneksi.php';
 
+  //cek session login
+if(isset($_SESSION["user"])){
+  header("Location: ../index.php");
+  exit;
+}
+
+//cek session login
+if(!isset($_SESSION["admin"])){
+header("Location: ../signup.php");
+exit;
+}
+
   date_default_timezone_set("Asia/Jakarta");
   date_default_timezone_get();
   $now = date("Y-m-d H:i:s");

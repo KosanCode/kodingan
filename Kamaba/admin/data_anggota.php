@@ -4,6 +4,18 @@ session_start();
 require_once '../koneksi.php';
 require '../function.php';
 
+//cek session login
+if(isset($_SESSION["user"])){
+  header("Location: ../index.php");
+  exit;
+}
+
+//cek session login
+if(!isset($_SESSION["admin"])){
+header("Location: ../signup.php");
+exit;
+}
+
 //ambil data dari tabel anggota
 $anggota = query("SELECT * FROM anggota a JOIN jabatan j ON a.kd_jabatan=j.kd_jabatan");
 
