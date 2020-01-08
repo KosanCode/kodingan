@@ -239,7 +239,7 @@ if(isset($_POST["daftar"])) {
     </div>
     
     <footer>
-      <div class="container">
+      <div class="container" style="padding-top: 20px; padding-bottom: 20px;">
 
         
           <div class="col-lg-12" style="margin-top: 20px;">
@@ -277,7 +277,7 @@ if(isset($_POST["daftar"])) {
           <div class="text-center p-3">
 
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a> x KosanCode <img src="images/kosanlogo.png" height="25px">
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a><br> KosanCode <br> <img src="images/kosanlogo.png" height="25px">
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             
           </div>

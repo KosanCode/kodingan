@@ -182,8 +182,9 @@ if(isset($_GET["aksi"])) {
                     <td><?= $row["tanggal"] ?></td>
                     <td><?= $row["iuran"] ?></td>
                     <td>
-                        <a href="editkeg.php?kd_kegiatan=<?= $row["kd_kegiatan"]; ?>"><i class="fa fa-pencil"></i></a>
-                        <a href="hapuskeg.php?kd_kegiatan=<?= $row["kd_kegiatan"]; ?>"><i class="fa fa-trash-o "></i></a>
+                        <a href="editkeg.php?kd_kegiatan=<?= $row["kd_kegiatan"]; ?>"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil "></i></button></a>
+                        <a href="hapuskeg.php?kd_kegiatan=<?= $row["kd_kegiatan"]; ?>" onclick="return confirm('Yakin ingin menghapus data yang dipilih?');">
+                            <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button></a>
                     </td>
                     </tr>
                     <?php $i++; ?>
