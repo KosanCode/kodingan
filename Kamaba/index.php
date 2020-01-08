@@ -166,7 +166,6 @@
                   </div>
                   <div class="col-lg-12 col-xl-2 ml-auto text-right">
                     <input type="submit" name="cari" class="btn text-white btn-primary" value="Search">
-                  </div>
                   
                 </div>
               </form>
@@ -400,11 +399,12 @@
         ?>
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
             <div class="h-entry">
-              <img src="Images\Berita/<?=$row ["namagambar"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
+              <a href="blog-single.php?kd_berita=<?= $row["kd_berita"];?> ">
+              <img style="object-fit: cover; height: 300px" src="Images\Berita/<?=$row ["namagambar"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
               <div class="h-entry-inner">
-                <h2 class="font-size-regular"><a href="#"><?= $row["judul"]; ?></a></h2>
-                <div class="meta mb-4">by <a href="#"><?= $row["nama"]; ?></a> <span class="mx-2">&bullet;</span> <?= $row["tanggal"]; ?></div>
-                <p style="overflow:hidden;"><?= substr($row["isi"], 0, 100); ?></p>
+                <h2 class="font-size-regular"><a href="blog-single.php?kd_berita=<?= $row["kd_berita"];?> "><?= $row["judul"]; ?></a></h2>
+                <div class="meta mb-4">by <?= $row["nama"]; ?> <span class="mx-2">&bullet;</span> <?= $row["tanggal"]; ?></div>
+                <p style="overflow:hidden; color: #000;"><?= substr($row["isi"], 0, 100); ?></p>
               </div>
             </div> 
           </div>
@@ -442,7 +442,7 @@
             <div class="row"> 
               <div class="col-lg-5">
                   <a href="about.php" class="logo"><h1 style="color: #000;"><b>KAMA<span style="color: #00908d;">BA</span></b></h1></a>
-                  <p>Keluarga Mahasiswa Blora (KAMABA) Yogyakarta merupakan organisasi mahasiswa di Yogyakarta<br> yang berasal dari daerah Kabupaten Blora,<br> Provinsi Jawa Tegah.
+                  <p style="color: #000;">Keluarga Mahasiswa Blora (KAMABA) Yogyakarta merupakan organisasi mahasiswa di Yogyakarta<br> yang berasal dari daerah Kabupaten Blora,<br> Provinsi Jawa Tegah.
                     
                   </p>
               </div>
@@ -450,16 +450,16 @@
               <div class="col-lg-4">
                   <div class="row">
                     <i class="icon-map-marker" style="font-size: 24px; margin-right: 30px;"></i>
-                    <p >Jaranan, Desa Banguntapan, <br> Kec. Banguntapan, Kab.  Bantul,<br> Daerah Istimewa Yogyakarta<br> 55198
+                    <p style="color: #000;">Jaranan, Desa Banguntapan, <br> Kec. Banguntapan, Kab.  Bantul,<br> Daerah Istimewa Yogyakarta<br> 55198
                     </p>
                   </div>
                   <div class="row">
                     <i class="icon-camera-retro" style="font-size: 24px; margin-right: 20px;"></i>
-                    <p >kamaba_yk</p>
+                    <p style="color: #000;">kamaba_yk</p>
                   </div>
                   <div class="row">
                     <i class="icon-envelope" style="font-size: 24px; margin-right: 20px;"></i>
-                    <p >kamaba_yk@gmail.com</p>
+                    <p style="color: #000;">kamaba_yk@gmail.com</p>
                   </div>
               </div>
 

@@ -220,7 +220,7 @@
 		  <div class="mb-4 mb-lg-4 col-lg-2">
 		  <div class="listing-item">
               <div class="listing-image">
-                <img src="images/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                <img src="images/user/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               </div>
               <div class="listing-item-content">
                 <h6 class="mb-1 small bold text-white"><?= $row["nama"]; ?></h6>
@@ -248,7 +248,7 @@
 		  <div class="mb-4 mb-lg-4 col-lg-2">
 		  <div class="listing-item">
               <div class="listing-image">
-                <img src="images/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                <img src="images/user/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               </div>
               <div class="listing-item-content">
                 <h6 class="mb-1 small bold text-white"><?= $row["nama"]; ?></h6>
@@ -281,7 +281,7 @@
 		  <div class="mb-4 mb-lg-4 col-lg-2">
 		  <div class="listing-item">
               <div class="listing-image">
-                <img src="images/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                <img src="images/user/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               </div>
               <div class="listing-item-content">
                 <h6 class="mb-1 small bold text-white"><?= $row["nama"]; ?></h6>
@@ -304,7 +304,7 @@
 		  <div class="mb-4 mb-lg-4 col-lg-2">
 		  <div class="listing-item">
               <div class="listing-image">
-                <img src="images/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                <img src="images/user/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               </div>
               <div class="listing-item-content">
                 <h6 class="mb-1 small bold text-white"><?= $row["nama"]; ?></h6>
@@ -330,7 +330,7 @@
 		  <div class="mb-4 mb-lg-4 col-lg-2">
 		  <div class="listing-item">
               <div class="listing-image">
-                <img src="images/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                <img src="images/user/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               </div>
               <div class="listing-item-content">
                 <h6 class="mb-1 small bold text-white"><?= $row["nama"]; ?></h6>
@@ -353,7 +353,7 @@
 		  <div class="mb-4 mb-lg-4 col-lg-2">
 		  <div class="listing-item">
               <div class="listing-image">
-                <img src="images/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                <img src="images/user/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               </div>
               <div class="listing-item-content">
                 <h6 class="mb-1 small bold text-white"><?= $row["nama"]; ?></h6>
@@ -381,7 +381,7 @@
 		  <div class="mb-4 mb-lg-4 col-lg-3">
 		  <div class="listing-item">
               <div class="listing-image">
-                <img src="images/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                <img src="images/user/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               </div>
               <div class="listing-item-content">
                 <h6 class="mb-1 small bold text-white"><?= $row["nama"]; ?></h6>
@@ -404,7 +404,7 @@
 		  <div class="mb-4 mb-lg-4 col-lg-3">
 		  <div class="listing-item">
               <div class="listing-image">
-                <img src="images/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                <img src="images/user/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               </div>
               <div class="listing-item-content">
                 <h6 class="mb-1 small bold text-white"><?= $row["nama"]; ?></h6>
@@ -427,7 +427,7 @@
 		  <div class="mb-4 mb-lg-4 col-lg-3">
 		  <div class="listing-item">
               <div class="listing-image">
-                <img src="images/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                <img src="images/user/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               </div>
               <div class="listing-item-content">
                 <h6 class="mb-1 small bold text-white"><?= $row["nama"]; ?></h6>
@@ -450,7 +450,7 @@
 		  <div class="mb-4 mb-lg-4 col-lg-3">
 		  <div class="listing-item">
               <div class="listing-image">
-                <img src="images/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
+                <img src="images/user/<?= $row["foto"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid">
               </div>
               <div class="listing-item-content">
                 <h6 class="mb-1 small bold text-white"><?= $row["nama"]; ?></h6>

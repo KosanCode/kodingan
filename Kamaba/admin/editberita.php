@@ -25,14 +25,14 @@ if (isset($_POST['submit'])) {
       echo "
           <script>
             alert('DATA BERHASIL DIEDIT!');
-            document.location.href = 'data_kegiatan.php';
+            document.location.href = 'data_berita.php';
           </script>
       ";
     } else {
       echo "
           <script>
             alert('DATA GAGAL DIEDIT!');
-            document.location.href = 'data_kegiatan.php';
+            document.location.href = 'data_berita.php';
           </script>
       ";
     }

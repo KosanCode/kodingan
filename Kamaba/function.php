@@ -284,7 +284,7 @@ function cekCokie() {
   
     //cek cookie dan nama
     if ($key === hash('sha256', $row['email'])) {
-      if($row['id'] == '1') {
+      if($row['id'] == '2') {
         $_SESSION['admin'] = $row['id'];
       } else {
         $_SESSION['user'] = $row['id'];

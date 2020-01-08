@@ -181,7 +181,7 @@
 				?>			
 				<div class="col-md-6 col-lg-6 mb-4 mb-lg-4">
 					<div class="h-entry">
-					<a href="blog-single.php?kd_berita=<?= $row["kd_berita"];?> "><img src="Images\Berita/<?=$row ["namagambar"]; ?>" alt="Image" class="img-fluid"></a>
+					<a href="blog-single.php?kd_berita=<?= $row["kd_berita"];?> "><img style="object-fit: cover; height: 300px" src="Images\Berita/<?=$row ["namagambar"]; ?>" alt="Image" class="img-fluid"></a>
 						<div class="h-entry-inner">
 							<h2 class="font-size-regular"><a href="blog-single.php?kd_berita=<?= $row["kd_berita"];?>"><?= $row["judul"]; ?></a></h2>
 							<div class="meta mb-4">Oleh <?= $row["nama"]; ?> <span class="mx-2">&bullet;</span><?= $row["tanggal"]; ?></div>

@@ -9,7 +9,9 @@
 		$user = $_SESSION["user"];
 	}
 	
-	$komen = mysqli_query($koneksi, "SELECT * FROM tabelkomentar tk join login l on tk.id=l.id join anggota a on l.id=a.id where kd_berita = $kd_berita");
+	$komen = mysqli_query($koneksi, "SELECT l.id, l.nama_lengkap, tk.komentar, tk.tanggal, a.foto, tk.kd_komentar, tk.kd_berita FROM tabelkomentar tk join login l on tk.id=l.id left join anggota a on l.id=a.id where kd_berita = $kd_berita AND a.foto is not null");
+
+
 	$jml_komen = ("select * from tabelkomentar where kd_berita = $kd_berita");	
 	
 	//mengambil berita	
@@ -192,10 +194,20 @@
 					?>
 					<li class="comment bg-light p-3">
 					  <div class="vcard bio">
+              <?php  
+                  if(@$_SESSION["user"] && $row["foto"]==null) {
+                ?>
+
+                <img src="images\user\noMember.jpg" alt="Image">
+
+                <?php }else{ ?>
 						<img src="images\user\<?= $row["foto"]; ?>" alt="Image">
+
+          <?php } ?>
+
 					  </div>
 					  <div class="comment-body">
-						<h3><?= $row["nama"]; ?></h3>
+						<h3><?= $row["nama_lengkap"]; ?></h3>
 						<div class="meta"><?= $row["tanggal"]; ?></div>
 						<p><?= $row["komentar"]; ?></p>
 						

@@ -112,14 +112,26 @@ if(isset($_POST["ubahJabatan"])) {
               </a>
           </li>
           <li class="sub-menu">
-          <a href="javascript:;">
+            <a href="javascript:;">
               <i class="fa fa-th"></i>
               <span>Data</span>
               </a>
-              <ul class="sub">
+            <ul class="sub">
               <li class="active"><a href="data_anggota.php">Anggota</a></li>
-              <li><a  href="dokumen_bEnd.php">Sertifikat</a></li>
+              <li><a href="dokumen_bEnd.php">Sertifikat</a></li>
             </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="data_kegiatan.php">
+              <i class="fa fa-th"></i>
+              <span>Kegiatan</span>
+              </a>
+          </li>
+      <li class="sub-menu">
+            <a href="data_berita.php">
+              <i class="fa fa-th"></i>
+              <span>Berita</span>
+              </a>
           </li>
         </ul>
         <!-- sidebar menu end-->

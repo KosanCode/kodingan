@@ -97,20 +97,58 @@ if(isset($_POST["daftar"])) {
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="index.php"><span>Home</span></a></li>
+                <?php if(@$_SESSION["user"]) : ?>
+                <li class="has-children">
+                  <a href="listings.php"><span>Kegiatan</span></a>
+                  <ul class="dropdown arrow-top">
+                    <li><a href="listings.php">Daftar Kegiatan</a></li>
+                    <li><a href="sertifikat.php">Sertifikat</a></li>
+                    <!--<li class="has-children">
+                      <a href="#">Dropdown</a>
+                      <ul class="dropdown">
+                        <li><a href="#">Menu One</a></li>
+                        <li><a href="#">Menu Two</a></li>
+                        <li><a href="#">Menu Three</a></li>
+                        <li><a href="#">Menu Four</a></li>
+                      </ul>
+                    </li>-->
+                  </ul>
+                </li>
+                <?php endif; ?>
+                <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
                 <li><a href="about.php"><span>Info</span></a></li>
-                <li><a href="blog.php"><span>Blog</span></a></li>      
-                <li class="active"><a href=""><span>Join With Us</span></a></li>
-                <?php if(@$_SESSION["user"]) : ?>                
+                <li><a href="blog.php"><span>Blog</span></a></li>
+
+                <?php if((@!$_SESSION["admin"]) && (@!$_SESSION["user"])) : ?>
+                <li class="activeku"><a href="signup.php"><span>Login</span></a></li>
+                <?php endif; ?>
+                <?php  
+                  $user_terlogin = @$_SESSION['user'];
+                  $sql_user = mysqli_query($koneksi, "SELECT * FROM anggota WHERE id = '$user_terlogin'") or die(mysql_error());
+                  $data_user =  mysqli_fetch_array($sql_user);
+
+                  if(@$_SESSION["user"] && !@$data_user['id']) :
+                ?>
+                  <li><a href="pendaftaran.php"><span style="border: 2px solid #fff;">Join With Us</span></a></li>
+                <?php endif; ?>
+                <?php if(@$_SESSION["admin"] || @$_SESSION["user"]) : ?>                
                   <li class="has-children activeku">
-                  <?php
-                    $user_terlogin = @$_SESSION['user'];
+                  <?php 
+                    if(@$_SESSION["admin"]) {
+                      $user_terlogin = @$_SESSION['admin'];
+                    } else if(@$_SESSION["user"]){
+                      $user_terlogin = @$_SESSION['user'];
+                    }
                     $sql_user = mysqli_query($koneksi, "SELECT * FROM login WHERE id = '$user_terlogin'") or die(mysql_error());
                     $data_user =  mysqli_fetch_array($sql_user);
                   ?>
                   <a href="#"><span><?php echo $data_user['nama_lengkap']; ?> </span></a>
                   
                   <ul class="dropdown arrow-top">
+                  <?php
+                  if(@$_SESSION["user"]) :?>
                     <li><a href="profile.php">Profile</a></li>
+                  <?php endif; ?>
                     <li><a href="logout.php">Logout</a></li>
                     </li>
                   </ul>

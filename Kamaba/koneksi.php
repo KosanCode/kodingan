@@ -15,7 +15,7 @@
 	function cari($keyword) {
 		$query = "SELECT * FROM tabelberita
 					WHERE 
-					judul like '$keyword%'";
+					judul like '%$keyword%'";
 		return query($query);
 	}
 	
