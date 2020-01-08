@@ -1,4 +1,5 @@
 <?php
+session_start();
   require '../koneksi.php';
 
   //cek session login
@@ -136,18 +137,34 @@ exit;
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered">Sam Soffes</h5>
+        <p class="centered"><img src="img/admin.png" class="img-circle" width="80"></p>
+          <h5 class="centered">ADMIN</h5>
           <li class="mt">
-            <a href="dokumen_bEnd.php">
+            <a href="index.php">
               <i class="fa fa-dashboard"></i>
               <span>Dashboard</span>
               </a>
           </li>
           <li class="sub-menu">
-            <a class="active" href="dokumen_bEnd.php">
+            <a href="javascript:;">
               <i class="fa fa-th"></i>
-              <span>Data Sertifikat</span>
+              <span>Data</span>
+              </a>
+            <ul class="sub">
+              <li><a href="data_anggota.php">Anggota</a></li>
+              <li class="active"><a href="dokumen_bEnd.php">Sertifikat</a></li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+            <a href="data_kegiatan.php">
+              <i class="fa fa-th"></i>
+              <span>Kegiatan</span>
+              </a>
+          </li>
+		  <li class="sub-menu">
+            <a href="data_berita.php">
+              <i class="fa fa-th"></i>
+              <span>Berita</span>
               </a>
           </li>
         </ul>
