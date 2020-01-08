@@ -178,7 +178,7 @@
     
     
       
-    <?php if((@!$_SESSION["admin"]) && (@!$_SESSION["user"])) : ?>
+    <?php if(@$_SESSION["user"]) : ?>
     <div class="site-section" data-aos="fade">
       <div class="container">
         <div class="row justify-content-center mb-5">
