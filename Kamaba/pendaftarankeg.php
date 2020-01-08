@@ -11,12 +11,22 @@
 
   $dtl_kegiatan = query("SELECT * FROM kegiatan WHERE kd_kegiatan = $kd_kegiatan ")[0];
 
+  $user_terlogin = @$_SESSION['user'];
+
+  $cek = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM dtl_kegiatan JOIN anggota on dtl_kegiatan.kd_anggota=anggota.kd_anggota WHERE id='$user_terlogin' AND kd_kegiatan='$kd_kegiatan'"));
+
   //ambil data dari tabel anggota sesuai user login
-$user_terlogin = @$_SESSION['user'];
+  
+  //$cek = mysqli_num_rows($hasil);
 
   if (isset($_POST['daftar'])) {
 
-    if( daftarkeg($_POST) > 0){
+    if ($cek > 0){
+          echo "<script>window.alert('Data tersebut sudah ada dalam database')
+          window.location='listings.php'</script>";
+          }
+   
+    else if( daftarkeg($_POST) > 0){
       echo "
           <script>
             alert('ANDA BERHASIL MENDAFTAR!');

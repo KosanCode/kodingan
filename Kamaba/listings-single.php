@@ -5,12 +5,13 @@
   if(isset($_SESSION["admin"]) || (!isset($_SESSION["user"]))){
     header("Location: index.php");
     exit;
-}
+  }
 
   $kd_kegiatan = $_GET["kd_kegiatan"];
 
   $single_kegiatan = query("SELECT * FROM kegiatan WHERE kd_kegiatan = $kd_kegiatan ")[0];
 
+  
 
 
 
