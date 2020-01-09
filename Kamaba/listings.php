@@ -78,7 +78,7 @@
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li ><a href="index.php"><span>Home</span></a></li>
                 <?php if(@$_SESSION["user"]) : ?>
-                <li class="has-children">
+                <li class="has-children active">
                   <a href="listings.php"><span>Kegiatan</span></a>
                   <ul class="dropdown arrow-top">
                     <li><a href="listings.php">Daftar Kegiatan</a></li>

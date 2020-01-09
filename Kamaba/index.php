@@ -390,7 +390,6 @@
         <div id="blog"  class="row justify-content-center mb-5">
           <div class="col-md-7 text-center border-primary">
             <h2 class="font-weight-light text-primary">Tips &amp; Articles</h2>
-            <p class="color-black-opacity-5">See Our Daily tips &amp; articles</p>
           </div>
         </div>
         <div class="row mb-3 align-items-stretch">
@@ -402,7 +401,7 @@
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
             <div class="h-entry">
               <a href="blog-single.php?kd_berita=<?= $row["kd_berita"];?> ">
-              <img style="object-fit: cover; height: 300px" src="Images\Berita/<?=$row ["namagambar"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
+              <img style="object-fit: cover; height: 300px; width: 400px" src="Images\Berita/<?=$row ["namagambar"]; ?>" alt="Free Website Template by Free-Template.co" class="img-fluid"></a>
               <div class="h-entry-inner">
                 <h2 class="font-size-regular"><a href="blog-single.php?kd_berita=<?= $row["kd_berita"];?> "><?= $row["judul"]; ?></a></h2>
                 <div class="meta mb-4">by <?= $row["nama"]; ?> <span class="mx-2">&bullet;</span> <?= $row["tanggal"]; ?></div>
