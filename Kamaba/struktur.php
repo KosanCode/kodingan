@@ -86,7 +86,7 @@
                   </ul>
                 </li>
                 <?php endif; ?>
-                 <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
+                 <li class="active"><a href="struktur.php"><span>Kepengurusan</span></a></li>
                 <li><a href="about.php"><span>Info</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
                 <?php if((@!$_SESSION["admin"]) && (@!$_SESSION["user"])) : ?>

@@ -58,7 +58,7 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
 
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-                <li class="active"><a href="index.php"><span>Home</span></a></li>
+                <li><a href="index.php"><span>Home</span></a></li>
 
                 <?php if(@$_SESSION["user"]) : ?>
                 <li class="has-children">
@@ -79,7 +79,7 @@
                 </li>
                 <?php endif; ?>
                 <li><a href="struktur.php"><span>Kepengurusan</span></a></li>
-                <li><a href="about.php"><span>Info</span></a></li>
+                <li class="active"><a href="about.php"><span>Info</span></a></li>
                 <li><a href="blog.php"><span>Blog</span></a></li>
 
                 <?php if((@!$_SESSION["admin"]) && (@!$_SESSION["user"])) : ?>

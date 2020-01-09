@@ -9,7 +9,7 @@
 		$user = $_SESSION["user"];
 	}
 	
-	$komen = mysqli_query($koneksi, "SELECT l.id, l.nama_lengkap, tk.komentar, tk.tanggal, a.foto, tk.kd_komentar, tk.kd_berita FROM tabelkomentar tk join login l on tk.id=l.id left join anggota a on l.id=a.id where kd_berita = $kd_berita AND a.foto is not null");
+	$komen = mysqli_query($koneksi, "SELECT l.id, l.nama_lengkap, tk.komentar, tk.tanggal, a.foto, tk.kd_komentar, tk.kd_berita FROM tabelkomentar tk join login l on tk.id=l.id left join anggota a on l.id=a.id where kd_berita = $kd_berita AND a.foto is not null order by tk.tanggal ASC");
 
 
 	$jml_komen = ("select * from tabelkomentar where kd_berita = $kd_berita");	

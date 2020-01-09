@@ -47,7 +47,9 @@ exit;
 
         $cek = mysqli_num_rows(mysqli_query($koneksi,"SELECT * FROM dokumen WHERE kd_anggota='$kd_anggota' AND kd_kegiatan='$kd_kegiatan'"));
 
-        $status = mysqli_query($koneksi,"SELECT status FROM dtl_kegiatan WHERE kd_anggota=$kd_anggota AND kd_kegiatan=$kd_kegiatan");
+        $status = mysqli_fetch_assoc(mysqli_query($koneksi,"SELECT status FROM dtl_kegiatan WHERE kd_anggota=$kd_anggota AND kd_kegiatan=$kd_kegiatan"));
+
+        $cekStatus = $status["status"];
 
 
           if ($cek > 0){
@@ -55,8 +57,8 @@ exit;
           window.location='dokumen_bEnd.php'</script>";
           }
 
-          else if($status == 'n'){
-          echo "<script>window.alert('$status Status peserta belum memenuhi syarat')
+          else if($cekStatus == 'n'){
+          echo "<script>window.alert('Status peserta belum memenuhi syarat')
           window.location='dokumen_bEnd.php'</script>";
           }
 

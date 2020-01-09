@@ -8,9 +8,11 @@
 
   $dtl_kegiatan = query("SELECT * FROM dtl_kegiatan");
 
-
   if( isset( $_GET["cari"]) ) {
-    $berita = cari($_GET["keyword"]);
+
+  $keyword = $_GET["keyword"];
+
+    header("Location: blog.php?keyword=$keyword&cari=");
   }
 
 ?>
